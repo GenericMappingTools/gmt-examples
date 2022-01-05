@@ -1,5 +1,7 @@
 name: gmt-examples
-  - conda-forge
+channels:
+    - conda-forge
+    - defaults
 dependencies:
   - gmt
   - sphinx

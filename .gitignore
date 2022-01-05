@@ -1,0 +1,15 @@
+# Sphinx documentation
+docs/_build/
+
+# Visual Studio Code
+.vscode/
+
+# Environments
+.env
+
+# Backup copies / swap files
+*~
+.*.swp
+
+# macOS
+.DS_Store

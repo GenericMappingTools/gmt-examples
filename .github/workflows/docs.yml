@@ -12,26 +12,39 @@ on:
       - 'docs/**'
       - '.github/workflows/**'
 
-defaults:
-  run:
-    # default to use bash shell
-    shell: bash
-
 jobs:
   build:
     runs-on: ubuntu-20.04
+    defaults:
+      run:
+        shell: bash -l {0}
+
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE
       - name: Checkout
         uses: actions/checkout@v2.4.0
 
-      - name: Setup Python
-        uses: actions/setup-python@v2
+      # Install Mambaforge with conda-forge dependencies
+      - name: Setup Mambaforge
+        uses: conda-incubator/setup-miniconda@v2.1.1
         with:
-          python-version: '3.8'
+          activate-environment: gmt-examples
+          python-version: 3.8
+          channels: conda-forge,nodefaults
+          channel-priority: strict
+          miniforge-version: latest
+          miniforge-variant: Mambaforge
+          mamba-version: "*"
+          use-mamba: true
 
-      - name: Install requirements
-        run: pip install -r requirements.txt
+      # Install GMT and other required dependencies from conda-forge
+      - name: Install dependencies
+        run: |
+          mamba install gmt sphinx sphinx_rtd_theme sphinx_gmt
+
+      # Show installed pkg information for postmortem diagnostic
+      - name: List installed packages
+        run: mamba list
 
       - name: Build the website
         run: make -C docs clean html

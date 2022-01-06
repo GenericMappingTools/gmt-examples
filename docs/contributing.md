@@ -29,12 +29,12 @@ to install GMT. The Python dependencies can be installed using the
 
 Unix/macOS:
 ```
-python -m pip install -r requirements.txt # Unix/MacOS
+python -m pip install -r requirements.txt
 ```
 
 Windows:
 ```
-py -m pip install -r requirements.txt # Windows
+py -m pip install -r requirements.txt
 ```
 
 

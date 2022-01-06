@@ -18,6 +18,8 @@ The following dependencies are required for building the GMT examples pages:
 - [sphinx_gmt](https://www.generic-mapping-tools.org/sphinx_gmt/latest/)
 - [sphinx_rtd_theme](https://sphinx-rtd-theme.readthedocs.io/en/stable/installing.html)
 
+Two options for installing the dependencies are [pip](#pip-setup) and [conda](#conda-setup).
+
 ### Pip Setup
 
 These instructions rely on the [pip](https://pip.pypa.io/en/stable/) package
@@ -36,7 +38,6 @@ Windows:
 ```
 py -m pip install -r requirements.txt
 ```
-
 
 ### Conda Setup
 

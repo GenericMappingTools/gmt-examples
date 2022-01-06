@@ -20,6 +20,13 @@ various tasks using GMT.
 
    examples/tutorials/*/*
 
+.. toctree::
+   :hidden:
+   :maxdepth: 2
+   :caption: Development
+
+   contributing.md
+
 .. cssclass:: gmtgallery
 
 

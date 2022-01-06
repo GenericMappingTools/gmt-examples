@@ -3,15 +3,11 @@
 This repository contains tutorials and gallery examples for the Generic Mapping
 Tools.
 
-## Building the documentation
+## Contributing
 
-Building the documentation requires the dependencies listed in requirements.txt.
-Using conda, these can be installed with the provided environment.yml file.
-
-Run:
-
-    cd docs
-    make html
+:tada: Thank you for considering contributing to our project! :tada: Please
+refer to the [contributors guide](https://www.generic-mapping-tools.org/gmt-examples/contributing.html)
+for more guidance.
 
 ## Acknowledgements
 

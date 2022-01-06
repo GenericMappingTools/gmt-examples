@@ -10,17 +10,38 @@ and we encourage all to read it carefully.
 
 ## Setting up your environment
 
-We highly recommend using [Anaconda](https://www.anaconda.com/download/) and the `conda`
-package manager to install and manage your packages.
+The following dependencies are required for building the GMT examples pages:
+
+- [gmt](https://docs.generic-mapping-tools.org/latest/#)
+- [myst-parser](https://myst-parser.readthedocs.io/en/latest/)
+- [sphinx](https://www.sphinx-doc.org/en/master/)
+- [sphinx_gmt](https://www.generic-mapping-tools.org/sphinx_gmt/latest/)
+- [sphinx_rtd_theme](https://sphinx-rtd-theme.readthedocs.io/en/stable/installing.html)
+
+### Pip Setup
+
+These instructions rely on the [pip](https://pip.pypa.io/en/stable/) package
+installer, which can be used to install all dependencies except GMT.
+Follow the [GMT Install Guide](https://github.com/GenericMappingTools/gmt/blob/master/INSTALL.md)
+to install GMT. The Python dependencies can be installed using the
+`requirements.txt` from the base of the repository (you may wish to setup a
+[virtual environment](https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/#creating-a-virtual-environment) first):
+
+Unix/macOS:
+```
+python -m pip install -r requirements.txt # Unix/MacOS
+```
+
+Windows:
+```
+py -m pip install -r requirements.txt # Windows
+```
 
 
-The repository includes a conda environment file `environment.yml` with the
-specification for all development requirements to build and test the project.
-See the [`environment.yml`](https://github.com/GenericMappingTools/gmt-examples/blob/main/environment.yml)
-file for the list of dependencies and the environment name (`gmt-examples`).
-Once you have forked and cloned the repository to your local machine, you can
-use this file to create an isolated environment on which you can work.
-Run the following on the base of the repository to create a new conda
+### Conda Setup
+
+These instructions rely on the [conda](https://docs.conda.io/en/latest/) package
+manager. Run the following from the base of the repository to create a new conda
 environment from the `environment.yml` file:
 
 ```bash

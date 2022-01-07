@@ -12,7 +12,7 @@ and we encourage all to read it carefully.
 
 The following dependencies are required for building the GMT examples pages:
 
-- [gmt](https://docs.generic-mapping-tools.org/latest/#)
+- [gmt](https://docs.generic-mapping-tools.org/latest/)
 - [myst-parser](https://myst-parser.readthedocs.io/en/latest/)
 - [sphinx](https://www.sphinx-doc.org/en/master/)
 - [sphinx_gmt](https://www.generic-mapping-tools.org/sphinx_gmt/latest/)
@@ -49,7 +49,7 @@ environment from the `environment.yml` file:
 conda env create
 ```
 
-Before building and testing the project, you have to activate the environment
+Before building the documentation, you have to activate the environment
 (you'll need to do this every time you start a new terminal):
 
 ```bash

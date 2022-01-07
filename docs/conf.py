@@ -40,9 +40,6 @@ templates_path = ['_templates']
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
 
-# MyST-NB configuration
-execution_timeout = 900
-
 # configure links to GMT docs
 extlinks = {
     "gmt-module": ("https://docs.generic-mapping-tools.org/latest/%s", "%s"),

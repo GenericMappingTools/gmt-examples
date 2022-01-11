@@ -9,6 +9,28 @@ The goal is to maintain a diverse community that's pleasant for everyone.
 `Code of Conduct <https://github.com/GenericMappingTools/gmt-examples/blob/main/CODE_OF_CONDUCT.md>`_
 and we encourage all to read it carefully.
 
+GMT Examples Overview
+~~~~~~~~~~~~~~~~~~~~~
+
+There are two main components to GMT examples project:
+
+* Gallery examples, with source material in the ``docs/gallery/`` folder.
+* Tutorial examples, with source material in the ``docs/tutorials/`` folder.
+
+The gallery examples are designed to instruct users on how to complete a specific
+problem. For general recommendations on how to design effective gallery examples,
+see the `diataxis framework's section on how-to guides <https://diataxis.fr/how-to-guides/>`_.
+
+The tutorials are learning orientated with the goal of teaching users GMT. For
+general recommendations on how to design effective tutorials, see the
+`diataxis framework's section on tutorials <https://diataxis.fr/tutorials/>`_.
+
+The documentation are written primarily in
+`reStructuredText <https://docutils.sourceforge.io/rst.html>`_ and built by
+`Sphinx <http://www.sphinx-doc.org/>`_. Please refer to
+`reStructuredText Cheatsheet <https://docs.generic-mapping-tools.org/latest/devdocs/rst-cheatsheet.html>`_
+if you are new to reStructuredText.
+
 Setting up your environment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -63,28 +85,6 @@ build the documentation using::
 
   cd docs
   make html
-
-GMT Examples Overview
-~~~~~~~~~~~~~~~~~~~~~
-
-There are two main components to GMT examples project:
-
-* Gallery examples, with source material in the ``docs/gallery/`` folder.
-* Tutorial examples, with source material in the ``docs/tutorials/`` folder.
-
-The gallery examples are designed to instruct users on how to complete a specific
-problem. For general recommendations on how to design effective gallery examples,
-see the `diataxis framework's section on how-to guides <https://diataxis.fr/how-to-guides/>`_.
-
-The tutorials are learning orientated with the goal of teaching users GMT. For
-general recommendations on how to design effective tutorials, see the
-`diataxis framework's section on tutorials <https://diataxis.fr/tutorials/>`_.
-
-The documentation are written primarily in
-`reStructuredText <https://docutils.sourceforge.io/rst.html>`_ and built by
-`Sphinx <http://www.sphinx-doc.org/>`_. Please refer to
-`reStructuredText Cheatsheet <https://docs.generic-mapping-tools.org/latest/devdocs/rst-cheatsheet.html>`_
-if you are new to reStructuredText.
 
 Contributing New Examples
 ~~~~~~~~~~~~~~~~~~~~~~~~~

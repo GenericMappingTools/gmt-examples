@@ -18,8 +18,8 @@
 # -- Project information -----------------------------------------------------
 
 project = 'GMT Examples'
-copyright = '2022, The GMT Team'
-author = 'The GMT Team'
+copyright = '2022, The GMT Examples Authors'
+author = 'GMT Examples Contributors'
 
 
 # -- General configuration ---------------------------------------------------

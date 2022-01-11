@@ -28,3 +28,8 @@ The goal is to maintain a diverse community that's pleasant for everyone.
 **Please be considerate and respectful of others**.
 Everyone must abide by our [Code of Conduct](CODE_OF_CONDUCT.md) and we encourage all to
 read it carefully.
+
+## The `AUTHORS.md` file
+
+Anyone who has contributed a pull request to the project is welcome to add
+themselves to the `AUTHORS.md` file.

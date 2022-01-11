@@ -42,6 +42,10 @@ The following dependencies are required for building the GMT examples pages:
 - `sphinx_rtd_theme <https://sphinx-rtd-theme.readthedocs.io/en/stable/)>`_ (a Sphinx theme used for consistent documentation appearance between GMT projects)
 
 Two options for installing the dependencies are :ref:`pip <Pip Setup>` and :ref:`conda <Conda Setup>`.
+Since Sphinx is a Python documentation generator, you will need a working Python
+environment. For those who do not already have a working Python environment,
+one option is to use the minimal installer for Conda `Miniforge <https://github.com/conda-forge/miniforge>`_
+along with the :ref:`conda <Conda Setup>` instructions.
 
 Pip Setup
 ^^^^^^^^^

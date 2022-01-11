@@ -70,8 +70,8 @@ build the documentation using:
 
 There are two main components to GMT examples project:
 
-* Gallery examples, with source material in the `docs/examples/gallery/` folder.
-* Tutorial examples, with source material in the `docs/examples/tutorials/` folder.
+* Gallery examples, with source material in the `docs/gallery/` folder.
+* Tutorial examples, with source material in the `docs/tutorials/` folder.
 
 The gallery examples are designed to instruct users on how to complete a specific
 problem. For general recommendations on how to design effective gallery examples,
@@ -90,14 +90,14 @@ if you are new to reStructuredText.
 ## Contributing New Examples
 
 The source files for the gallery examples and tutorials are `.rst` files in
-`docs/examples/` that generate one or more figures using the
+`docs/` that generate one or more figures using the
 [sphinx_gmt](https://www.generic-mapping-tools.org/sphinx_gmt/latest/)
 extension. To add a new gallery example or tutorial:
 
-* If necessary, create a new sub-directory under `docs/examples/gallery/` for a
+* If necessary, create a new sub-directory under `docs/gallery/` for a
   gallery example section (e.g., `basemaps/` or `plot_embellishments/`).
 * Create a new `.rst` file inside the appropriate sub-directory in
-  `docs/examples/gallery/` or `docs/examples/tutorials/`.
+  `docs/gallery/` or `docs/tutorials/`.
 * Add a descriptive title and as much explanation as necessary.
 * Add hyperlinks to GMT modules using the `gmt-module` restructured text directive:
 
@@ -132,11 +132,11 @@ extension. To add a new gallery example or tutorial:
 
   ```bash
     -  .. image:: _images/<file-name>-gmtplot-0.png
-        :target: examples/gallery/<section>/<file-name>.html
+        :target: gallery/<section>/<file-name>.html
         :width: 80%
         :align: center
 
-     :doc:`examples/gallery/<section>/<file-name>`
+     :doc:`gallery/<section>/<file-name>`
   ```
 
   Edit the number in the `.. image:: ...` line to show a different figure on the

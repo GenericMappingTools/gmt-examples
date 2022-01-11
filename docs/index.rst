@@ -10,7 +10,7 @@ various tasks using GMT.
    :maxdepth: 2
    :caption: Gallery
 
-   examples/gallery/*/*
+   gallery/*/*
 
 .. toctree::
    :hidden:
@@ -18,7 +18,7 @@ various tasks using GMT.
    :maxdepth: 2
    :caption: Tutorials
 
-   examples/tutorials/*/*
+   tutorials/*/*
 
 .. toctree::
    :hidden:
@@ -55,11 +55,11 @@ Images, contours, and fields
 .. cssclass:: gmtgallery
 
 -  .. image:: _images/grdview_surface-gmtplot-0.png
-      :target: examples/gallery/3d_plots/grdview_surface.html
+      :target: gallery/3d_plots/grdview_surface.html
       :width: 80%
       :align: center
 
-   :doc:`examples/gallery/3d_plots/grdview_surface`
+   :doc:`gallery/3d_plots/grdview_surface`
 
 Seismology and geodesy
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -82,8 +82,8 @@ Basics
 .. cssclass:: gmtgallery
 
 -  .. image:: _images/coastlines-gmtplot-4.png
-      :target: examples/tutorials/basics/coastlines.html
+      :target: tutorials/basics/coastlines.html
       :width: 80%
       :align: center
 
-   :doc:`examples/tutorials/basics/coastlines`
+   :doc:`tutorials/basics/coastlines`

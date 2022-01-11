@@ -4,7 +4,6 @@ channels:
     - defaults
 dependencies:
     - gmt
-    - myst-parser
     - sphinx
     - sphinx_gmt
     - sphinx_rtd_theme

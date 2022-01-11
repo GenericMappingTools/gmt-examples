@@ -28,7 +28,7 @@ author = 'GMT Examples Contributors'
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    "myst_parser",
+    "sphinx.ext.autosectionlabel",
     "sphinx.ext.extlinks",
     "sphinx_gmt.gmtplot",
 ]

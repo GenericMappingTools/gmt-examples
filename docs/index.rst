@@ -25,7 +25,7 @@ various tasks using GMT.
    :maxdepth: 2
    :caption: Development
 
-   contributing.md
+   contributing.rst
 
 .. cssclass:: gmtgallery
 

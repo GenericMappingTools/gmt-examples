@@ -116,7 +116,6 @@ extension. To add a new gallery example or tutorial:
 
   ```bash
   .. gmtplot::
-     :language: bash
 
      gmt begin basemap png
         gmt basemap -B -Rg -JH5c

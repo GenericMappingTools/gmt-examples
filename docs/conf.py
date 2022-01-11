@@ -59,3 +59,6 @@ html_theme = 'sphinx_rtd_theme'
 html_favicon = "_static/favicon.png"
 html_static_path = ["_static"]
 html_css_files = ["style.css"]
+
+# Adjust highlight language for sphinx_gmt examples
+highlight_language = "bash"

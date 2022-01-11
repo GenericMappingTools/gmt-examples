@@ -16,7 +16,6 @@ The :gmt-module:`-I <grdview#i>` parameter specifies the illumination; here we
 use an azimuth of 45° using the ``+a`` modifier.
 
 .. gmtplot::
-   :language: bash
 
    gmt grdmath -R-15/15/-15/15 -I0.3 X Y HYPOT DUP 2 MUL PI MUL 8 DIV COS EXCH NEG 10 DIV EXP MUL 0.001 SUB = example_grid.nc
    gmt begin grdview_surface png

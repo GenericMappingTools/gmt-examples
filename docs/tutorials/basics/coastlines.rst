@@ -9,7 +9,6 @@ Shorelines
 Use the :gmt-module:`-W <coast#w>` parameter to plot only the shorelines:
 
 .. gmtplot::
-   :language: bash
 
    gmt begin shorelines png
       gmt coast -Rg -JW15c -B -W
@@ -27,7 +26,6 @@ GMT pen configuration to the :gmt-module:`-W <coast#w>` parameter. For example,
 to plot just the coastlines with 0.5 thickness and black lines:
 
 .. gmtplot::
-   :language: bash
 
    gmt begin shorelines_levels png
       gmt coast -Rg -JW15c -B -W1/0.5p,black
@@ -37,7 +35,6 @@ You can specify multiple levels by using the :gmt-module:`-W <coast#w>`
 parameter more than once:
 
 .. gmtplot::
-   :language: bash
 
    gmt begin shorelines_levels png
       gmt coast -Rg -JW15c -B -W1/0.5p,black -W2/0.5,red
@@ -56,7 +53,6 @@ The coastline database comes with 5 resolutions, which can be set using the
 5. **f**: full
 
 .. gmtplot::
-   :language: bash
 
    oahu="-158.3/-157.6/21.2/21.8"
    gmt begin shorelines_resolutions png
@@ -74,7 +70,6 @@ specify a fill color for land and water bodies. The colors can be given by name
 or hex codes:
 
 .. gmtplot::
-   :language: bash
 
    gmt begin land_water png
       gmt coast -Rg -JW15c -B -G#666666 -Sskyblue

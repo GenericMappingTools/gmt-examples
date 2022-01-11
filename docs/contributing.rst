@@ -36,10 +36,10 @@ Setting up your environment
 
 The following dependencies are required for building the GMT examples pages:
 
-- `gmt <https://docs.generic-mapping-tools.org/latest/>`_
-- `sphinx <http://www.sphinx-doc.org/>`_
-- `sphinx_gmt <https://www.generic-mapping-tools.org/sphinx_gmt/latest/)>`_
-- `sphinx_rtd_theme <https://sphinx-rtd-theme.readthedocs.io/en/stable/installing.html)>`_
+- `gmt <https://docs.generic-mapping-tools.org/latest/>`_ (GMT is required for executing example scripts)
+- `sphinx <http://www.sphinx-doc.org/>`_ (a Python documentation generator for creating the docs from source files)
+- `sphinx_gmt <https://www.generic-mapping-tools.org/sphinx_gmt/latest/)>`_ (a Sphinx extension for creating GMT figures to accompany example scripts)
+- `sphinx_rtd_theme <https://sphinx-rtd-theme.readthedocs.io/en/stable/)>`_ (a Sphinx theme used for consistent documentation appearance between GMT projects)
 
 Two options for installing the dependencies are :ref:`pip <Pip Setup>` and :ref:`conda <Conda Setup>`.
 

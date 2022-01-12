@@ -61,7 +61,6 @@ Unix/macOS::
 
   python -m pip install -r requirements.txt
 
-
 Windows::
 
   py -m pip install -r requirements.txt
@@ -74,7 +73,6 @@ manager. Run the following from the base of the repository to create a new conda
 environment from the ``environment.yml`` file::
 
   conda env create
-
 
 Before building the documentation, you have to activate the environment
 (you'll need to do this every time you start a new terminal)::
@@ -103,7 +101,7 @@ extension. To add a new gallery example or tutorial:
 * Create a new ``.rst`` file inside the appropriate sub-directory in
   ``docs/gallery/`` or ``docs/tutorials/``.
 * Add a descriptive title and as much explanation as necessary.
-* Add hyperlinks to GMT modules using the ``gmt-module`` restructured text directive::
+* Add hyperlinks to GMT modules using the ``gmt-module`` reStructuredText directive::
 
   :gmt-module:`grdview`
 
@@ -118,9 +116,9 @@ extension. To add a new gallery example or tutorial:
 
     .. gmtplot::
 
-      gmt begin basemap png
-        gmt basemap -B -Rg -JH5c
-      gmt end show
+       gmt begin basemap png
+         gmt basemap -B -Rg -JH5c
+       gmt end show
 
   The figures will be placed after the source code in the built documentation
   by the ``sphinx_gmt`` extension.
@@ -132,11 +130,11 @@ extension. To add a new gallery example or tutorial:
 
     ```bash
       -  .. image:: _images/<file-name>-gmtplot-0.png
-          :target: gallery/<section>/<file-name>.html
-          :width: 80%
-          :align: center
+            :target: gallery/<section>/<file-name>.html
+            :width: 80%
+            :align: center
 
-       :doc:`gallery/<section>/<file-name>`
+         :doc:`gallery/<section>/<file-name>`
     ```
 
   Edit the number in the ``.. image:: ...`` line to show a different figure on the

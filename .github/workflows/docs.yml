@@ -29,6 +29,7 @@ jobs:
         uses: conda-incubator/setup-miniconda@v2.1.1
         with:
           activate-environment: gmt-examples
+          environment-file: environment.yml
           python-version: 3.8
           channels: conda-forge,nodefaults
           channel-priority: strict
@@ -36,11 +37,6 @@ jobs:
           miniforge-variant: Mambaforge
           mamba-version: "*"
           use-mamba: true
-
-      # Install GMT and other required dependencies from conda-forge
-      - name: Install dependencies
-        run: |
-          mamba install gmt sphinx sphinx_rtd_theme sphinx_gmt
 
       # Show installed pkg information for postmortem diagnostic
       - name: List installed packages

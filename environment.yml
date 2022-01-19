@@ -1,0 +1,9 @@
+name: gmt-examples
+channels:
+    - conda-forge
+    - defaults
+dependencies:
+    - gmt
+    - sphinx
+    - sphinx_gmt
+    - sphinx_rtd_theme

@@ -24,23 +24,19 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2.4.0
 
-      # Install Mambaforge with conda-forge dependencies
-      - name: Setup Mambaforge
+      # Setup Miniconda
+      - name: Setup Miniconda
         uses: conda-incubator/setup-miniconda@v2.1.1
         with:
           activate-environment: gmt-examples
           environment-file: environment.yml
           python-version: 3.9
-          channels: conda-forge,nodefaults
-          channel-priority: strict
-          miniforge-version: latest
-          miniforge-variant: Mambaforge
-          mamba-version: "*"
-          use-mamba: true
+          channels: conda-forge
+          miniconda-version: "latest"
 
       # Show installed pkg information for postmortem diagnostic
       - name: List installed packages
-        run: mamba list
+        run: conda list
 
       - name: Build the website
         run: make -C docs clean html

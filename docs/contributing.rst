@@ -28,8 +28,7 @@ general recommendations on how to design effective tutorials, see the
 The documentation are written primarily in
 `reStructuredText <https://docutils.sourceforge.io/rst.html>`_ and built by
 `Sphinx <http://www.sphinx-doc.org/>`_. Please refer to
-`reStructuredText Cheatsheet <https://docs.generic-mapping-tools.org/latest/devdocs/rst-cheatsheet.html>`_
-if you are new to reStructuredText.
+:gmt-module:`reStructuredText cheatsheet <devdocs/rst-cheatsheet.html>` if you are new to reStructuredText.
 
 Setting up your environment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~

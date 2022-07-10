@@ -54,7 +54,7 @@ Images, contours, and fields
 
 .. cssclass:: gmtgallery
 
--  .. image:: _images/grdview_surface-gmtplot-0.png
+-  .. image:: _images/4546e1b4bf691b3b38010ff66e835609.png
       :target: gallery/3d_plots/grdview_surface.html
       :width: 80%
       :align: center
@@ -81,7 +81,7 @@ Basics
 
 .. cssclass:: gmtgallery
 
--  .. image:: _images/coastlines-gmtplot-4.png
+-  .. image:: _images/67b8930e41c80cad1a26bc81920b6abe.png
       :target: tutorials/basics/coastlines.html
       :width: 80%
       :align: center

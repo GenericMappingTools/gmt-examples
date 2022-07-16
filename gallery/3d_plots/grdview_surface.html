@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plotting a surface &mdash; GMT Examples  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Coastlines and boarders" href="../../tutorials/basics/coastlines.html" />
+    <link rel="prev" title="GMT Tutorials and Examples" href="../../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> GMT Examples
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Gallery</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Plotting a surface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/basics/coastlines.html">Coastlines and boarders</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributors Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">GMT Examples</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Plotting a surface</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/gallery/3d_plots/grdview_surface.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="plotting-a-surface">
+<h1>Plotting a surface<a class="headerlink" href="#plotting-a-surface" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="https://docs.generic-mapping-tools.org/latest/grdview">grdview</a> can plot 3-D surfaces using the <a class="reference external" href="https://docs.generic-mapping-tools.org/latest/grdview#q">-Q</a>
+parameter with the <code class="docutils literal notranslate"><span class="pre">s</span></code> directive. Here, we use <a class="reference external" href="https://docs.generic-mapping-tools.org/latest/grdmath">grdmath</a> to create
+a netCDF file containing a grid for plotting.</p>
+<p>Note that the <strong>-p</strong> parameter here controls the azimuth and elevation angle of
+the view.</p>
+<p>We use the <a class="reference external" href="https://docs.generic-mapping-tools.org/latest/grdview#b">-B</a> parameter twice - the first specifies
+the <span class="math notranslate nohighlight">\(x\)</span>- and <span class="math notranslate nohighlight">\(y\)</span>-axes frame attributes and the second specifies the
+<span class="math notranslate nohighlight">\(z\)</span>-axis frame attributes using the <code class="docutils literal notranslate"><span class="pre">z</span></code> directive.</p>
+<p>The <a class="reference external" href="https://docs.generic-mapping-tools.org/latest/grdview#i">-I</a> parameter specifies the illumination; here we
+use an azimuth of 45° using the <code class="docutils literal notranslate"><span class="pre">+a</span></code> modifier.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmt grdmath -R-15/15/-15/15 -I0.3 X Y HYPOT DUP <span class="m">2</span> MUL PI MUL <span class="m">8</span> DIV COS EXCH NEG <span class="m">10</span> DIV EXP MUL <span class="m">0</span>.001 <span class="nv">SUB</span> <span class="o">=</span> example_grid.nc
+gmt begin grdview_surface png
+   gmt grdview example_grid.nc -Ba5f1 -Bza5f1 -JX10C -JZ2c -Qs -Croma -p135/30 -I+a45
+gmt end show
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-4546e1b4bf691b3b38010ff66e835609">
+<img alt="../../_images/4546e1b4bf691b3b38010ff66e835609.png" src="../../_images/4546e1b4bf691b3b38010ff66e835609.png" />
+</figure>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../index.html" class="btn btn-neutral float-left" title="GMT Tutorials and Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../tutorials/basics/coastlines.html" class="btn btn-neutral float-right" title="Coastlines and boarders" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, The GMT Examples Authors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>

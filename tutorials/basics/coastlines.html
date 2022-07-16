@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coastlines and boarders &mdash; GMT Examples  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/style.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Contributors Guide" href="../../contributing.html" />
+    <link rel="prev" title="Plotting a surface" href="../../gallery/3d_plots/grdview_surface.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> GMT Examples
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Gallery</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../gallery/3d_plots/grdview_surface.html">Plotting a surface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Coastlines and boarders</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#shorelines">Shorelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#resolutions">Resolutions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#land-and-water">Land and water</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributors Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">GMT Examples</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Coastlines and boarders</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/tutorials/basics/coastlines.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="coastlines-and-boarders">
+<h1>Coastlines and boarders<a class="headerlink" href="#coastlines-and-boarders" title="Permalink to this heading"></a></h1>
+<p>Plotting coastlines and boarders is handled by <a class="reference external" href="https://docs.generic-mapping-tools.org/latest/coast">coast</a>.</p>
+<section id="shorelines">
+<h2>Shorelines<a class="headerlink" href="#shorelines" title="Permalink to this heading"></a></h2>
+<p>Use the <a class="reference external" href="https://docs.generic-mapping-tools.org/latest/coast#w">-W</a> parameter to plot only the shorelines:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmt begin shorelines png
+   gmt coast -Rg -JW15c -B -W
+gmt end show
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-67b8930e41c80cad1a26bc81920b6abe">
+<img alt="../../_images/67b8930e41c80cad1a26bc81920b6abe.png" src="../../_images/67b8930e41c80cad1a26bc81920b6abe.png" />
+</figure>
+<p>The shorelines are divided in 4 levels:</p>
+<ol class="arabic simple">
+<li><p>coastline</p></li>
+<li><p>lakeshore</p></li>
+<li><p>island-in-lake shore</p></li>
+<li><p>lake-in-island-in-lake shore</p></li>
+</ol>
+<p>You can specify which level you want to plot by appending the level number and a
+GMT pen configuration to the <a class="reference external" href="https://docs.generic-mapping-tools.org/latest/coast#w">-W</a> parameter. For example,
+to plot just the coastlines with 0.5 thickness and black lines:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmt begin shorelines_levels png
+   gmt coast -Rg -JW15c -B -W1/0.5p,black
+gmt end show
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-c3e2e6daeacf8ad76a7b03408513b21a">
+<img alt="../../_images/c3e2e6daeacf8ad76a7b03408513b21a.png" src="../../_images/c3e2e6daeacf8ad76a7b03408513b21a.png" />
+</figure>
+<p>You can specify multiple levels by using the <a class="reference external" href="https://docs.generic-mapping-tools.org/latest/coast#w">-W</a>
+parameter more than once:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmt begin shorelines_levels png
+   gmt coast -Rg -JW15c -B -W1/0.5p,black -W2/0.5,red
+gmt end show
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-580c6f3ad7f899c6733aa12f8765740c">
+<img alt="../../_images/580c6f3ad7f899c6733aa12f8765740c.png" src="../../_images/580c6f3ad7f899c6733aa12f8765740c.png" />
+</figure>
+</section>
+<section id="resolutions">
+<h2>Resolutions<a class="headerlink" href="#resolutions" title="Permalink to this heading"></a></h2>
+<p>The coastline database comes with 5 resolutions, which can be set using the
+<a class="reference external" href="https://docs.generic-mapping-tools.org/latest/coast#d">-D</a> parameter. The resolution drops by 80% between levels:</p>
+<ol class="arabic simple">
+<li><p><strong>c</strong>: crude</p></li>
+<li><p><strong>l</strong>: low</p></li>
+<li><p><strong>i</strong>: intermediate</p></li>
+<li><p><strong>h</strong>: high</p></li>
+<li><p><strong>f</strong>: full</p></li>
+</ol>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">oahu</span><span class="o">=</span><span class="s2">&quot;-158.3/-157.6/21.2/21.8&quot;</span>
+gmt begin shorelines_resolutions png
+   <span class="k">for</span> res <span class="k">in</span> c, l, i, h, f
+   <span class="k">do</span>
+       gmt coast -R<span class="si">${</span><span class="nv">oahu</span><span class="si">}</span> -JM5c -W1p -D<span class="si">${</span><span class="nv">res</span><span class="si">}</span> -X5c
+   <span class="k">done</span>
+gmt end show
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-2243b82b814295af096d16766b3b0a3e">
+<img alt="../../_images/2243b82b814295af096d16766b3b0a3e.png" src="../../_images/2243b82b814295af096d16766b3b0a3e.png" />
+</figure>
+</section>
+<section id="land-and-water">
+<h2>Land and water<a class="headerlink" href="#land-and-water" title="Permalink to this heading"></a></h2>
+<p>Use the <a class="reference external" href="https://docs.generic-mapping-tools.org/latest/coast#g">-G</a> and <a class="reference external" href="https://docs.generic-mapping-tools.org/latest/coast#s">-S</a> parameters to
+specify a fill color for land and water bodies. The colors can be given by name
+or hex codes:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmt begin land_water png
+   gmt coast -Rg -JW15c -B -G#666666 -Sskyblue
+gmt end show
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-ee98811b451efb0322440de72236cbb8">
+<img alt="../../_images/ee98811b451efb0322440de72236cbb8.png" src="../../_images/ee98811b451efb0322440de72236cbb8.png" />
+</figure>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../gallery/3d_plots/grdview_surface.html" class="btn btn-neutral float-left" title="Plotting a surface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../contributing.html" class="btn btn-neutral float-right" title="Contributors Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, The GMT Examples Authors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>

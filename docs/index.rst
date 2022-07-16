@@ -4,6 +4,18 @@ GMT Tutorials and Examples
 A collection of tutorials and short guides demonstrating how to complete
 various tasks using GMT.
 
+There are two main components to GMT examples project:
+
+* Gallery examples.
+* Tutorial examples.
+
+The gallery examples are designed to instruct users on how to complete a specific problem.
+They are how-to guides. It assumes you already know how to work with GMT.
+
+The tutorials are learning orientated with the goal of teaching users GMT. 
+They are designed to help beginners to understand how GMT works. 
+If you want to learn GMT you should start here. 
+
 .. toctree::
    :hidden:
    :glob:

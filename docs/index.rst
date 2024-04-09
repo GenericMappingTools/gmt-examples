@@ -99,3 +99,10 @@ Basics
       :align: center
 
    :doc:`tutorials/basics/coastlines`
+
+-  .. image:: _images/18736ae188d169a16383b28a3a7afcb8.png
+      :target: tutorials/basics/frames.html
+      :width: 80%
+      :align: center
+
+   :doc:`tutorials/basics/frames`

@@ -13,12 +13,14 @@
 # import os
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
+import datetime
 
 
 # -- Project information -----------------------------------------------------
 
 project = 'GMT Examples'
-copyright = '2022, The GMT Examples Authors'
+year = datetime.date.today().year
+copyright = f"2022-{year}, The GMT Examples Authors"
 author = 'GMT Examples Contributors'
 
 
@@ -51,6 +53,7 @@ extlinks = {
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
+html_baseurl="https://www.generic-mapping-tools.org/gmt-examples/"
 html_theme = 'sphinx_rtd_theme'
 html_theme_options = {
     'sticky_navigation': False,

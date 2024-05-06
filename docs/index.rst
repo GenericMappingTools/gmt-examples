@@ -106,3 +106,10 @@ Basics
       :align: center
 
    :doc:`tutorials/basics/frames`
+
+-  .. image:: _images/1db761511fa1371a3fa3f01cc3bdc199.png
+      :target: tutorials/basics/region.html
+      :width: 80%
+      :align: center
+
+   :doc:`tutorials/basics/region`

@@ -113,3 +113,10 @@ Basics
       :align: center
 
    :doc:`tutorials/basics/region`
+
+-  .. image:: _images/42eb572e679e97489f2a5029a5d74352.png
+      :target: tutorials/basics/color.html
+      :width: 80%
+      :align: center
+
+   :doc:`tutorials/basics/color`

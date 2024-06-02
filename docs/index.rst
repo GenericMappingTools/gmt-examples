@@ -120,3 +120,10 @@ Basics
       :align: center
 
    :doc:`tutorials/basics/color`
+
+-  .. image:: _images/ec0d8d5349173bd8da9d665f6f93ea70.png
+      :target: tutorials/basics/line.html
+      :width: 80%
+      :align: center
+
+   :doc:`tutorials/basics/line`

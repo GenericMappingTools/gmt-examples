@@ -54,7 +54,6 @@ Lines
 Vectors
 ~~~~~~~
 
-
 Symbols and markers
 ~~~~~~~~~~~~~~~~~~~
 
@@ -78,6 +77,15 @@ Seismology and geodesy
 
 Basemaps
 ~~~~~~~~
+
+.. cssclass:: gmtgallery
+
+-  .. image:: _images/7dd36e07258e1015a0673dea4e472db1.png
+      :target: gallery/maps/gadm.html
+      :width: 80%
+      :align: center
+
+   :doc:`gallery/maps/gadm`
 
 Histograms
 ~~~~~~~~~~

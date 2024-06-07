@@ -1,10 +1,11 @@
 name: gmt-examples
 channels:
-    - conda-forge
-    - defaults
+  - conda-forge
+  - nodefaults
 dependencies:
-    - gmt
-    - myst-parser
-    - sphinx
-    - sphinx_gmt
-    - sphinx_rtd_theme
+  - python=3.12
+  - gmt=6.5.0
+  - myst-parser
+  - sphinx
+  - sphinx_gmt
+  - sphinx_rtd_theme

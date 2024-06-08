@@ -33,6 +33,7 @@ extensions = [
     "myst_parser",
     "sphinx.ext.autosectionlabel",
     "sphinx.ext.extlinks",
+    "sphinx_design",
     "sphinx_gmt.gmtplot",
 ]
 # Add any paths that contain templates here, relative to this directory.

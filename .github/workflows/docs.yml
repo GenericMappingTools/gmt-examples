@@ -4,7 +4,10 @@
 name: Docs
 
 on:
-  # pull_request:
+  pull_request:
+    paths:
+      - 'docs/**'
+      - '.github/workflows/**'
   push:
     branches:
       - main
@@ -14,29 +17,27 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     defaults:
       run:
         shell: bash -l {0}
 
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE
       - name: Checkout
-        uses: actions/checkout@v2.4.0
+        uses: actions/checkout@v4.1.6
 
-      # Setup Miniconda
-      - name: Setup Miniconda
-        uses: conda-incubator/setup-miniconda@v2.1.1
+      - name: Get current week number of year
+        id: date
+        run: echo "date=$(date +%Y-W%W)" >> $GITHUB_OUTPUT  # e.g., 2024-W19
+
+      - name: Setup Micromamba
+        uses: mamba-org/setup-micromamba@v1.9.0
         with:
-          activate-environment: gmt-examples
           environment-file: environment.yml
-          python-version: 3.9
-          channels: conda-forge
-          miniconda-version: "latest"
-
-      # Show installed pkg information for postmortem diagnostic
-      - name: List installed packages
-        run: conda list
+          cache-downloads: false
+          cache-environment: true
+          # environment cache is persistent for one week.
+          cache-environment-key: micromamba-environment-${{ steps.date.outputs.date }}
 
       - name: Build the website
         run: make -C docs clean html

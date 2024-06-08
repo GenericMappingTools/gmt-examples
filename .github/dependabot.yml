@@ -1,0 +1,13 @@
+# Set update schedule for GitHub Actions
+
+version: 2
+updates:
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      # Check for updates to GitHub Actions on Tuesdays
+      interval: "weekly"
+      day: "tuesday"
+    # Allow up to 2 open pull requests at a time
+    open-pull-requests-limit: 2

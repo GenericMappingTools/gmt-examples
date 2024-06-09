@@ -37,6 +37,7 @@ The following dependencies are required for building the GMT examples pages:
 
 - `gmt <https://docs.generic-mapping-tools.org/latest/>`_ (GMT is required for executing example scripts)
 - `sphinx <http://www.sphinx-doc.org/>`_ (a Python documentation generator for creating the docs from source files)
+- `sphinx_design <https://sphinx-design.readthedocs.io/>`_ (A sphinx extension for designing beautiful, screen-size responsive web-components)
 - `sphinx_gmt <https://www.generic-mapping-tools.org/sphinx_gmt/latest/>`_ (a Sphinx extension for creating GMT figures to accompany example scripts)
 - `sphinx_rtd_theme <https://sphinx-rtd-theme.readthedocs.io/en/stable/>`_ (a Sphinx theme used for consistent documentation appearance between GMT projects)
 
@@ -123,18 +124,14 @@ extension. To add a new gallery example or tutorial:
   by the ``sphinx_gmt`` extension.
 
 * Add the file to the appropriate section in ``docs/index.rst`` using the following
-  template:
+  template::
 
-  ::
+    .. grid-item-card:: :doc:`gallery/<section>/<file-name>`
+       :padding: 1
+       :link-type: doc
+       :link: gallery/<section>/<file-name>
 
-    ```bash
-      -  .. image:: _images/<file-name>-gmtplot-0.png
-            :target: gallery/<section>/<file-name>.html
-            :width: 80%
-            :align: center
+       .. image:: _images/<image-hash>.png
 
-         :doc:`gallery/<section>/<file-name>`
-    ```
-
-  Edit the number in the ``.. image:: ...`` line to show a different figure on the
+  Edit the hash in the ``.. image:: ...`` line to show a different figure on the
   index page.

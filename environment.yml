@@ -7,5 +7,6 @@ dependencies:
   - gmt=6.5.0
   - myst-parser
   - sphinx
+  - sphinx-design
   - sphinx_gmt
   - sphinx_rtd_theme

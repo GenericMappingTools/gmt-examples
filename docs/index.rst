@@ -76,6 +76,16 @@ Seismology and geodesy
 Basemaps
 ~~~~~~~~
 
+.. grid:: 2 3 3 4
+
+    .. grid-item-card:: :doc:`gallery/maps/gadm`
+       :padding: 1
+       :link-type: doc
+       :link: gallery/maps/gadm
+
+       .. image:: _images/7dd36e07258e1015a0673dea4e472db1.png
+
+
 Histograms
 ~~~~~~~~~~
 

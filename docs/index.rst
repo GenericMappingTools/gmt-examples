@@ -65,7 +65,7 @@ Images, contours, and fields
        :link-type: doc
        :link: gallery/images/slope
 
-       .. image:: _images/6b12ba3c82f97e0841efb186eef0aa40.png
+       .. image:: _images/7d348a567d46f174deaf393618a19491.png
 
 
 3d plots

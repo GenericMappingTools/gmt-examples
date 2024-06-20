@@ -3,17 +3,16 @@ How to make a slope map
 
 This tutorial show how to make a slope map of the moon from a geographic grid.
 
+We utilize ``grdgradient`` to calculate the gradient magnitude (i.e., dz/dr).
 Since we are working with geographic coordinates (longitude and latitude), 
-it is crucial to set the correct ellipsoid parameter first (in this case, for the moon). 
-Next, we utilize ``grdgradient`` to calculate the gradient magnitude (i.e., dz/dr). 
+it is crucial to set the correct ellipsoid parameter (in this case, for the moon). 
 Finally, we convert this gradient to degrees with ``grdmath``.
 
 .. gmtplot::
 
    # Make a slope map of the moon.
-   gmt set PROJ_ELLIPSOID moon
    # Calculate gradient magnitude
-   gmt grdgradient @moon_relief_15m -D -Sgradient.nc -fg
+   gmt grdgradient @moon_relief_15m -D -Sgradient.nc -fg --PROJ_ELLIPSOID=moon
    # Convert gradient to degrees
    gmt grdmath gradient.nc ATAND = moon_slope.nc
    # Make map with colorbar

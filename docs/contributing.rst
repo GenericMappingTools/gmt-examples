@@ -93,7 +93,7 @@ Contributing New Examples
 
 The source files for the gallery examples and tutorials are ``.rst`` files in
 ``docs/`` that generate one or more figures using the
-`sphinx_gmt <https://www.generic-mapping-tools.org/sphinx_gmt/latest/)>`_
+`sphinx_gmt <https://www.generic-mapping-tools.org/sphinx_gmt/latest/>`_
 extension. To add a new gallery example or tutorial:
 
 * If necessary, create a new sub-directory under ``docs/gallery/`` for a

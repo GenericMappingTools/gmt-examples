@@ -144,3 +144,16 @@ Basics
        :link: tutorials/basics/line
 
        .. image:: _images/ec0d8d5349173bd8da9d665f6f93ea70.png
+
+
+Advance
+~~~~~~~
+
+.. grid:: 2 3 3 4
+
+    .. grid-item-card:: :doc:`tutorials/advance/animation`
+       :padding: 1
+       :link-type: doc
+       :link: tutorials/advance/animation
+
+       .. image:: _images/01920d6ddd40f8db1e4b9f6d23c1302d.png

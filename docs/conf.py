@@ -35,6 +35,8 @@ extensions = [
     "sphinx.ext.extlinks",
     "sphinx_design",
     "sphinx_gmt.gmtplot",
+    'sphinx.ext.intersphinx',
+    'sphinxcontrib.youtube'
 ]
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

@@ -3,3 +3,4 @@ sphinx
 sphinx-design
 sphinx_gmt
 sphinx_rtd_theme
+sphinxcontrib-youtube==1.4.1

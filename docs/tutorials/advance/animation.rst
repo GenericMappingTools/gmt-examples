@@ -16,7 +16,8 @@ By F. Esteban (@esteban82). October 20, 2024
 1.2. How to make an animation?
 ==============================
 
-- In order to make an animation we need: 
+- In order to make an animation we need:
+
 #. A lot of still images.
 #. Combine all the images in a video format.
 
@@ -44,6 +45,9 @@ I categorize two types of animations based on their complexity in GMT:
 1.5. Prerequisites
 ==================
 
+.. video:: movie.mp4
+
+
 - GMT version 6.1 or later.
 
 2. Tutorial 1. Earth spinning
@@ -57,7 +61,7 @@ As an example, I will create an animation of the Earth spinning similar to the o
 Corregir link
 
 ..  youtube:: NjSDpQ5S3FM
-   :width: 100%
+   :height: 80%
 
 
 2.1. Goals of the Tutorial
@@ -72,17 +76,10 @@ Corregir link
 
 To create an animation, follow these steps:
 
-
 #. Make first image
 #. Make master frame with gmt movie
 #. Make draft animation
 #. Make full animation
-
-
-#. `221-make-first-image`_.
-
-#. `222-make-master-frame`_.
-
 
 2.2.1. Make first image
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -94,7 +91,7 @@ The first step is to create an image using a standard GMT script that will serve
 For this example, we will create a map of the Earth with:
 
      .. gmtplot::
-        :height: 40%
+        :height: 300 px
 
         gmt begin Earth png
             # Plot relief grid
@@ -146,7 +143,7 @@ with some variation using specific frame variables.
 We will create the first frame (``-M0,png``) over a black canvas (``-G``) for an HD video.
 
      .. gmtplot::
-        :height: 40%
+        :height: 300 px
 
         cat << 'EOF' > main.sh
         gmt begin
@@ -169,10 +166,6 @@ We will create the first frame (``-M0,png``) over a black canvas (``-G``) for an
 
   The previous script is surrounded by these two lines:
 
-  The script is saved into the file ``main.sh`` using a Here Document, 
-  which simplifies the process of handling the main script.
-
-
   .. code-block:: bash 
     cat <<- 'EOF' > main.sh
     ...
@@ -189,11 +182,64 @@ We will fix the canvas size to match the map dimensions:
 
 **What is the Canvas?**
 
-Since we are plotting each frame, and GMT users typically make a plot of some standard size (e.g., often a paper size, say A4 or US Letter), we need to understand how to determine what our “paper size” is so we can do our composition correctly. We call this paper the canvas (Figure 1) and it is a setting we control. The canvas setting in the movie module (-C) determines basically two things: The size of your “plot paper” and what resolution (in dots per unit; dpu) at which this canvas is converted to a raster image. You should compose your plots using the given canvas size, and movie will make proper conversions of the canvas to image pixel dimensions.
+The canvas is the black area of the previous image. 
+
+Since we are plotting each frame, and GMT users typically make a plot of some standard size (e.g., often a paper size, say A4 or US Letter), 
+we need to understand how to determine what our “paper size” is so we can do our composition correctly. 
+We call this paper the canvas (Figure 1) and it is a setting we control. 
+The canvas setting in the movie module (-C) determines basically two things: 
+* The size of your “plot paper” and 
+* what resolution (in dots per unit; dpu) at which this canvas is converted to a raster image. 
+
+You should compose your plots using the given canvas size, and movie will make proper conversions of the canvas to image pixel dimensions.
+
+       .. image:: Canvas_16x9.png
 
 
 2.3. Make draft animation
 ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Now that we are happy with the master frame, it is helpfull to create a very short and low quality animation.
+This is advisable because creating an animation can be time-consuming and there may be errors when generating many images and when they are assembled.
+
+.. Note::
+  The conversion to a video is done with FFmpeg (or GraphicsMagick if we ask for a GIF). 
+
+.. admonition:: **Step Goals**:
+
+  * to see if the frames are changing as we expected.
+  * to see if there is video file is created well.
+
+**Hints**:
+
+* We recommend you make a very short (i.e., -T) and small (i.e., -C) movie so you don't have to wait very long to see the result.
+  * to reduce the number of frames (-T).
+  * to reduce the quality of the frames (-C).
+
+We add the following arguments:
+
+* -Fmp4: to create a video (now it is possible to delete ``-M``).
+* -Zs: to remove the temporary files created in the movie-making process.
+
+
+2.3.1. First attemp
++++++++++++++++++++
+
+     .. gmtplot::
+        :height: 300 px
+
+        cat << 'EOF' > main.sh
+        gmt begin
+          gmt grdimage @earth_relief_06m -I -JG0/0/13c -X0 -Y0
+        gmt end
+        EOF
+        gmt movie main.sh -NEarth -C13cx13cx30 -T10 -M0,png -Gblack -V -Zs -Fmp4
+
+
+**Error**:
+
+* The movie doesn't change. We must learn about varibles.
+
 
 2.4. Make full animation
 ^^^^^^^^^^^^^^^^^^^^^^^^

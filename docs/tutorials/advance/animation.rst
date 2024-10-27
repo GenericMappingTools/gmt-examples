@@ -54,10 +54,10 @@ In this tutorial, I will explain the simplest type of animation,
 which only requires :gmt-module:`movie` module. 
 As an example, I will create an animation of the Earth spinning similar to the one below:
 
-Corregir link
-
-..  youtube:: NjSDpQ5S3FM
-   :height: 80%
+..  youtube:: uZtyTv6DLnM
+    :align: center
+    :height: 300px
+    :aspect: 1:1
 
 
 2.1. Goals of the Tutorial
@@ -146,7 +146,7 @@ We will create the first frame (``-M0,png``) over a black canvas (``-G``) for an
           gmt grdimage @earth_relief_06m -I -JG0/0/13c
         gmt end
         EOF
-        gmt movie main.sh -NEarth -Cfhd -T10 -M0,png -Gblack -V
+        gmt movie main.sh -NEarth -Cfhd -T10 -M0,png -V -L+f14p,Helvetica-Bold,white -Gblack
 
 
 .. Error::
@@ -245,7 +245,8 @@ You should compose your plots using the given canvas size, and movie will make p
           gmt grdimage @earth_relief_06m -I -JG0/0/13c -X0 -Y0
         gmt end
         EOF
-        gmt movie main.sh -NEarth -C13cx13cx80 -T10 -M0,png -Gblack -V
+        gmt movie main.sh -NEarth -C13cx13cx80 -T10 -M0,png -V -L+f14p,Helvetica-Bold,white -Gblack
+
 
 
 2.3. Make draft animation
@@ -274,20 +275,27 @@ We add the following arguments:
 2.3.1. First attemp
 +++++++++++++++++++
 
-     #.. gmtplot::
-        :height: 300 px
+    .. code-block:: bash
 
         cat << 'EOF' > main.sh
         gmt begin
           gmt grdimage @earth_relief_06m -I -JG0/0/13c -X0 -Y0
         gmt end
         EOF
-        gmt movie main.sh -NEarth -C13cx13cx30 -T10 -M0,png -Gblack -V -Zs -Fmp4
+        gmt movie main.sh -NEarth -C13cx13cx30 -T10 -M0,png -V -Gblack -L+f14p,Helvetica-Bold,white -Zs -Fmp4
 
-Corregir link
 
-..  youtube:: NjSDpQ5S3FM
-   :height: 80%
+  ..  youtube:: hHmXSYpV0yw
+    :align: center
+    :height: 300px
+    :aspect: 1:1
+
+<video>
+   <source src="Earth_2a.mp4" type="video/mp4">
+</video>
+
+.. video:: Earth_2a.mp4
+
 
 **Error**:
 
@@ -342,26 +350,24 @@ Variable parameters: These variables are updated for each frame (k, w are column
 - It is possible also to use the `MOVIE_WIDTH` parameter to set the widht of the map. 
   This is a constant parameter and it will remain fixed (to 13 cm) in all the frames.
 
+      .. code-block:: bash
 
-     #.. gmtplot::
-        :height: 300 px
-  
         cat << 'EOF' > main.sh
         gmt begin
          gmt grdimage @earth_relief_06m -I -JG-${MOVIE_FRAME}/0/${MOVIE_WIDTH} -Y0 -X0
         gmt end
         EOF
-        gmt movie main.sh -NEarth -C13cx13cx30 -T10 -Mf,png -Gblack -V -Fmp4
+        gmt movie main.sh -NEarth -C13cx13cx30 -T10 -M0,png -V -Gblack -L+f14p,Helvetica-Bold,white -Fmp4 -Zs
 
 .. Note::
  
   I add a minus sign so the earth spinns in the correct sense.
 
 
-Corregir link
-
-..  youtube:: NjSDpQ5S3FM
-   :height: 80%
+..  youtube:: sagKzhI88tU
+    :align: center
+    :height: 300px
+    :aspect: 1:1
 
 
 2.4. Make full animation
@@ -370,23 +376,19 @@ Corregir link
 - I increase the amount of frames to 360 (``-T360``) 
 - and increment the resolution to 80 dots per cm (``-C13cx13cx80``).
 
-
-     #.. gmtplot::
-        :height: 300 px
-      
+    .. code-block:: bash
+     
         cat << 'EOF' > main.sh
         gmt begin
          gmt grdimage @earth_relief_06m -I -JG-${MOVIE_FRAME}/0/13c -X0 -Y0
         gmt end
         EOF
-        gmt movie main.sh -C13cx13cx80 -T360 -M0,png -NEarth -Gblack -V -Fmp4
+        gmt movie main.sh -NEarth -C13cx13cx80 -T360 -M0,png -V -Gblack -L+f14p,Helvetica-Bold,white -Fmp4 -Zs
 
-
-Corregir link
-
-..  youtube:: NjSDpQ5S3FM
-   :height: 80%
-
+..  youtube:: uZtyTv6DLnM
+    :align: center
+    :height: 300px
+    :aspect: 1:1
 
 .. Tip::
 
@@ -403,13 +405,15 @@ Corregir link
 4. References
 ~~~~~~~~~~~~~
 
-* Wessel, P., Esteban, F., & Delaviel-Anger, G. (2024). The Generic Mapping Tools and animations for the masses. 
+- Wessel, P., Esteban, F., & Delaviel-Anger, G. (2024). The Generic Mapping Tools and animations for the masses. 
 Geochemistry, Geophysics, Geosystems, 25, e2024GC011545. https://doi.org/10.1029/2024GC011545.
+
 
 Technical information:
 
-* gmt movie: <https://docs.generic-mapping-tools.org/6.5/movie.html>
+- gmt movie: <https://docs.generic-mapping-tools.org/6.5/movie.html>
+
 
 See also more animations examples:
 
-* GMT animation gallery: https://docs.generic-mapping-tools.org/6.5/animations.html. 
+- GMT animation gallery: https://docs.generic-mapping-tools.org/6.5/animations.html. 

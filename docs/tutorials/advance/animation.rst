@@ -401,6 +401,161 @@ Variable parameters: These variables are updated for each frame (k, w are column
 3. Tutorial 2. Earthquakes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+In this tutorial, I will explain a bit more complex type of animation.
+This requires to use :gmt-module:`events` and :gmt-module:`movie` modules.
+In this example, I will create an animation showing the occurrences of earthquakes during the year 2018: 
+
+..  youtube:: uZtyTv6DLnM
+    :align: center
+    :height: 300px
+    :aspect: 1:1
+
+This animation was done from 365 frames (one per day) which were shown at 24 frames per second (fps).
+
+
+3.1. Goals of the Tutorial
+==========================
+
+- Explain the most important aspects of using the :gmt-module:`events` module.
+- Explain more complex aspects of using the :gmt-module:`movie` module.
+
+3.2. Step-by-step
+=================
+
+I will follow the same steps as described for tutorial 1.
+
+3.2.1. Make last image
+^^^^^^^^^^^^^^^^^^^^^^
+
+In this example I will plot an static map of the earth. I create a cpt to plot the earthquakes.
+
+     .. gmtplot::
+        :height: 300 px
+
+        gmt begin Earth png
+            # Plot relief grid
+            gmt grdimage @earth_relief_06m -I -JN14c
+            # Create cpt for the earthquakes
+            gmt makecpt -Cred,green,blue -T0,70,300,10000
+            # Plot quakes
+            gmt plot quakes.txt -SE- -C
+        gmt end
+
+
+3.2.2. Make master frame
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+For this example, it is suggested to use a background script (pre.sh.) 
+This is used for two purposes: 
+
+#. (1) To create a cpt file that will be needed by mainscript to make the movie, 
+#. (2) To make a static background plot that should form the background for all frames.
+
+So, in this background script I create the CPT for the earthquakes and plot the background map. Note that I use a constant parameter (``${MOVIE_WIDTH}``).
+
+I also include a label with the date (``-Lc0``).
+
+     .. gmtplot::
+        :height: 300 px
+        
+        cat << 'EOF' > pre.sh
+        gmt begin
+          # Create background map
+          gmt grdimage @earth_relief_06m -I -JN${MOVIE_WIDTH} -Rg -X0 -Y0
+          # Create cpt for the earthquakes
+          gmt makecpt -Cred,green,blue -T0,70,300,10000 -H > quakes.cpt
+        gmt end
+        EOF
+
+        cat << 'EOF' > main.sh
+        gmt begin
+          gmt basemap -Rg -JN${MOVIE_WIDTH} -X0 -Y0 -B+n
+          gmt plot quakes.txt -SE- -Cquakes.cpt
+          gmt events quakes.txt -SE- -Cquakes.cpt -T${MOVIE_COL0}
+        gmt end
+        EOF
+
+        gmt movie main.sh -Sbpre.sh -NEarth -Ml,png -Zs -V -C720p \
+        -T2018-01-01T/2018-12-31T/1d -Gblack \
+        -Lc0 --FONT_TAG=18p,Helvetica,white --FORMAT_CLOCK_MAP=-
+
+
+3.2.3. Make full animation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+    .. code-block:: bash
+
+        cat << 'EOF' > pre.sh
+        gmt begin
+          # Create background map
+          gmt grdimage @earth_relief_06m -I -JN${MOVIE_WIDTH} -Rg -X0 -Y0
+          # Create cpt for the earthquakes
+          gmt makecpt -Cred,green,blue -T0,70,300,10000 -H > quakes.cpt
+        gmt end
+        EOF
+
+        cat << 'EOF' > main.sh
+        gmt begin
+          gmt basemap -Rg -JN${MOVIE_WIDTH} -X0 -Y0 -B+n
+          #gmt plot quakes.txt -SE- -Cquakes.cpt
+          gmt events quakes.txt -SE- -Cquakes.cpt -T${MOVIE_COL0}
+        gmt end
+        EOF
+
+        gmt movie main.sh -Sbpre.sh -NEarth -Ml,png -Zs -V -C24cx12cx80 \
+        -T2018-01-01T/2018-12-31T/1d -Gblack -Fmp4 \
+        -Lc0 --FONT_TAG=18p,Helvetica,white --FORMAT_CLOCK_MAP=-
+
+
+..  youtube:: uZtyTv6DLnM
+    :align: center
+    :height: 300px
+    :aspect: 2:1
+
+
+3.2.4. Make full animation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In the previous animation, the earthquakes appear. The module events include options that can modify and enhance the earthquakes.
+The -E option allows to set the duration of the phases. 
+The -M option modify the symbols during the phases:
+
+-Es+r2+d6: This sets the duration of the rise phase and the decay phase. 
+- Ms5+c0.5: modify the relative size of the symbol. The size increase 5 times and them reduce by half (of the original size) in the coda phase.
+- Mt+c0: modify the transparency to 0 in the coda fade. This allows that the symbols continue to be seen after its occurrence. 
+- Mi1+c-0.6: modify the intensity of the color. It gets lighter and then darker in the coda phase.
+
+
+
+
+    .. code-block:: bash
+
+        cat << 'EOF' > pre.sh
+        gmt begin
+          # Create background map
+          gmt grdimage @earth_relief_06m -I -JN${MOVIE_WIDTH} -Rg -X0 -Y0
+          # Create cpt for the earthquakes
+          gmt makecpt -Cred,green,blue -T0,70,300,10000 -H > quakes.cpt
+        gmt end
+        EOF
+
+        cat << 'EOF' > main.sh
+        gmt begin
+          gmt basemap -Rg -JN${MOVIE_WIDTH} -X0 -Y0 -B+n
+          gmt events quakes.txt -SE- -Cquakes.cpt -T${MOVIE_COL0} \
+          -Es+r2+d6 -Ms5+c0.5 -Mi1+c-0.6 -Mt+c0 --TIME_UNIT=d
+        gmt end
+        EOF
+
+        gmt movie main.sh -Sbpre.sh -NEarth -Ml,png -Zs -V -C24cx12cx80 \
+        -T2018-01-01T/2018-12-31T/1d -Gblack -Fmp4 \
+        -Lc0 --FONT_TAG=18p,Helvetica,white --FORMAT_CLOCK_MAP=-
+
+
+..  youtube:: uZtyTv6DLnM
+    :align: center
+    :height: 300px
+    :aspect: 2:1
 
 
 4. References

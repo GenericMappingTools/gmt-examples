@@ -59,6 +59,14 @@ As an example, I will create an animation of the Earth spinning similar to the o
     :height: 300px
     :aspect: 1:1
 
+This animation was done from 360 frames (changing by 1 degree the central longitude of the map) which were shown at 24 frames per second (fps). 
+
+Previously, before the movie module was introduced with GMT 6, making an animation like this would require making 360 maps
+(1 centred on a different longitude all the way around). For this it would be very useful to use a loop. 
+Finally, the figures would be assembled into a video format using ffmpeg or graphics magik. 
+You can see an explanation of that times `here  <https://docs.generic-mapping-tools.org/5.4/gallery/anim_introduction.html>`_ 
+and some examples `here  <https://docs.generic-mapping-tools.org/5.4/Gallery.html#animations>`_.
+
 
 2.1. Goals of the Tutorial
 ==========================
@@ -289,13 +297,6 @@ We add the following arguments:
     :align: center
     :height: 300px
     :aspect: 1:1
-
-<video>
-   <source src="Earth_2a.mp4" type="video/mp4">
-</video>
-
-.. video:: Earth_2a.mp4
-
 
 **Error**:
 

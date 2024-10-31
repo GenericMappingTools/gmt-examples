@@ -515,8 +515,16 @@ I also include a label with the date (``-Lc0``).
         -T2018-01-01T/2018-12-31T/1d -Gblack \
         -Lc0 --FONT_TAG=18p,Helvetica,white --FORMAT_CLOCK_MAP=-
 
+.. admonition:: Technical Information
+
+  - **--FONT_TAG=18p,Helvetica,white**: This set the font for the label.
+  - **--FORMAT_CLOCK_MAP=-**: This works to NOT include the hours in the date.
+
+
 3.2.3. Make full animation without enhancement
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Now, I will make the final animation. In this example, the command executed in the main script is simple so you can avoid making a draft animation.
 
     .. code-block:: bash
 
@@ -532,7 +540,6 @@ I also include a label with the date (``-Lc0``).
         cat << 'EOF' > main.sh
         gmt begin
           gmt basemap -Rg -JN${MOVIE_WIDTH} -X0 -Y0 -B+n
-          #gmt plot @quakes_2018.txt -SE- -Cquakes.cpt
           gmt events @quakes_2018.txt -SE- -Cquakes.cpt -T${MOVIE_COL0}
         gmt end
         EOF
@@ -551,15 +558,19 @@ I also include a label with the date (``-Lc0``).
 3.2.4. Make full animation with enhancement
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In the previous animation, the earthquakes appear. The module events include options that can modify and enhance the earthquakes.
+In the previous animation, the earthquakes appear. 
+
+The module :gmt-module:`events` include options that can modify and enhance the earthquakes.
 The -E option allows to set the duration of the phases. 
-The -M option modify the symbols during the phases:
+The -M option modify the symbols during the phases.
 
--Es+r2+d6: This sets the duration of the rise phase and the decay phase. 
-- Ms5+c0.5: modify the relative size of the symbol. The size increase 5 times and them reduce by half (of the original size) in the coda phase.
-- Mt+c0: modify the transparency to 0 in the coda fade. This allows that the symbols continue to be seen after its occurrence. 
-- Mi1+c-0.6: modify the intensity of the color. It gets lighter and then darker in the coda phase.
+In this example I use the following options:
 
+-\--TIME_UNIT=d: This sets that the duration of the phases (set via -E) are in days (d).
+- -Es+r2+d6: This sets the duration of the rise phase and the decay phase.
+- -Ms5+c1: modify the size. The size will increase 5 times during the rise phase and them reduce to the original size in the coda phase.
+- -Mt+c0: modify the transparency.  The transparency will remain to 0 at the end. This allows to be seen after its occurrence. 
+- -Mi1+c0: modify the intensity of the color. It gets lighter during the rise phase and them returns to its original color.
 
 
     .. code-block:: bash
@@ -577,7 +588,7 @@ The -M option modify the symbols during the phases:
         gmt begin
           gmt basemap -Rg -JN${MOVIE_WIDTH} -X0 -Y0 -B+n
           gmt events @quakes_2018.txt -SE- -Cquakes.cpt -T${MOVIE_COL0} \
-          -Es+r2+d6 --TIME_UNIT=d -Ms5+c0.5 -Mi1+c-0.6 -Mt+c0
+          -Es+r2+d6 -Ms5+c1 -Mi1+c0 -Mt+c0 --TIME_UNIT=d
         gmt end
         EOF
 
@@ -592,6 +603,10 @@ The -M option modify the symbols during the phases:
     :aspect: 2:1
 
 
+..  youtube:: rmPhIVzhIgY
+    :align: center
+    :height: 400px
+    :aspect: 2:1
 
 
 4. See also

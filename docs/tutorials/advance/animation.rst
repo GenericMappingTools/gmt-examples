@@ -1,7 +1,12 @@
 Making animations
 -----------------
 
-By F. Esteban (@esteban82). October 20, 2024
+By F. Esteban (@esteban82). November, 2024
+
+- This tutorial explain the basic aspect of doing animations with GTM.
+- It serve as a guide to help beginners understand and troubleshoot potential issues.
+- It explain basic aspect of the :gmt-module:`movie` and :gmt-module:`events` modules.
+
 
 1. Introduction
 ~~~~~~~~~~~~~~~
@@ -16,13 +21,19 @@ By F. Esteban (@esteban82). October 20, 2024
 1.2. How to make an animation?
 ==============================
 
-- In order to make an animation we need:
+In order to make an animation we need:
 
 #. A lot of still images.
 #. Combine all the images in a video format.
 
 .. Tip::
   A video file is just a container format that, when is executed, display all the images in it in a sequential order.
+
+
+The animation making modules were introduce with GMT 6 (`Wessel et al 2019 <https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2019GC008515>`_). 
+Before GMT6, the best way to make with an anmiation with GMT required a loop to make a lots of figures
+and them to assembled them into a video format using ffmpeg or graphics magick (here you can see an `explanation of that times <https://docs.generic-mapping-tools.org/5.4/gallery/anim_introduction.html>`_ 
+and `some examples <https://docs.generic-mapping-tools.org/5.4/Gallery.html#animations>`_).
 
 
 1.3. Why use GMT for animations?
@@ -37,7 +48,7 @@ GMT is ideal for animations that require:
 1.4. Types of animations in GMT
 ================================
 
-I categorize two types of animations based on their complexity in GMT:
+I categorize two types of animations based on their complexity to make them with GMT:
 
 1. **Moving objects** (e.g., Earth spinning). It uses the :gmt-module:`movie` module.
 2. **Appearing objects** (e.g., earthquakes). It uses :gmt-module:`movie` and :gmt-module:`events` modules.
@@ -47,33 +58,31 @@ I categorize two types of animations based on their complexity in GMT:
 
 - GMT version 6.1 or later.
 
-The animation making modules were introduce with GMT 6 (CITA). Previously, making an animation would require a loop to make a lots of maps. 
-Finally, the figures would be assembled into a video format using ffmpeg or graphics magick. 
-In the following links you can see an `explanation of that times <https://docs.generic-mapping-tools.org/5.4/gallery/anim_introduction.html>`_ 
-and `some examples <https://docs.generic-mapping-tools.org/5.4/Gallery.html#animations>`_.
-
 
 2. Tutorial 1. Earth spinning
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In this tutorial, I will explain the simplest type of animation, 
 which only requires :gmt-module:`movie` module. 
+
 As an example, I will create an animation of the Earth spinning similar to the one below:
+This animation was done from 360 images (or frames), changing by 1 degree the central longitude of the map and it is shown at 24 frames per second (fps). 
 
 ..  youtube:: uZtyTv6DLnM
     :align: center
     :height: 400px
     :aspect: 1:1
 
-This animation was done from 360 images (or frames), changing by 1 degree the central longitude of the map and it is shown at 24 frames per second (fps). 
-
 
 2.1. Goals of the Tutorial
 ==========================
 
-- Provide a general introduction to creating animations with GMT.
-- Explain the most important aspects of using the :gmt-module:`movie` module.
-- Serve as a guide to help beginners understand and troubleshoot potential issues.
+- Explain the most important aspects of using the :gmt-module:`movie` module which include:
+
+  - What is GMT Movie
+  - How to set the Canvas (-C)
+  - How to set the movie parameters
+
 
 2.2. Step-by-step Instructions
 ==============================
@@ -88,7 +97,7 @@ To create an animation, follow these steps:
 2.2.1. Make first image
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-The first step is to create an image using a standard GMT script that will serve as the base for the animation.
+The first step is to create an image using a standard GMT script (with `modern mode <https://docs.generic-mapping-tools.org/dev/reference/introduction.html#modern-and-classic-mode>`_) that will serve as the base for the animation.
 
 **Step Goal**: Create the first image of the animation.
 
@@ -221,9 +230,6 @@ We will fix the canvas size to match the map dimensions:
 
 - Pixel density (dots-per-cm, dpc) is set automatically. 
 - For this presets format (for 16:9), the canvas is 24 x 13.5 cm: 
-
-       .. image:: Canvas_16x9.png
-            :align: center
 
 
      .. gmtplot::
@@ -558,7 +564,16 @@ Now, I will make the final animation. In this example, the command executed in t
 3.2.4. Make full animation with enhancement
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In the previous animation, the earthquakes appear. 
+In the previous animation, the earthquakes appear but it is hard to see when they do it. 
+It is possible to draw attention to the arrival of a new event by temporarily changing four attributes of the symbol (via -M): 
+ 
+- Size
+- Color intensity 
+- Transparency 
+- Color (via CPT look-up).
+
+The duration of the temporary changes are control via the -E modifier.
+
 
 The module :gmt-module:`events` include options that can modify and enhance the earthquakes.
 The -E option allows to set the duration of the phases. 
@@ -566,7 +581,7 @@ The -M option modify the symbols during the phases.
 
 In this example I use the following options:
 
--\--TIME_UNIT=d: This sets that the duration of the phases (set via -E) are in days (d).
+- \--TIME_UNIT=d: This sets that the values of -E are in days (d).
 - -Es+r2+d6: This sets the duration of the rise phase and the decay phase.
 - -Ms5+c1: modify the size. The size will increase 5 times during the rise phase and them reduce to the original size in the coda phase.
 - -Mt+c0: modify the transparency.  The transparency will remain to 0 at the end. This allows to be seen after its occurrence. 
@@ -597,12 +612,6 @@ In this example I use the following options:
         -Lc0 --FONT_TAG=18p,Helvetica,white --FORMAT_CLOCK_MAP=-
 
 
-..  youtube:: stoRkGNb3fw
-    :align: center
-    :height: 400px
-    :aspect: 2:1
-
-
 ..  youtube:: rmPhIVzhIgY
     :align: center
     :height: 400px
@@ -626,4 +635,5 @@ You can find more examples here:
 5. References
 ~~~~~~~~~~~~~
 
+- Wessel, P., Luis, J. F., Uieda, L., Scharroo, R., Wobbe, F., Smith, W. H. F., & Tian, D. (2019). The Generic Mapping Tools Version 6. Geochemistry, Geophysics, Geosystems, 20(11), 5556–5564. https://doi.org/10.1029/2019GC008515
 - Wessel, P., Esteban, F., & Delaviel-Anger, G. (2024). The Generic Mapping Tools and animations for the masses. Geochemistry, Geophysics, Geosystems, 25, e2024GC011545. https://doi.org/10.1029/2024GC011545.

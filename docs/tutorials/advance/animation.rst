@@ -3,7 +3,8 @@ Making animations
 
 By F. Esteban (@esteban82). November, 2024
 
-- This tutorial explain the basic aspect of doing animations with GTM.
+
+- This tutorial explain the basic aspect of doing animations with GMT.
 - It serve as a guide to help beginners understand and troubleshoot potential issues.
 - It explain basic aspect of the :gmt-module:`movie` and :gmt-module:`events` modules.
 
@@ -484,11 +485,20 @@ In this example I will plot an static map of the earth. I create a cpt to plot t
 3.2.2. Make master frame
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-For this example, it is suggested to use a background script (pre.sh.) 
-This is used for two purposes: 
+The background script
++++++++++++++++++++++
+
+Within movie, there is an optional background script that it is used for two purposes:
+
+#. Create files that will be needed by mainscript to make the movie, 
+#. Make a static background plot that should form the background for all frames 
+
+
+
+For this example, I use the background script (pre.sh.) to: 
 
 #. To create a cpt file that will be needed by mainscript to make the movie, 
-#. To make a static background plot that should form the background for all frames.
+#. To make a static background map to plot the quakes.
 
 So, in this background script I create the CPT for the earthquakes and plot the background map. Note that I use a constant parameter (``${MOVIE_WIDTH}``).
 
@@ -565,7 +575,7 @@ Now, I will make the final animation. In this example, the command executed in t
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In the previous animation, the earthquakes appear but it is hard to see when they do it. 
-It is possible to draw attention to the arrival of a new event by temporarily changing four attributes of the symbol (via -M): 
+With :gmt-module:`events` is possible to draw attention to the arrival of a new event by temporarily changing four attributes of the symbol (via -M): 
  
 - Size
 - Color intensity 
@@ -575,17 +585,15 @@ It is possible to draw attention to the arrival of a new event by temporarily ch
 The duration of the temporary changes are control via the -E modifier.
 
 
-The module :gmt-module:`events` include options that can modify and enhance the earthquakes.
-The -E option allows to set the duration of the phases. 
-The -M option modify the symbols during the phases.
+In this example I announce each quake by magnifying size and whitening the color for a little bit. Later the symbols return to its original properties.
 
-In this example I use the following options:
+.. admonition:: Technical Information
 
-- \--TIME_UNIT=d: This sets that the values of -E are in days (d).
-- -Es+r2+d6: This sets the duration of the rise phase and the decay phase.
-- -Ms5+c1: modify the size. The size will increase 5 times during the rise phase and them reduce to the original size in the coda phase.
-- -Mt+c0: modify the transparency.  The transparency will remain to 0 at the end. This allows to be seen after its occurrence. 
-- -Mi1+c0: modify the intensity of the color. It gets lighter during the rise phase and them returns to its original color.
+  - \--TIME_UNIT=d: This sets that the values of -E are in days (d).
+  - -Es+r2+d6: This sets the duration of the rise phase and the decay phase.
+  - -Ms5+c1: modify the size. The size will increase 5 times during the rise phase and them reduce to the original size.
+  - -Mt+c0: modify the transparency. The transparency will remain to 0 at the end. This allows to be seen after its occurrence. 
+  - -Mi1+c0: modify the intensity of the color. It gets lighter during the rise phase and them returns to its original color.
 
 
     .. code-block:: bash

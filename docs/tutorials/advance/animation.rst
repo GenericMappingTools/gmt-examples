@@ -20,7 +20,8 @@ Here you can see a `more complete explanation <https://docs.generic-mapping-tool
 and `some examples <https://docs.generic-mapping-tools.org/5.4/Gallery.html#animations>`_ of that times.
 
 GMT 6 (`Wessel et al 2019 <https://doi.org/10.1029/2019GC008515>`_) simplified all that by adding movie-making modules
-that were later refined with GMT 6.5 (`Wessel et al 2024 <https://doi.org/10.1029/2024GC011545>`_). These modules empower users to create animations by taking over non-trivial tasks.
+that were later refined with GMT 6.5 (`Wessel et al 2024 <https://doi.org/10.1029/2024GC011545>`_). 
+These modules empower users to create animations by taking over non-trivial tasks.
 
 1.1 What is an Animation?
 =========================
@@ -107,7 +108,9 @@ To create an animation, follow these steps:
 2.2.1. Make first image
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-The first step is to create an image using a standard GMT script (with `modern mode <https://docs.generic-mapping-tools.org/dev/reference/introduction.html#modern-and-classic-mode>`_) that will serve as the base for the animation.
+The first step is to create an image using a standard GMT script 
+(with `modern mode <https://docs.generic-mapping-tools.org/dev/reference/introduction.html#modern-and-classic-mode>`_) 
+that will serve as the base for the animation.
 
 **Step Goal**: Create the first image of the animation.
 
@@ -154,14 +157,14 @@ by executing a single plot script that is repeated across all frames.
 - **-T**: Number of frames.
 - There are two type of outputs. An image (called *master frame*; **-M**) or a video (**-F**). You have to asks for at least one of them.
 
-**Optional Arguments** (usefull for this tutorial):
+**Optional Arguments** (useful for this tutorial):
 
 - **-G**: Set the canvas color (or fill).
 - **-V**: Show verbose information during the movie-making process.
 - **-L**: Show a label with the frame number. 
 
-2.2.2.2. First Attemp
-+++++++++++++++++++++
+2.2.2.2. First Attempt
+++++++++++++++++++++++
 
 I create the first frame (``-M0,png``) over a black canvas (``-G``) for an HD video format (``-Chd``).
 
@@ -193,7 +196,7 @@ I create the first frame (``-M0,png``) over a black canvas (``-G``) for an HD vi
       EOF
 
   - This saved the main script into the file ``main.sh`` (using a `Here Document <https://en.wikipedia.org/wiki/Here_document>`_). 
-  - This is helpfull because allow us to see (and edit) the main script and the arguments of gmt-module:`movie` just using a single file.
+  - This is useful because allow us to see (and edit) the main script and the arguments of gmt-module:`movie` just using a single file.
 
 
 2.2.2.3. Fix the Canvas
@@ -272,10 +275,10 @@ I create the first frame (``-M0,png``) over a black canvas (``-G``) for an HD vi
   - DPU: Dots-per-unit pixel density. So it is DPI for inches or DPC for cm. 
 
 
-2.2.2.5. Second attemp. Fix the canvas
+2.2.2.5. Second attempt. Fix the canvas
 ++++++++++++++++++++++++++++++++++++++
 
-- For this new attemp I will:
+- For this new attempt I will:
 
   - set a custom canvas of a square of 13 cm and 80 dpu (same resolution as full hd, ``-C13cx13cx80``).
   - use ``-X0`` and ``-Y0`` (in ``main.sh``) to remove the default offset.
@@ -296,7 +299,8 @@ I create the first frame (``-M0,png``) over a black canvas (``-G``) for an HD vi
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Once you are happy with the master frame, I recommend to make a very short and small movie so you don't have to wait very long to see the result.
-This approach is advisable because creating an animation can be time-consuming, and generating many images for assembly can sometimes lead to errors or unexpected behaviors.
+This approach is advisable because creating an animation can be time-consuming, 
+and generating many images for assembly can sometimes lead to errors or unexpected behaviors.
 
 .. admonition:: **Step Goals**:
 
@@ -317,7 +321,7 @@ In this example I will reduce the number of frames to 10 (``-T10``) and the qual
 Also, I add the following arguments to :gmt-module:`movie`:
 
 - Fmp4: to create a mp4 video (now it is possible to delete ``-M``).
-- Zs: to remove the temporary files created in the movie-making process. Usefull to keep the working directory clean.
+- Zs: to remove the temporary files created in the movie-making process. Useful to keep the working directory clean.
 
 
     .. code-block:: bash
@@ -384,10 +388,10 @@ Several parameters are automatically assigned (via the movie module) and can be 
     - In order to introduce changes in the frames we must use the movie variable parameters.
 
 
-2.3.2 Second attemp. Use parameters
-+++++++++++++++++++++++++++++++++++
+2.3.2 Second attempt. Use parameters
+++++++++++++++++++++++++++++++++++++
 
-Now I will movie parameters. First, I use ``MOVIE_FRAME`` variable paramater to set the central longitude of the map.
+Now I will movie parameters. First, I use ``MOVIE_FRAME`` variable parameter to set the central longitude of the map.
 I also use the ``MOVIE_WIDTH`` constant parameter to set the width of the map (instead of 13c).
 
       .. code-block:: bash
@@ -401,7 +405,7 @@ I also use the ``MOVIE_WIDTH`` constant parameter to set the width of the map (i
 
 .. Note::
  
-  I add a minus sign so the earth spinns in the correct sense.
+  I add a minus sign so the earth spins in the correct sense.
 
 
 ..  youtube:: sagKzhI88tU
@@ -416,7 +420,7 @@ Once that the draft animation is working it is possible to increment the number 
 
 In the example, I increase:
 
-- the amount of frames to 360 (``-T360``) to get the whole spinn.
+- the amount of frames to 360 (``-T360``) to get the whole spin.
 - the resolution to 80 DPC (``-C13cx13cx80``) to get a high-quality video.
 
     .. code-block:: bash
@@ -435,8 +439,8 @@ In the example, I increase:
 
 .. Tip::
 
-  Be carefull. This step could be quite time (and resources) consuming. 
-  By default, ``gmt movie`` uses all the cores available to speed up the frame creation process.
+  Be careful. This step can be quite time (and resource) consuming.
+  By default, :gmt-module:`movie` uses all the cores available to speed up the frame creation process.
   So probably you can't do anything else while GMT is creating all the frames (maybe you can take a break, or have lunch).
 
 
@@ -464,7 +468,7 @@ This animation was done from 365 frames (one per day) which were shown at 24 fra
 3.2. Step-by-step
 =================
 
-I will follow the same steps as described for tutorial 1 (except for the draf animation).
+I will follow the same steps as described for tutorial 1 (except for the draft animation).
 
 3.2.1. Make last image
 ^^^^^^^^^^^^^^^^^^^^^^
@@ -505,15 +509,15 @@ The background script
 
 Within movie, there is an optional background script that it is used for two purposes:
 
-#. Create files that will be needed by mainscript to make the movie, 
+#. Create files that will be needed by main script to make the movie, 
 #. Make a static background plot that should form the background for all frames 
 
 
 
 For this example, I use the background script (pre.sh.) to: 
 
-#. To create a cpt file that will be needed by mainscript to make the movie, 
-#. To make a static background map to plot the quakes.
+#. To create a cpt file that will be used to color the quakes.
+#. To make a worldwide background map.
 
 So, in this background script I create the CPT for the earthquakes and plot the background map. Note that I use a constant parameter (``${MOVIE_WIDTH}``).
 

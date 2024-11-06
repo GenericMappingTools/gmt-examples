@@ -359,16 +359,16 @@ Several parameters are automatically assigned (via the movie module) and can be 
 
 **Variable parameters**: Whose values change with the frame number.
 
- ============== ==============================================
-  Parameter                  Purpose or contents
- ============== ==============================================
-  MOVIE_FRAME    Number of current frame being processed
-  MOVIE_TAG      Formatted frame number (string)
-  MOVIE_NAME     Prefix for current frame image
-  MOVIE_COLk     Variable k from data column k, current row
-  MOVIE_TEXT     The full trailing text for current row 
-  MOVIE_WORDw    Word w from trailing text, current row 
- ============== ==============================================
+ ============== ============================================= ===============
+  Parameter                  Purpose or contents               Set by Movie
+ ============== ============================================= ===============
+  MOVIE_FRAME    Number of current frame being processed       -T
+  MOVIE_TAG      Formatted frame number (string)               -T 
+  MOVIE_NAME     Prefix for current frame image                -N and -T
+  MOVIE_COLk     Variable k from data column k, current row    -T\ *timefile*
+  MOVIE_TEXT     The full trailing text for current row        -T\ *timefile*
+  MOVIE_WORDw    Word w from trailing text, current row        -T\ *timefile*
+ ============== ============================================= ===============
 
 
 **Constant parameters**: Whose values do NOT change during the whole movie.
@@ -392,19 +392,19 @@ How to set the number of Frames
 
 There are 3 ways to set the number of frames for a movie:
 
-#. Number: 
+**1. Number**: 
 
 If you write a single (integer) value, them it will be the total number of frames. 
 Under the hood, this will create a one-column data set from 0 to that number every 1 value. 
-In this case, you can Use MOVIE_FRAME to get that value for each frame.
+In this case, you can use MOVIE_FRAME to get that value for each frame.
 
-#. min/max/inc: 
+**2. min/max/inc**:
 
 If you write 3 values, then GMT will create a one-column data set from *min* to *max* every *inc*.
 In this case the total of number will be total amount of rows that the one-column data set will have.
 In this case, you case also use the MOVIE_COL0 parameter to access the first column of the data set.
 
-#. Time file: 
+**3. Time file**:
 
 If you supply the name of a file, then GMT will access it and use one record (i.e. row) per frame.
 This method allow to have more than one-column and can be used to make more complex animations. 
@@ -415,7 +415,9 @@ The file can even have trailing text that will be accessed with MOVIE_TEXT.
 2.3.2 Second attempt. Use parameters
 ++++++++++++++++++++++++++++++++++++
 
-Now I will movie parameters. First, I use ``MOVIE_FRAME`` variable parameter to set the central longitude of the map.
+Now I will update the script with movie parameters. 
+First, I use ``MOVIE_FRAME`` variable parameter to set the central longitude of the map.
+Since I using ``-T10``, I will get an animation with 10 frames, where the longitude will range from 0 to 9. 
 I also use the ``MOVIE_WIDTH`` constant parameter to set the width of the map (instead of 13c).
 
       .. code-block:: bash

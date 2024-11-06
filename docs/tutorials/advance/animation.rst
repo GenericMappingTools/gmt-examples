@@ -314,8 +314,8 @@ and generating many images for assembly can sometimes lead to errors or unexpect
   and `GraphicsMagick <http://www.graphicsmagick.org/>`_ (for GIF).
 
 
-2.3.1. First attemp
-+++++++++++++++++++
+2.3.1. First attempt
+++++++++++++++++++++
 
 In this example I will reduce the number of frames to 10 (``-T10``) and the quality to 30 DPC (``-C13cx13cx30``).
 Also, I add the following arguments to :gmt-module:`movie`:
@@ -373,19 +373,43 @@ Several parameters are automatically assigned (via the movie module) and can be 
 
 **Constant parameters**: Whose values do NOT change during the whole movie.
  
- ============== =================================================================
-  Parameter                            Purpose or contents                      
- ============== =================================================================
-  MOVIE_NFRAMES   Total number of frames in the movie (via movie -T)            
-  MOVIE_WIDTH     Width of the movie canvas (via movie -C)                                     
-  MOVIE_HEIGHT    Height of the movie canvas (via movie -C)                                   
-  MOVIE_DPU       Dots (pixels) per unit used to convert to image (via movie -C)
-  MOVIE_RATE      Number of frames displayed per second (via movie -D)          
- ============== =================================================================
+ ============== ================================================= =============
+  Parameter               Purpose or contents                       Set by 
+ ============== ================================================= =============
+  MOVIE_NFRAMES   Total number of frames in the movie               movie -T
+  MOVIE_WIDTH     Width of the movie canvas                         movie -C
+  MOVIE_HEIGHT    Height of the movie canvas                        movie -C
+  MOVIE_DPU       Dots (pixels) per unit used to convert to image   movie -C
+  MOVIE_RATE      Number of frames displayed per second             movie -D 
+ ============== ================================================= =============
 
 .. Important::
     
     - In order to introduce changes in the frames we must use the movie variable parameters.
+
+How to set the number of Frames
++++++++++++++++++++++++++++++++
+
+There are 3 ways to set the number of frames for a movie:
+
+#. Number: 
+
+If you write a single (integer) value, them it will be the total number of frames. 
+Under the hood, this will create a one-column data set from 0 to that number every 1 value. 
+In this case, you can Use MOVIE_FRAME to get that value for each frame.
+
+#. min/max/inc: 
+
+If you write 3 values, then GMT will create a one-column data set from *min* to *max* every *inc*.
+In this case the total of number will be total amount of rows that the one-column data set will have.
+In this case, you case also use the MOVIE_COL0 parameter to access the first column of the data set.
+
+#. Time file: 
+
+If you supply the name of a file, then GMT will access it and use one record (i.e. row) per frame.
+This method allow to have more than one-column and can be used to make more complex animations. 
+For example, you can have a second column with numbers which will access with MOVIE_COL1.
+The file can even have trailing text that will be accessed with MOVIE_TEXT.
 
 
 2.3.2 Second attempt. Use parameters

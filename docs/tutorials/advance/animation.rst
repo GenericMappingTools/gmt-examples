@@ -22,6 +22,7 @@ and `some examples <https://docs.generic-mapping-tools.org/5.4/Gallery.html#anim
 GMT 6 (`Wessel et al 2019 <https://doi.org/10.1029/2019GC008515>`_) simplified all that by adding movie-making modules
 that were later refined with GMT 6.5 (`Wessel et al 2024 <https://doi.org/10.1029/2024GC011545>`_). 
 These modules empower users to create animations by taking over non-trivial tasks.
+.. However, these modules (:gmt-module:`movie` and :gmt-module:`events`) are more complex than others and required some explanation to master them (describe in this tutorial).
 
 1.1 What is an Animation?
 =========================
@@ -94,7 +95,7 @@ As an example, I will create an animation of the Earth spinning similar to the o
   - What is GMT movie
   - How to set the Canvas (-C)
   - How to set the movie parameters
-  - How to set the number of Frames
+  - How to set the number of Frames (-T)
 
 
 2.2. Step-by-step Instructions
@@ -153,10 +154,10 @@ by executing a single plot script that is repeated across all frames.
 
 **Required Arguments:**
 
-- **mainscript**: The previously created script.
+- **mainscript**: The previously created script that will use to create all the frames.
 - **-N**: Name for the output file.
-- **-C**: Canvas Size.
-- **-T**: Number of frames.
+- **-C**: Canvas Size (see below).
+- **-T**: Number of frames (see below).
 - There are two type of outputs. An image (called *master frame*; **-M**) or a video (**-F**). You have to asks for at least one of them.
 
 **Optional Arguments** (useful for this tutorial):
@@ -198,7 +199,7 @@ I create the first frame (``-M0,png``) over a black canvas (``-G``) for an HD vi
       EOF
 
   - This saved the main script into the file ``main.sh`` (using a `Here Document <https://en.wikipedia.org/wiki/Here_document>`_). 
-  - This is useful because allow us to see (and edit) the main script and the arguments of gmt-module:`movie` just using a single file.
+  - This is useful because allow us to see (and edit) the main script and the arguments of :gmt-module:`movie` just using a single file.
 
 
 2.2.2.3. Fix the Canvas
@@ -361,8 +362,8 @@ There are two sets of parameters:
 **Variable parameters**: 
 
 - These values change with the frame number.
-- We must use them in the *main script* to introduce variations in the frames (otherwise, the movie would be incredibly boring).
-
+- We must use them in the *main script* to introduce variations in the frames.
+.. (otherwise, the movie would be incredibly boring).
 
  ============== ============================================= ===============
   Parameter                  Purpose or contents               Set by Movie
@@ -380,15 +381,18 @@ There are two sets of parameters:
 
 - These values do NOT change during the whole movie.
 - It can use them in the *main script* (and in the optional background and foreground scripts).
- 
+
+.. gmt movie main.sh -NEarth -C13cx13cx30 -T10 -M0,png -V -Gblack -L+f14p,Helvetica-Bold,white -Fmp4 -Zs
+
+
  ============== ================================================= ==============
   Parameter               Purpose or contents                      Set by Movie
  ============== ================================================= ==============
-  MOVIE_NFRAMES   Total number of frames in the movie               -T
-  MOVIE_WIDTH     Width of the movie canvas                         -C
-  MOVIE_HEIGHT    Height of the movie canvas                        -C
-  MOVIE_DPU       Dots (pixels) per unit used to convert to image   -C
-  MOVIE_RATE      Number of frames displayed per second             -D 
+  MOVIE_NFRAMES   Total number of frames in the movie               -T 10
+  MOVIE_WIDTH     Width of the movie canvas                         -C 13 (cm)
+  MOVIE_HEIGHT    Height of the movie canvas                        -C 13 (cm)
+  MOVIE_DPU       Dots (pixels) per unit used to convert to image   -C 30 (dpc)
+  MOVIE_RATE      Number of frames displayed per second             -D (24, by default)
  ============== ================================================= ==============
 
 .. Important::
@@ -398,7 +402,15 @@ There are two sets of parameters:
 How to set the number of Frames
 +++++++++++++++++++++++++++++++
 
+The number of frames is another important aspect to make animations.
 There are 3 ways to set the number of frames for a movie:
+
+.. The frame count in an animation is key for smoothness and clarity.
+  More frames create smoother motion and clearer transitions, which is crucial for visualizing gradual changes in scientific animations.
+ However, higher frame counts also mean larger file sizes and more processing.
+ .. Tip::
+  The display frame rate is set by default to 24 `fps <https://en.wikipedia.org/wiki/Frame_rate>`_. It can be change with `-D <https://docs.generic-mapping-tools.org/dev/movie.html#d>`_.
+
 
 **1. Number**: 
 
@@ -433,7 +445,7 @@ The file can even have trailing text that will be accessed with MOVIE_TEXT.
 
 Now I will update the script with movie parameters. 
 First, I use ``MOVIE_FRAME`` variable parameter to set the central longitude of the map.
-Since I using ``-T10``, I will get an animation with 10 frames, where the longitude will range from 0 to 9. 
+.. Since I using ``-T10``, I will get an animation with 10 frames, where the longitude will range from 0 to 9. 
 I also use the ``MOVIE_WIDTH`` constant parameter to set the width of the map (instead of 13c).
 
       .. code-block:: bash
@@ -498,14 +510,20 @@ In this example, I will create an animation showing the occurrences of earthquak
     :height: 400px
     :aspect: 1:1
 
-This animation was done from 365 frames (one per day) which were shown at 24 frames per second (fps).
+
+.. admonition:: Technical Information
+
+  This animation was created from 365 frames (one per day).
 
 
 3.1. Goals of the Tutorial
 ==========================
 
-- Explain the most important aspects of using the :gmt-module:`events` module.
-- Explain more complex aspects of using the :gmt-module:`movie` module.
+.. - Explain the most important aspects of using the :gmt-module:`events` module.
+.. - Explain more complex aspects of using the :gmt-module:`movie` module.
+- How to use a background script for a movie.
+- What is gmt events.
+- How to enhance symbols with the :gmt-module:`events` module.
 
 3.2. Step-by-step
 =================
@@ -546,25 +564,57 @@ In this example I will plot an static map of the earth. I create a cpt to plot t
 3.2.2. Make master frame
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-The background script
-+++++++++++++++++++++
+In this example, to create the master frame I must use a:
+
+- background script
+- use the :gmt-module:`events` module.
+
+In this step, I use it to recreate the previous image (the *master frame*).
+
+3.2.2.1. The background script
+++++++++++++++++++++++++++++++
 
 Within movie, there is an optional background script that it is used for two purposes:
 
 #. Create files that will be needed by main script to make the movie, 
 #. Make a static background plot that should form the background for all frames 
 
+.. admonition:: Technical Information
 
+  The background script are run only once. 
+
+
+3.2.2.2. gmt events module
++++++++++++++++++++++++++++
+
+I can plot symbols in a movie using the :gmt-module:`plot` module but they will appear on all frames.
+So if I want to plot quakes as they occur, I have to use the :gmt-module:`events` which allows to plot them as they unfold.
+For this, it has to be used used in conjunction with :gmt-module:`movie`. 
+Events 
+
+.. This module is typically used in conjunction with :gmt-module:`movie` where is used to call events over a time-sequence and thus plot symbols as the events unfold.
+
+.. Note:: 
+  - events requires a time column in the input data and will use it and the animation time to determine when symbols should be plotted.
+
+**Required Arguments:**
+
+- **-T**: Set the current plot time.
+
+
+.. - use -i to sort the column in the correct order ()
+
+
+3.2.2.3. First attempt
+++++++++++++++++++++++
 
 For this example, I use the background script (pre.sh.) to: 
 
 #. To create a cpt file that will be used to color the quakes.
-#. To make a worldwide background map.
+#. To make a worldwide background map. Note that I use the ``${MOVIE_WIDTH}`` constant parameter.
 
-So, in this background script I create the CPT for the earthquakes and plot the background map. Note that I use a constant parameter (``${MOVIE_WIDTH}``).
-
-For the main script, I use events (instead of plot). In order to use it, I only add the parameter ``-T`` which indicate the *time* of the events.
-I also include a label with the date (``-Lc0``).
+For the main script, I use :gmt-module:`events`. 
+I also include a label with the dates from the first column (``-Lc0``).
 
      .. gmtplot::
         :height: 400 px
@@ -598,10 +648,18 @@ I also include a label with the date (``-Lc0``).
   - **--FORMAT_CLOCK_MAP=-**: This works to NOT include the hours in the date.
 
 
+.. admonition:: Technical Information
+
+  - I use ``-T2018-01-01T/2018-12-31T/1d``to create a one-column data set with all the day in 2018.
+  - I used the variable parameter MOVIE_COL0 in ``events -T``. In this ways the symbols plotted will be changed as frames progresses.
+  
+
+
 3.2.3. Make full animation without enhancement
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Now, I will make the final animation. In this example, the command executed in the main script is simple so you can avoid making a draft animation.
+
 
     .. code-block:: bash
 
@@ -632,19 +690,27 @@ Now, I will make the final animation. In this example, the command executed in t
     :aspect: 2:1
 
 
+
+
 3.2.4. Make full animation with enhancement
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+3.2.4.1. How to enhance symbols with events
+++++++++++++++++++++++++++++++++++++++++++++
+
 In the previous animation, the earthquakes appear but it is hard to see when they do it. 
-With :gmt-module:`events` is possible to draw attention to the arrival of a new event by temporarily changing four attributes of the symbol (via -M): 
+With :gmt-module:`events` is possible to draw attention to the arrival of a new event.
+This can be done by temporarily changing four attributes of the symbol (via `-M <https://docs.generic-mapping-tools.org/dev/events.html#m>`_ optional argument): 
  
 - Size
 - Color intensity 
 - Transparency 
 - Color (via CPT look-up).
 
-The duration of the temporary changes are control via the -E modifier.
+The duration of the temporary changes are control via the `-E <https://docs.generic-mapping-tools.org/dev/events.html#e>`_ argument.
 
+3.2.4.2. Make full animation
++++++++++++++++++++++++++++++
 
 In this example I announce each quake by magnifying size and whitening the color for a little bit. Later the symbols return to its original properties.
 
@@ -690,7 +756,7 @@ In this example I announce each quake by magnifying size and whitening the color
 4. See also
 ~~~~~~~~~~~
 
-The paper about animations which include explanation and examples (Wessel 2024).
+The paper about animations which include explanation and examples (`Wessel et al. 2024 <https://doi.org/10.1029/2024GC011545>`_).
 
 Check the modules documentation for full technical information:
 

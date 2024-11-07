@@ -39,6 +39,7 @@ In order to make an animation we need:
 #. A method to combine these images into a video format.
 
 .. admonition:: Technical Information
+
   A video file is essentially a container format that sequentially displays all the images it contains.
 
 
@@ -93,6 +94,7 @@ As an example, I will create an animation of the Earth spinning similar to the o
   - What is GMT movie
   - How to set the Canvas (-C)
   - How to set the movie parameters
+  - How to set the number of Frames
 
 
 2.2. Step-by-step Instructions
@@ -276,7 +278,7 @@ I create the first frame (``-M0,png``) over a black canvas (``-G``) for an HD vi
 
 
 2.2.2.5. Second attempt. Fix the canvas
-++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++
 
 - For this new attempt I will:
 
@@ -347,17 +349,20 @@ Also, I add the following arguments to :gmt-module:`movie`:
 Movie Parameters
 ++++++++++++++++
 
-The key idea in :gmt-module:`movie` is for the user to write the main script that makes the idea of the animation and it is used for all frames.
-To introduce variations in the frames (otherwise, the movie would be incredibly boring), 
-we must use variables parameters that will automatically be updated as different frames are built. 
-Several parameters are automatically assigned (via the movie module) and can be used when composing the main script.
-
-- There are two sets of parameters:
+The movie parameters are key to make animations.
+They are automatically assigned by different movie arguments (see tables below). 
+There are two sets of parameters:
 
   - Variable
   - Constant 
 
-**Variable parameters**: Whose values change with the frame number.
+.. The key idea in :gmt-module:`movie` is for the user to write the main script that makes the idea of the animation and it is used for all frames.
+
+**Variable parameters**: 
+
+- These values change with the frame number.
+- We must use them in the *main script* to introduce variations in the frames (otherwise, the movie would be incredibly boring).
+
 
  ============== ============================================= ===============
   Parameter                  Purpose or contents               Set by Movie
@@ -371,17 +376,20 @@ Several parameters are automatically assigned (via the movie module) and can be 
  ============== ============================================= ===============
 
 
-**Constant parameters**: Whose values do NOT change during the whole movie.
+**Constant parameters**:
+
+- These values do NOT change during the whole movie.
+- It can use them in the *main script* (and in the optional background and foreground scripts).
  
- ============== ================================================= =============
-  Parameter               Purpose or contents                       Set by 
- ============== ================================================= =============
-  MOVIE_NFRAMES   Total number of frames in the movie               movie -T
-  MOVIE_WIDTH     Width of the movie canvas                         movie -C
-  MOVIE_HEIGHT    Height of the movie canvas                        movie -C
-  MOVIE_DPU       Dots (pixels) per unit used to convert to image   movie -C
-  MOVIE_RATE      Number of frames displayed per second             movie -D 
- ============== ================================================= =============
+ ============== ================================================= ==============
+  Parameter               Purpose or contents                      Set by Movie
+ ============== ================================================= ==============
+  MOVIE_NFRAMES   Total number of frames in the movie               -T
+  MOVIE_WIDTH     Width of the movie canvas                         -C
+  MOVIE_HEIGHT    Height of the movie canvas                        -C
+  MOVIE_DPU       Dots (pixels) per unit used to convert to image   -C
+  MOVIE_RATE      Number of frames displayed per second             -D 
+ ============== ================================================= ==============
 
 .. Important::
     
@@ -394,21 +402,29 @@ There are 3 ways to set the number of frames for a movie:
 
 **1. Number**: 
 
-If you write a single (integer) value, them it will be the total number of frames. 
-Under the hood, this will create a one-column data set from 0 to that number every 1 value. 
-In this case, you can use MOVIE_FRAME to get that value for each frame.
+If you supply a single (integer) value, then it will be the total number of frames. 
+Under the hood, this will create a one-column data set from 0 to that number minus 1.
+In this case, you can use MOVIE_FRAME parameter to make the animation.
+For example, when I set ``-T10``, I got values from 0 to 9.
+
 
 **2. min/max/inc**:
 
-If you write 3 values, then GMT will create a one-column data set from *min* to *max* every *inc*.
-In this case the total of number will be total amount of rows that the one-column data set will have.
-In this case, you case also use the MOVIE_COL0 parameter to access the first column of the data set.
+If you supply 3 values, then GMT will create a one-column data set from *min* to *max*, incrementing by *inc*.
+In this case the total of number of frames will be:
+
+.. math::
+
+     \text{total frames} = \frac{\text{max} - \text{min}}{\text{inc}} + 1
+
+
+In this case, you have to use the MOVIE_COL0 parameter to access the values of the of the one-column data set.
 
 **3. Time file**:
 
 If you supply the name of a file, then GMT will access it and use one record (i.e. row) per frame.
-This method allow to have more than one-column and can be used to make more complex animations. 
-For example, you can have a second column with numbers which will access with MOVIE_COL1.
+This method allows you to have more than one-column and can be used to make more complex animations. 
+For example, you can have a second column with numbers that you can access using MOVIE_COL1.
 The file can even have trailing text that will be accessed with MOVIE_TEXT.
 
 

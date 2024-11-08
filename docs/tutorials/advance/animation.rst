@@ -501,39 +501,44 @@ In the example, I increase:
 3. Tutorial 2. Earthquakes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In this tutorial, I will explain a bit more complex type of animation.
-This requires to use :gmt-module:`events` and :gmt-module:`movie` modules.
-In this example, I will create an animation showing the occurrences of earthquakes during the year 2018: 
+Here I will explain how to make an animation with appearing objects. 
+This a bit more complex and requires to use :gmt-module:`events` and :gmt-module:`movie` modules.
+In this example, I will create an animation showing the occurrences of earthquakes during the year 2018 (with one frame per day).
+Note that the earthquakes are drawn as they occur and remain visible until the end of the animation.
 
-..  youtube:: uZtyTv6DLnM
+.. ..  youtube:: rmPhIVzhIgY
+..  youtube:: rmPhIVzhIgYdbOjYqWzGi0
     :align: center
     :height: 400px
-    :aspect: 1:1
+    :aspect: 2:1
 
+.. .. admonition:: Technical Information
+..  This animation was created from 365 frames (one per day).
 
-.. admonition:: Technical Information
-
-  This animation was created from 365 frames (one per day).
-
-
+|
 3.1. Goals of the Tutorial
 ==========================
 
 .. - Explain the most important aspects of using the :gmt-module:`events` module.
 .. - Explain more complex aspects of using the :gmt-module:`movie` module.
 - How to use a background script for a movie.
-- What is gmt events.
-- How to enhance symbols with the :gmt-module:`events` module.
+- What is gmt gmt-module:`events`.
+- How to enhance symbols with :gmt-module:`events`.
 
 3.2. Step-by-step
 =================
 
-I will follow the same steps as described for tutorial 1 (except for the draft animation).
+For this tutorial I will follow these steps:
+
+#. Make last image
+#. Make last frame
+#. Make animation without enhancement
+#. Make animation with enhancement
 
 3.2.1. Make last image
 ^^^^^^^^^^^^^^^^^^^^^^
 
-In this example I will plot an static map of the earth. I create a cpt to plot the earthquakes.
+In this step I will plot a map of the earth with all the quakes. 
 
      .. gmtplot::
         :height: 400 px
@@ -549,6 +554,7 @@ In this example I will plot an static map of the earth. I create a cpt to plot t
 
 .. admonition:: Technical Information
 
+    - I create a `CPT <https://docs.generic-mapping-tools.org/dev/reference/cpts.html#of-colors-and-color-legends>`_ to color the earthquakes.
     - I used the earthquakes from the file `quakes_2018.txt <https://github.com/GenericMappingTools/gmtserver-admin/blob/master/cache/quakes_2018.txt>`_ which has 5 columns.
 
      ============== ========== ======== ================ ======================== 
@@ -563,6 +569,8 @@ In this example I will plot an static map of the earth. I create a cpt to plot t
 
 3.2.2. Make master frame
 ^^^^^^^^^^^^^^^^^^^^^^^^
+In this step I will create the last frame of the animation (if I plot the first frame, then the quakes won't appear).
+In the script of the previous script there were three commnands. 
 
 In this example, to create the master frame I must use a:
 
@@ -590,25 +598,22 @@ Within movie, there is an optional background script that it is used for two pur
 I can plot symbols in a movie using the :gmt-module:`plot` module but they will appear on all frames.
 So if I want to plot quakes as they occur, I have to use the :gmt-module:`events` which allows to plot them as they unfold.
 For this, it has to be used used in conjunction with :gmt-module:`movie`. 
-Events 
+
+**Required Arguments:**
+
+- **-T**: Set the current plot time.
 
 .. This module is typically used in conjunction with :gmt-module:`movie` where is used to call events over a time-sequence and thus plot symbols as the events unfold.
 
 .. Note:: 
   - events requires a time column in the input data and will use it and the animation time to determine when symbols should be plotted.
 
-**Required Arguments:**
-
-- **-T**: Set the current plot time.
-
-
 .. - use -i to sort the column in the correct order ()
-
 
 3.2.2.3. First attempt
 ++++++++++++++++++++++
 
-For this example, I use the background script (pre.sh.) to: 
+For this example, I use the background script (``pre.sh``) to: 
 
 #. To create a cpt file that will be used to color the quakes.
 #. To make a worldwide background map. Note that I use the ``${MOVIE_WIDTH}`` constant parameter.
@@ -650,7 +655,7 @@ I also include a label with the dates from the first column (``-Lc0``).
 
 .. admonition:: Technical Information
 
-  - I use ``-T2018-01-01T/2018-12-31T/1d``to create a one-column data set with all the day in 2018.
+  - I use ``-T2018-01-01T/2018-12-31T/1d`` to create a one-column data set with every the days in 2018.
   - I used the variable parameter MOVIE_COL0 in ``events -T``. In this ways the symbols plotted will be changed as frames progresses.
   
 

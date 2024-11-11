@@ -522,7 +522,7 @@ Note that the earthquakes are drawn as they occur and remain visible until the e
 .. - Explain the most important aspects of using the :gmt-module:`events` module.
 .. - Explain more complex aspects of using the :gmt-module:`movie` module.
 - How to use a background script for a movie.
-- What is gmt gmt-module:`events`.
+- What is gmt :gmt-module:`events`.
 - How to enhance symbols with :gmt-module:`events`.
 
 3.2. Step-by-step
@@ -544,8 +544,10 @@ In this step I will plot a map of the earth with all the quakes.
         :height: 400 px
 
         gmt begin Earth png
+            # Set parameters and position
+            gmt basemap -Rg -JN14c -B+n
             # Plot relief grid
-            gmt grdimage @earth_relief_06m -I -JN14c
+            gmt grdimage @earth_relief_06m -I
             # Create cpt for the earthquakes
             gmt makecpt -Cred,green,blue -T0,70,300,10000
             # Plot quakes
@@ -569,8 +571,39 @@ In this step I will plot a map of the earth with all the quakes.
 
 3.2.2. Make master frame
 ^^^^^^^^^^^^^^^^^^^^^^^^
-In this step I will create the last frame of the animation (if I plot the first frame, then the quakes won't appear).
-In the script of the previous script there were three commnands. 
+In this step I will create the last frame (``-Ml,png``) of the animation (if I plot the first frame, then the quakes won't appear).
+In the previous animation there is map of the earth as background. script of the previous script there were three commands. 
+
+3.2.2.3. Second attempt
+++++++++++++++++++++++
+
+
+     .. gmtplot::
+        :height: 400 px
+
+        cat << 'EOF' > main.sh
+        gmt begin
+          # Set parameters and position
+          gmt basemap -Rg -JN14c -B+n -X0 -Y0
+          # Create background map
+          gmt grdimage @earth_relief_06m -I
+          # Create cpt for the earthquakes
+          gmt makecpt -Cred,green,blue -T0,70,300,10000
+          gmt plot @quakes_2018.txt -SE- -C
+        gmt end
+        EOF
+
+        gmt movie main.sh -NEarth -Ml,png -Zs -V -C720p -T2018-01-01T/2018-12-31T/1d -Gblack \
+        -Lc0 --FONT_TAG=18p,Helvetica,white --FORMAT_CLOCK_MAP=-
+
+
+.. admonition:: Technical Information
+
+  - I use ``-T2018-01-01T/2018-12-31T/1d`` to create a one-column data set with every the days in 2018.
+  - I use ``-Lc0`` to add a label with the first column (i.e. the dates).
+  - **--FONT_TAG=18p,Helvetica,white**: This set the font for the label.
+  - **--FORMAT_CLOCK_MAP=-**: to NOT include the hours in the date and only plot year, month and day.
+
 
 In this example, to create the master frame I must use a:
 
@@ -610,7 +643,7 @@ For this, it has to be used used in conjunction with :gmt-module:`movie`.
 
 .. - use -i to sort the column in the correct order ()
 
-3.2.2.3. First attempt
+3.2.2.3. Second attempt
 ++++++++++++++++++++++
 
 For this example, I use the background script (``pre.sh``) to: 
@@ -647,15 +680,9 @@ I also include a label with the dates from the first column (``-Lc0``).
         -T2018-01-01T/2018-12-31T/1d -Gblack \
         -Lc0 --FONT_TAG=18p,Helvetica,white --FORMAT_CLOCK_MAP=-
 
-.. admonition:: Technical Information
-
-  - **--FONT_TAG=18p,Helvetica,white**: This set the font for the label.
-  - **--FORMAT_CLOCK_MAP=-**: This works to NOT include the hours in the date.
-
 
 .. admonition:: Technical Information
 
-  - I use ``-T2018-01-01T/2018-12-31T/1d`` to create a one-column data set with every the days in 2018.
   - I used the variable parameter MOVIE_COL0 in ``events -T``. In this ways the symbols plotted will be changed as frames progresses.
   
 
@@ -694,9 +721,7 @@ Now, I will make the final animation. In this example, the command executed in t
     :height: 400px
     :aspect: 2:1
 
-
-
-
+|
 3.2.4. Make full animation with enhancement
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

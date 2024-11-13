@@ -715,30 +715,38 @@ In this step, we can make a draft animation. For this example, I recommend to ma
         gmt movie main.sh -NQuakes -Ml,png -Zs -V -C24cx12cx30 -T2018-01-01T/2018-12-31T/1d -Gblack \
         -Lc0 --FONT_TAG=18p,Helvetica,white --FORMAT_CLOCK_MAP=- -Fmp4
 
+
+..  youtube:: TH4moYCHRT8
+    :align: center
+    :height: 400px
+    :aspect: 2:1
+
+
+
 .. Warning::
   - The above script works well but it can be more efficient if a background script is used as well.
 
 3.3.4. The background script
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Within movie, there is an optional background script that it is used for two purposes:
+Within :gmt-module:`movie` module, there is an optional background script that it is used for two purposes:
 
 #. Create files that will be needed by main script to make the movie.
 #. Make a static background plot that should form the background for all frames.
 
 .. admonition:: Technical Information
 
-  The background script are run only once. 
-
+  The background script are run only once.
+  
 
 
 3.3.5. Second attempt (with background script)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-For this step, I use the background script (``pre.sh``) to: 
+For this step, I use the background script (call ``pre.sh``) to: 
 
 #. To create a cpt file that will be used to color the quakes.
-#. To make a worldwide background map.
+#. To make a **static** worldwide background map.
 
 .. Important:: 
   - This allows to create the animation much faster because the CPT and the map will be created only once (instead of 365).
@@ -773,13 +781,14 @@ For the main script, I use :gmt-module:`events`.
 
 .. admonition:: Technical Information
   - For the CPT, I must use `-H <https://docs.generic-mapping-tools.org/latest/makecpt.html#h>`_ and give it a name, and then use that name in \``main.sh``.
-  - Both scripts needs to have the same positioning (i.e., -X and -Y) 
+  - I add \``-Sbpre.sh`` within the \:gmt-module:`movie` module to use the background script.
+  - I repeat the \``basemap`` command in the main and background scripts so both have the same positioning (i.e., ``-X`` and ``-Y``) and parameters (i.e. ``-R``and ``-J``).
   
 
 3.4. Make full animation without enhancement
 =============================================
 
-Now, in this I make the final high-quality animation (i.e. 80 DPC)-
+Now, in this I make the final high-quality animation (i.e. 80 DPC).
 
 
     .. code-block:: bash

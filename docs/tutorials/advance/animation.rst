@@ -501,13 +501,13 @@ In the example, I increase:
 3. Tutorial 2. Earthquakes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Here I will explain how to make an animation with appearing objects. 
+Here I explain how to make an animation with appearing objects. 
 This a bit more complex and requires to use :gmt-module:`events` and :gmt-module:`movie` modules.
-In this example, I will create an animation showing the occurrences of earthquakes during the year 2018 (with one frame per day).
+In this example, I create an animation showing the occurrences of earthquakes during the year 2018 (with one frame per day).
 Note that the earthquakes are drawn as they occur and remain visible until the end of the animation.
 
 .. ..  youtube:: rmPhIVzhIgY
-..  youtube:: rmPhIVzhIgYdbOjYqWzGi0
+..  youtube:: dbOjYqWzGi0
     :align: center
     :height: 400px
     :aspect: 2:1
@@ -521,24 +521,21 @@ Note that the earthquakes are drawn as they occur and remain visible until the e
 
 .. - Explain the most important aspects of using the :gmt-module:`events` module.
 .. - Explain more complex aspects of using the :gmt-module:`movie` module.
-- How to use a background script for a movie.
 - What is gmt :gmt-module:`events`.
+- How to use a background script for a movie.
 - How to enhance symbols with :gmt-module:`events`.
 
-3.2. Step-by-step
-=================
+For this tutorial I follow these steps:
 
-For this tutorial I will follow these steps:
-
-#. Make last image
-#. Make last frame
+#. Make image
+#. Make master frame
 #. Make animation without enhancement
 #. Make animation with enhancement
 
-3.2.1. Make last image
-^^^^^^^^^^^^^^^^^^^^^^
+3.2 Make image
+===============
 
-In this step I will plot a map of the earth with all the quakes. 
+In this step I plot a map of the earth with all the quakes. 
 
      .. gmtplot::
         :height: 400 px
@@ -566,17 +563,19 @@ In this step I will plot a map of the earth with all the quakes.
       169.3488       -18.8355   242.77      260           2018-01-02T08:10:00.06  
       ...                                                                
      ============== ========== ======== ================ ========================
-    - The same file was used for animation 08. Check it to see how it was download and process.
+    - The same file was used for `animation 08 <https://docs.generic-mapping-tools.org/dev//animations/anim08.html>`_. Check it to see how it was download and process.
 
 
-3.2.2. Make master frame
-^^^^^^^^^^^^^^^^^^^^^^^^
-In this step I will create the last frame (``-Ml,png``) of the animation (if I plot the first frame, then the quakes won't appear).
-In the previous animation there is map of the earth as background. script of the previous script there were three commands. 
+3.3. Make master frame
+=======================
 
-3.2.2.3. Second attempt
-++++++++++++++++++++++
 
+.. In the previous animation there is map of the earth as background. script of the previous script there were three commands. 
+
+3.3.1. First attempt (last frame)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+In this step I create the first frame (``-Ml,png``) of the animation
+In this first attempt I put the previous script within ``main.sh`` and I use the MOVIE_WIDTH parameter.
 
      .. gmtplot::
         :height: 400 px
@@ -584,7 +583,7 @@ In the previous animation there is map of the earth as background. script of the
         cat << 'EOF' > main.sh
         gmt begin
           # Set parameters and position
-          gmt basemap -Rg -JN14c -B+n -X0 -Y0
+          gmt basemap -Rg -JN${MOVIE_WIDTH} -B+n -X0 -Y0
           # Create background map
           gmt grdimage @earth_relief_06m -I
           # Create cpt for the earthquakes
@@ -593,66 +592,159 @@ In the previous animation there is map of the earth as background. script of the
         gmt end
         EOF
 
-        gmt movie main.sh -NEarth -Ml,png -Zs -V -C720p -T2018-01-01T/2018-12-31T/1d -Gblack \
+        gmt movie main.sh -NQuakes -Mf,png -Zs -V -C24cx12cx80 -T2018-01-01T/2018-12-31T/1d -Gblack \
         -Lc0 --FONT_TAG=18p,Helvetica,white --FORMAT_CLOCK_MAP=-
 
 
 .. admonition:: Technical Information
 
-  - I use ``-T2018-01-01T/2018-12-31T/1d`` to create a one-column data set with every the days in 2018.
+  - I use ``-T2018-01-01T/2018-12-31T/1d`` to create a one-column data set with all days in 2018.
   - I use ``-Lc0`` to add a label with the first column (i.e. the dates).
   - **--FONT_TAG=18p,Helvetica,white**: This set the font for the label.
   - **--FORMAT_CLOCK_MAP=-**: to NOT include the hours in the date and only plot year, month and day.
+  - I use a custom canvas of 24 x 12 cm with a resolution of 80 DPC.
 
 
-In this example, to create the master frame I must use a:
+.. Error::
 
-- background script
-- use the :gmt-module:`events` module.
+  - The first frame contains all the quakes when none of them should be plotted. I must use gmt events instead.
 
-In this step, I use it to recreate the previous image (the *master frame*).
 
-3.2.2.1. The background script
-++++++++++++++++++++++++++++++
+3.3.3. The events module
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. I can plot symbols in a movie using the :gmt-module:`plot` module but they will appear on all frames.
+
+In the previous figure, I use the :gmt-module:`plot` module to draw the symbols. This results that the symbols appear on all frames.
+If I want to plot quakes as they occur, I have to use the :gmt-module:`events` instead. 
+This allows to plot them as they unfold.
+
+.. For this, it has to be used used in conjunction with :gmt-module:`movie`. 
+.. This module is typically used in conjunction with :gmt-module:`movie` where is used to call events over a time-sequence and thus plot symbols as the events unfold.
+
+
+.. Important::
+    
+  **Required Arguments:**
+  - **-T**: Set the current plot time.
+
+
+.. Note:: 
+  - events requires a time column in the input data and will use it and the animation time to determine when symbols should be plotted.
+  - The input file as the date in fifth column.
+
+.. - use -i to sort the column in the correct order ()
+
+3.3.4. Second attempt (first and last frame with events)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Now, in this attempt I use :gmt-module:`events`. I use it along with the ``MOVIE_COL0`` parameter in the ``T``.
+In this ways the symbols plotted will be changed as dates progresses.
+
+I plot the first
+
+
+     .. gmtplot::
+        :height: 400 px
+
+        cat << 'EOF' > main.sh
+        gmt begin
+          # Set parameters and position
+          gmt basemap -Rg -JN${MOVIE_WIDTH} -B+n -X0 -Y0
+          # Create background map
+          gmt grdimage @earth_relief_06m -I
+          # Create cpt for the earthquakes
+          gmt makecpt -Cred,green,blue -T0,70,300,10000
+          gmt events @quakes_2018.txt -SE- -C -T${MOVIE_COL0}
+        gmt end
+        EOF
+
+        gmt movie main.sh -NQuakes -Mf,png -Zs -V -C24cx12cx80 -T2018-01-01T/2018-12-31T/1d -Gblack \
+        -Lc0 --FONT_TAG=18p,Helvetica,white --FORMAT_CLOCK_MAP=-
+
+.. Warning::
+  The map shows NO earthquakes. This is expected because there is no quakes (in the data file) before January first.
+  However, this could also be to a problem. 
+  I must plot also the last frame to see if the quakes appear.
+
+..  - I used the variable parameter MOVIE_COL0 in ``events -T``. In this ways the symbols plotted will be changed as frames progresses.
+
+
+3.3.5. Third attempt (last frame)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Now, I also plot the last frame (``-Ml``). 
+In this first attempt I put the previous script within ``main.sh`` and I use the MOVIE_WIDTH parameter.
+
+     .. gmtplot::
+        :height: 400 px
+
+        cat << 'EOF' > main.sh
+        gmt begin
+          # Set parameters and position
+          gmt basemap -Rg -JN${MOVIE_WIDTH} -B+n -X0 -Y0
+          # Create background map
+          gmt grdimage @earth_relief_06m -I
+          # Create cpt for the earthquakes
+          gmt makecpt -Cred,green,blue -T0,70,300,10000
+          gmt events @quakes_2018.txt -SE- -C -T${MOVIE_COL0}
+        gmt end
+        EOF
+
+        gmt movie main.sh -NQuakes -Ml,png -Zs -V -C24cx12cx80 -T2018-01-01T/2018-12-31T/1d -Gblack \
+        -Lc0 --FONT_TAG=18p,Helvetica,white --FORMAT_CLOCK_MAP=-
+
+3.5. Make draft animation
+==========================
+
+In this step, we can make a draft animation. For this example, I recommend to make a low quality (with 30 DPC) video to see if the quakes appear correctly.
+
+
+    .. code-block:: bash
+
+        cat << 'EOF' > main.sh
+        gmt begin
+          # Set parameters and position
+          gmt basemap -Rg -JN${MOVIE_WIDTH} -B+n -X0 -Y0
+          # Create background map
+          gmt grdimage @earth_relief_06m -I
+          # Create cpt for the earthquakes
+          gmt makecpt -Cred,green,blue -T0,70,300,10000
+          gmt events @quakes_2018.txt -SE- -C -T${MOVIE_COL0}
+        gmt end
+        EOF
+
+        gmt movie main.sh -NQuakes -Ml,png -Zs -V -C24cx12cx30 -T2018-01-01T/2018-12-31T/1d -Gblack \
+        -Lc0 --FONT_TAG=18p,Helvetica,white --FORMAT_CLOCK_MAP=- -Fmp4
+
+.. Warning::
+  - The above script works well but it can be more efficient if a background script is used as well.
+
+3.3.4. The background script
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Within movie, there is an optional background script that it is used for two purposes:
 
-#. Create files that will be needed by main script to make the movie, 
-#. Make a static background plot that should form the background for all frames 
+#. Create files that will be needed by main script to make the movie.
+#. Make a static background plot that should form the background for all frames.
 
 .. admonition:: Technical Information
 
   The background script are run only once. 
 
 
-3.2.2.2. gmt events module
-+++++++++++++++++++++++++++
 
-I can plot symbols in a movie using the :gmt-module:`plot` module but they will appear on all frames.
-So if I want to plot quakes as they occur, I have to use the :gmt-module:`events` which allows to plot them as they unfold.
-For this, it has to be used used in conjunction with :gmt-module:`movie`. 
+3.3.5. Second attempt (with background script)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**Required Arguments:**
-
-- **-T**: Set the current plot time.
-
-.. This module is typically used in conjunction with :gmt-module:`movie` where is used to call events over a time-sequence and thus plot symbols as the events unfold.
-
-.. Note:: 
-  - events requires a time column in the input data and will use it and the animation time to determine when symbols should be plotted.
-
-.. - use -i to sort the column in the correct order ()
-
-3.2.2.3. Second attempt
-++++++++++++++++++++++
-
-For this example, I use the background script (``pre.sh``) to: 
+For this step, I use the background script (``pre.sh``) to: 
 
 #. To create a cpt file that will be used to color the quakes.
-#. To make a worldwide background map. Note that I use the ``${MOVIE_WIDTH}`` constant parameter.
+#. To make a worldwide background map.
+
+.. Important:: 
+  - This allows to create the animation much faster because the CPT and the map will be created only once (instead of 365).
 
 For the main script, I use :gmt-module:`events`. 
-I also include a label with the dates from the first column (``-Lc0``).
+
 
      .. gmtplot::
         :height: 400 px
@@ -671,26 +763,23 @@ I also include a label with the dates from the first column (``-Lc0``).
         cat << 'EOF' > main.sh
         gmt begin
           gmt basemap -Rg -JN${MOVIE_WIDTH} -X0 -Y0 -B+n
-          #gmt plot @quakes_2018.txt -SE- -Cquakes.cpt
           gmt events @quakes_2018.txt -SE- -Cquakes.cpt -T${MOVIE_COL0}
         gmt end
         EOF
 
-        gmt movie main.sh -Sbpre.sh -NEarth -Ml,png -Zs -V -C720p \
-        -T2018-01-01T/2018-12-31T/1d -Gblack \
+        gmt movie main.sh -Sbpre.sh -NQuakes -Ml,png -Zs -V -C24cx12x80 -T2018-01-01T/2018-12-31T/1d -Gblack \
         -Lc0 --FONT_TAG=18p,Helvetica,white --FORMAT_CLOCK_MAP=-
 
 
 .. admonition:: Technical Information
-
-  - I used the variable parameter MOVIE_COL0 in ``events -T``. In this ways the symbols plotted will be changed as frames progresses.
+  - For the CPT, I must use `-H <https://docs.generic-mapping-tools.org/latest/makecpt.html#h>`_ and give it a name, and then use that name in \``main.sh``.
+  - Both scripts needs to have the same positioning (i.e., -X and -Y) 
   
 
+3.4. Make full animation without enhancement
+=============================================
 
-3.2.3. Make full animation without enhancement
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Now, I will make the final animation. In this example, the command executed in the main script is simple so you can avoid making a draft animation.
+Now, in this I make the final high-quality animation (i.e. 80 DPC)-
 
 
     .. code-block:: bash
@@ -711,7 +800,7 @@ Now, I will make the final animation. In this example, the command executed in t
         gmt end
         EOF
 
-        gmt movie main.sh -Sbpre.sh -NEarth -Ml,png -Zs -V -C24cx12cx80 \
+        gmt movie main.sh -Sbpre.sh -NQuakes -Ml,png -Zs -V -C24cx12cx80 \
         -T2018-01-01T/2018-12-31T/1d -Gblack -Fmp4 \
         -Lc0 --FONT_TAG=18p,Helvetica,white --FORMAT_CLOCK_MAP=-
 
@@ -722,11 +811,11 @@ Now, I will make the final animation. In this example, the command executed in t
     :aspect: 2:1
 
 |
-3.2.4. Make full animation with enhancement
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+3.5. Make full animation with enhancement
+=========================================
 
-3.2.4.1. How to enhance symbols with events
-++++++++++++++++++++++++++++++++++++++++++++
+3.5.1. How to enhance symbols with events
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In the previous animation, the earthquakes appear but it is hard to see when they do it. 
 With :gmt-module:`events` is possible to draw attention to the arrival of a new event.
@@ -739,8 +828,8 @@ This can be done by temporarily changing four attributes of the symbol (via `-M 
 
 The duration of the temporary changes are control via the `-E <https://docs.generic-mapping-tools.org/dev/events.html#e>`_ argument.
 
-3.2.4.2. Make full animation
-+++++++++++++++++++++++++++++
+3.5.2. Make full animation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In this example I announce each quake by magnifying size and whitening the color for a little bit. Later the symbols return to its original properties.
 
@@ -772,7 +861,7 @@ In this example I announce each quake by magnifying size and whitening the color
         gmt end
         EOF
 
-        gmt movie main.sh -Sbpre.sh -NEarth -Ml,png -Zs -V -C24cx12cx80 \
+        gmt movie main.sh -Sbpre.sh -NQuakes -Ml,png -Zs -V -C24cx12cx80 \
         -T2018-01-01T/2018-12-31T/1d -Gblack -Fmp4 \
         -Lc0 --FONT_TAG=18p,Helvetica,white --FORMAT_CLOCK_MAP=-
 

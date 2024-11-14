@@ -169,7 +169,7 @@ by executing a single plot script that is repeated across all frames.
 2.2.2.2. First Attempt
 ++++++++++++++++++++++
 
-I create the first frame (``-M0,png``) over a black canvas (``-G``) for an HD video format (``-Chd``).
+I create the first frame (``-M0,png``) over a black canvas (``-Gblack``) for an HD video format (``-Chd``).
 
      .. gmtplot::
         :height: 400 px
@@ -385,15 +385,15 @@ There are two sets of parameters:
 .. gmt movie main.sh -NEarth -C13cx13cx30 -T10 -M0,png -V -Gblack -L+f14p,Helvetica-Bold,white -Fmp4 -Zs
 
 
- ============== ================================================= ==============
+ ============== ================================================= =====================
   Parameter               Purpose or contents                      Set by Movie
- ============== ================================================= ==============
+ ============== ================================================= =====================
   MOVIE_NFRAMES   Total number of frames in the movie               -T 10
   MOVIE_WIDTH     Width of the movie canvas                         -C 13 (cm)
   MOVIE_HEIGHT    Height of the movie canvas                        -C 13 (cm)
   MOVIE_DPU       Dots (pixels) per unit used to convert to image   -C 30 (dpc)
   MOVIE_RATE      Number of frames displayed per second             -D (24, by default)
- ============== ================================================= ==============
+ ============== ================================================= =====================
 
 .. Important::
     
@@ -671,8 +671,7 @@ I plot the first
 
 3.3.5. Third attempt (last frame)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Now, I also plot the last frame (``-Ml``). 
-In this first attempt I put the previous script within ``main.sh`` and I use the MOVIE_WIDTH parameter.
+Now, I also plot the last frame (``-Ml``).  
 
      .. gmtplot::
         :height: 400 px
@@ -691,6 +690,8 @@ In this first attempt I put the previous script within ``main.sh`` and I use the
 
         gmt movie main.sh -NQuakes -Ml,png -Zs -V -C24cx12cx80 -T2018-01-01T/2018-12-31T/1d -Gblack \
         -Lc0 --FONT_TAG=18p,Helvetica,white --FORMAT_CLOCK_MAP=-
+
+Everything looks fine. I can go to the next step.
 
 3.5. Make draft animation
 ==========================

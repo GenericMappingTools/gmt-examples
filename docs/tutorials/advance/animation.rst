@@ -141,7 +141,9 @@ For this example, I create a map of the Earth with:
 2.3. Make the Master Frame
 ===========================
 
-In this step, I recreate the previous image (the *master frame*) but with the :gmt-module:`movie` module which is use to create animations.
+In this step, I recreate the previous image but with the :gmt-module:`movie` module which is use to create animations. 
+
+.. Within this module, this image is called *master frame*.
 
 
 .. Important::
@@ -171,7 +173,7 @@ by executing a single plot script that is repeated across all frames.
 2.3.2. First Attempt
 ^^^^^^^^^^^^^^^^^^^^^
 
-I create the first frame (``-M0,png``) over a black canvas (``-Gblack``) for an HD video format (``-Chd``).
+In the first attempt, I create the first frame (``-M0,png``) over a black canvas (``-Gblack``) for an HD video format (``-Chd``).
 
      .. gmtplot::
         :height: 400 px
@@ -205,7 +207,7 @@ I create the first frame (``-M0,png``) over a black canvas (``-Gblack``) for an 
 
 
 2.3.3. The Canvas
-^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^
 
 **What is the Canvas?**
 
@@ -272,7 +274,7 @@ I create the first frame (``-M0,png``) over a black canvas (``-Gblack``) for an 
 
 **Custom format**:
 
-- If you want another dimensions, you can request a custom format directly by giving width and height (in cm or inches) and dpu (*widthxheightxdpu*).
+- If you want another dimensions, you can request a custom format directly by giving width and height and dpu (*widthxheightxdpu*).
 
 
 .. Important::
@@ -283,9 +285,9 @@ I create the first frame (``-M0,png``) over a black canvas (``-Gblack``) for an 
 2.3.4. Second attempt. Fix the canvas
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- For this new attempt I will:
+For this new attempt I:
 
-  - set a custom canvas of a square of 13 cm and 80 dpu (same resolution as full hd, ``-C13cx13cx80``).
+  - use a custom canvas of a square of 13 cm and 80 dpc (same resolution as full hd, ``-C13cx13cx80``).
   - use ``-X0`` and ``-Y0`` (in ``main.sh``) to remove the default offset.
 
 
@@ -304,13 +306,13 @@ I create the first frame (``-M0,png``) over a black canvas (``-Gblack``) for an 
 =========================
 
 Once you are happy with the master frame, I recommend to make a very short and small movie so you don't have to wait very long to see the result.
-This approach is advisable because creating an animation can be time-consuming, 
-and generating many images for assembly can sometimes lead to errors or unexpected behaviors.
+
+.. The idea is to see that there are no errors in the creation of the animation and that the animation is as desired.
 
 .. admonition:: **Step Goals**:
 
-  - to see if the frames are changing as expected.
-  - to see if the video file is created properly.
+  - See that the video file is created properly.
+  - See that the frames are changing as expected.
 
 
 .. Note::
@@ -320,9 +322,9 @@ and generating many images for assembly can sometimes lead to errors or unexpect
 
 
 2.4.1. First attempt
-+++++++++++++++++++++
+^^^^^^^^^^^^^^^^^^^^^^
 
-In this example I will reduce the number of frames to 10 (``-T10``) and the quality to 30 DPC (``-C13cx13cx30``).
+In this step I reduce the number of frames to 10 (``-T10``) and the quality to 30 DPC (``-C13cx13cx30``).
 Also, I add the following arguments to :gmt-module:`movie`:
 
 - Fmp4: to create a mp4 video (now it is possible to delete ``-M``).
@@ -349,15 +351,15 @@ Also, I add the following arguments to :gmt-module:`movie`:
 
   - The movie doesn't change. We must learn about parameters.
 
-Movie Parameters
-++++++++++++++++
+2.4.2. Movie Parameters
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 The movie parameters are key to make animations.
 They are automatically assigned by different movie arguments (see tables below). 
 There are two sets of parameters:
 
-  - Variable
-  - Constant 
+..  - Variable
+..  - Constant 
 
 .. The key idea in :gmt-module:`movie` is for the user to write the main script that makes the idea of the animation and it is used for all frames.
 
@@ -365,7 +367,7 @@ There are two sets of parameters:
 
 - These values change with the frame number.
 - We must use them in the *main script* to introduce variations in the frames.
-.. (otherwise, the movie would be incredibly boring).
+
 
  ============== ============================================= ===============
   Parameter                  Purpose or contents               Set by Movie
@@ -384,8 +386,6 @@ There are two sets of parameters:
 - These values do NOT change during the whole movie.
 - It can use them in the *main script* (and in the optional background and foreground scripts).
 
-.. gmt movie main.sh -NEarth -C13cx13cx30 -T10 -M0,png -V -Gblack -L+f14p,Helvetica-Bold,white -Fmp4 -Zs
-
 
  ============== ================================================= =====================
   Parameter               Purpose or contents                      Set by Movie
@@ -399,13 +399,13 @@ There are two sets of parameters:
 
 .. Important::
     
-    - In order to introduce changes in the frames we must use the movie variable parameters.
+    - In order to introduce changes in the frames we must use the **variable parameters**.
 
-How to set the number of Frames
-+++++++++++++++++++++++++++++++
+2.4.3. How to set the number of Frames
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The number of frames is another important aspect to make animations.
-There are 3 ways to set the number of frames for a movie:
+The number of frames (``T``) is another important aspect to make animations.
+There are 3 ways to do it:
 
 .. The frame count in an animation is key for smoothness and clarity.
   More frames create smoother motion and clearer transitions, which is crucial for visualizing gradual changes in scientific animations.
@@ -414,15 +414,16 @@ There are 3 ways to set the number of frames for a movie:
   The display frame rate is set by default to 24 `fps <https://en.wikipedia.org/wiki/Frame_rate>`_. It can be change with `-D <https://docs.generic-mapping-tools.org/dev/movie.html#d>`_.
 
 
-**1. Number**: 
+1. **-TNumber**: 
 
 If you supply a single (integer) value, then it will be the total number of frames. 
 Under the hood, this will create a one-column data set from 0 to that number minus 1.
+For example, for ``-T10`` I get values from 0 to 9.
 In this case, you can use MOVIE_FRAME parameter to make the animation.
-For example, when I set ``-T10``, I got values from 0 to 9.
 
 
-**2. min/max/inc**:
+
+2. **-Tmin/max/inc**:
 
 If you supply 3 values, then GMT will create a one-column data set from *min* to *max*, incrementing by *inc*.
 In this case the total of number of frames will be:
@@ -434,7 +435,7 @@ In this case the total of number of frames will be:
 
 In this case, you have to use the MOVIE_COL0 parameter to access the values of the of the one-column data set.
 
-**3. Time file**:
+3. **-Ttimefile**:
 
 If you supply the name of a file, then GMT will access it and use one record (i.e. row) per frame.
 This method allows you to have more than one-column and can be used to make more complex animations. 
@@ -442,13 +443,13 @@ For example, you can have a second column with numbers that you can access using
 The file can even have trailing text that will be accessed with MOVIE_TEXT.
 
 
-2.4.2 Second attempt. Use parameters
-++++++++++++++++++++++++++++++++++++
+2.4.4. Second attempt. Use parameters
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Now I will update the script with movie parameters. 
-First, I use ``MOVIE_FRAME`` variable parameter to set the central longitude of the map.
-.. Since I using ``-T10``, I will get an animation with 10 frames, where the longitude will range from 0 to 9. 
-I also use the ``MOVIE_WIDTH`` constant parameter to set the width of the map (instead of 13c).
+Now I update the script with movie parameters. 
+First, I use ``MOVIE_FRAME`` variable parameter to set the central longitude of the map. Th
+I also use the ``MOVIE_WIDTH`` constant parameter (in ``main.sh``) to set the width of the map (instead of 13c).
+
 
       .. code-block:: bash
 
@@ -475,7 +476,7 @@ I also use the ``MOVIE_WIDTH`` constant parameter to set the width of the map (i
 
 Once that the draft animation is working it is possible to increment the number of frames (-T) and movie quality (-C).
 
-In the example, I increase:
+In the step, I increase:
 
 - the amount of frames to 360 (``-T360``) to get the whole spin.
 - the resolution to 80 DPC (``-C13cx13cx80``) to get a high-quality video.
@@ -499,6 +500,7 @@ In the example, I increase:
   Be careful. This step can be quite time (and resource) consuming.
   By default, :gmt-module:`movie` uses all the cores available to speed up the frame creation process.
   So probably you can't do anything else while GMT is creating all the frames (maybe you can take a break, or have lunch).
+  Also you could use `-x <https://docs.generic-mapping-tools.org/dev/gmt.html#core-full>`_ to specify the number of active cores to be used.
 
 
 3. Tutorial 2. Earthquakes

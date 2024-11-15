@@ -22,13 +22,13 @@ and `some examples <https://docs.generic-mapping-tools.org/5.4/Gallery.html#anim
 GMT 6 (`Wessel et al 2019 <https://doi.org/10.1029/2019GC008515>`_) simplified all that by adding movie-making modules
 that were later refined with GMT 6.5 (`Wessel et al 2024 <https://doi.org/10.1029/2024GC011545>`_). 
 These modules empower users to create animations by taking over non-trivial tasks.
-.. However, these modules (:gmt-module:`movie` and :gmt-module:`events`) are more complex than others and required some explanation to master them (describe in this tutorial).
 
-1.1 What is an Animation?
-=========================
+
+1.1. What is an Animation?
+==========================
 
 - Animation is a technique used to create the illusion of motion.
-- This is achieved by displaying a rapid sequence of still images (at least 12 frames per second, fps).
+- This is achieved by displaying a rapid sequence of still images (at least 12 frames per second; fps).
 
 
 1.2. How to Make an Animation
@@ -115,7 +115,9 @@ The first step is to create an image using a standard GMT script
 (with `modern mode <https://docs.generic-mapping-tools.org/dev/reference/introduction.html#modern-and-classic-mode>`_) 
 that will serve as the base for the animation.
 
-**Step Goal**: Create the first image of the animation.
+.. Important::
+
+  **Step Goal**: Create the first image of the animation.
 
 For this example, I create a map of the Earth with:
 
@@ -133,14 +135,13 @@ For this example, I create a map of the Earth with:
   - **gmt begin; gmt end**: Commands to start and end a GMT script using modern syntax.
   - **@earth_relief_06m**: A remote grid of Earth's relief with a 6-minute resolution.
   - **-I**: Apply illumination to the grid.
-  - **-JG0/0/13c**: Stereographic projection with the center at longitude 0 and latitude 0, with a 13 cm map width.
+  - **-JG0/0/13c**: Perspective projection with the center at longitude 0 and latitude 0, with a 13 cm map width.
 
 
 2.3. Make the Master Frame
 ===========================
 
-.. To create animations with GMT, I must use the :gmt-module:`movie` module. 
-So, in this step, I recreate the previous image (the *master frame*) but with the :gmt-module:`movie` module which is use to create animations.
+In this step, I recreate the previous image (the *master frame*) but with the :gmt-module:`movie` module which is use to create animations.
 
 
 .. Important::
@@ -155,7 +156,7 @@ by executing a single plot script that is repeated across all frames.
 
 **Required Arguments:**
 
-- **mainscript**: The previously created script that will use to create all the frames.
+- **mainscript**: Script that will use to create all the frames.
 - **-N**: Name for the output file.
 - **-C**: Canvas Size (see below).
 - **-T**: Number of frames (see below).
@@ -168,7 +169,7 @@ by executing a single plot script that is repeated across all frames.
 - **-L**: Show a label with the frame number. 
 
 2.3.2. First Attempt
-^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^
 
 I create the first frame (``-M0,png``) over a black canvas (``-Gblack``) for an HD video format (``-Chd``).
 
@@ -203,8 +204,8 @@ I create the first frame (``-M0,png``) over a black canvas (``-Gblack``) for an 
   - This is useful because allow us to see (and edit) the main script and the arguments of :gmt-module:`movie` just using a single file.
 
 
-2.3.3. Fix the Canvas
-^^^^^^^^^^^^^^^^^^^^^^^^^
+2.3.3. The Canvas
+^^^^^^^^^^^^^^^^^^^^^^
 
 **What is the Canvas?**
 
@@ -300,7 +301,7 @@ I create the first frame (``-M0,png``) over a black canvas (``-Gblack``) for an 
 
 
 2.4. Make draft animation
-^^^^^^^^^^^^^^^^^^^^^^^^^
+=========================
 
 Once you are happy with the master frame, I recommend to make a very short and small movie so you don't have to wait very long to see the result.
 This approach is advisable because creating an animation can be time-consuming, 

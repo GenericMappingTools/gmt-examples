@@ -98,9 +98,6 @@ As an example, I will create an animation of the Earth spinning similar to the o
   - How to set the number of Frames (-T)
 
 
-.. 2.2. Step-by-step Instructions
-.. ==============================
-
 To create an animation, follow these step-by-step instructions:
 
 #. Make first image
@@ -142,8 +139,6 @@ For this example, I create a map of the Earth with:
 ===========================
 
 In this step, I recreate the previous image but with the :gmt-module:`movie` module which is use to create animations. 
-
-.. Within this module, this image is called *master frame*.
 
 
 .. Important::
@@ -194,15 +189,8 @@ In the first attempt, I create the first frame (``-M0,png``) over a black canvas
 
 .. admonition:: Technical Information
 
-  - The previous script is surrounded by these two lines:
-
-    ::
-
-      cat << 'EOF' > main.sh
-      ...
-      EOF
-
-  - This saved the main script into the file ``main.sh`` (using a `Here Document <https://en.wikipedia.org/wiki/Here_document>`_). 
+  - The previous script is enclosed between ``cat << 'EOF' > main.sh`` and ``EOF``.
+  - This creates the ``main.sh`` file on-the-fly (using a `Here Document <https://en.wikipedia.org/wiki/Here_document>`_).
   - This is useful because allow us to see (and edit) the main script and the arguments of :gmt-module:`movie` just using a single file.
 
 
@@ -307,8 +295,6 @@ For this new attempt I:
 
 Once you are happy with the master frame, I recommend to make a very short and small movie so you don't have to wait very long to see the result.
 
-.. The idea is to see that there are no errors in the creation of the animation and that the animation is as desired.
-
 .. admonition:: **Step Goals**:
 
   - See that the video file is created properly.
@@ -327,8 +313,8 @@ Once you are happy with the master frame, I recommend to make a very short and s
 In this step I reduce the number of frames to 10 (``-T10``) and the quality to 30 DPC (``-C13cx13cx30``).
 Also, I add the following arguments to :gmt-module:`movie`:
 
-- Fmp4: to create a mp4 video (now it is possible to delete ``-M``).
-- Zs: to remove the temporary files created in the movie-making process. Useful to keep the working directory clean.
+- **-Fmp4**: to create a mp4 video (now it is possible to delete ``-M``).
+- **-Zs**: to remove the temporary files created in the movie-making process. Useful to keep the working directory clean.
 
 
     .. code-block:: bash
@@ -346,6 +332,9 @@ Also, I add the following arguments to :gmt-module:`movie`:
     :height: 400px
     :aspect: 1:1
 
+.. Note::
+  The display frame rate is set by default to 24 `fps <https://en.wikipedia.org/wiki/Frame_rate>`_. It can be change with `-D <https://docs.generic-mapping-tools.org/dev/movie.html#d>`_.
+
 
 .. Error::
 
@@ -357,9 +346,6 @@ Also, I add the following arguments to :gmt-module:`movie`:
 The movie parameters are key to make animations.
 They are automatically assigned by different movie arguments (see tables below). 
 There are two sets of parameters:
-
-..  - Variable
-..  - Constant 
 
 .. The key idea in :gmt-module:`movie` is for the user to write the main script that makes the idea of the animation and it is used for all frames.
 
@@ -390,11 +376,11 @@ There are two sets of parameters:
  ============== ================================================= =====================
   Parameter               Purpose or contents                      Set by Movie
  ============== ================================================= =====================
-  MOVIE_NFRAMES   Total number of frames in the movie               -T 10
-  MOVIE_WIDTH     Width of the movie canvas                         -C 13 (cm)
-  MOVIE_HEIGHT    Height of the movie canvas                        -C 13 (cm)
-  MOVIE_DPU       Dots (pixels) per unit used to convert to image   -C 30 (dpc)
-  MOVIE_RATE      Number of frames displayed per second             -D (24, by default)
+  MOVIE_NFRAMES   Total number of frames in the movie               -T
+  MOVIE_WIDTH     Width of the movie canvas                         -C
+  MOVIE_HEIGHT    Height of the movie canvas                        -C
+  MOVIE_DPU       Dots (pixels) per unit used to convert to image   -C
+  MOVIE_RATE      Number of frames displayed per second             -D
  ============== ================================================= =====================
 
 .. Important::
@@ -404,14 +390,8 @@ There are two sets of parameters:
 2.4.3. How to set the number of Frames
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The number of frames (``T``) is another important aspect to make animations.
+The number of frames (``-T``) is another important aspect to make animations.
 There are 3 ways to do it:
-
-.. The frame count in an animation is key for smoothness and clarity.
-  More frames create smoother motion and clearer transitions, which is crucial for visualizing gradual changes in scientific animations.
- However, higher frame counts also mean larger file sizes and more processing.
- .. Tip::
-  The display frame rate is set by default to 24 `fps <https://en.wikipedia.org/wiki/Frame_rate>`_. It can be change with `-D <https://docs.generic-mapping-tools.org/dev/movie.html#d>`_.
 
 
 1. **-TNumber**: 
@@ -507,7 +487,7 @@ In the step, I increase:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Here I explain how to make an animation with appearing objects. 
-This a bit more complex and requires to use :gmt-module:`events` and :gmt-module:`movie` modules.
+This is more complex and requires to use :gmt-module:`events` and :gmt-module:`movie` modules.
 In this example, I create an animation showing the occurrences of earthquakes during the year 2018 (with one frame per day).
 Note that the earthquakes are drawn as they occur and remain visible until the end of the animation.
 
@@ -519,6 +499,7 @@ Note that the earthquakes are drawn as they occur and remain visible until the e
 
 
 |
+
 3.1. Goals of the Tutorial
 ==========================
 
@@ -537,7 +518,7 @@ For this tutorial I follow these steps:
 3.2 Make image
 ===============
 
-In this step I plot a map of the earth with all the quakes. 
+In this step I plot a map of the earth with all the quakes from 2018.
 
      .. gmtplot::
         :height: 400 px
@@ -555,17 +536,18 @@ In this step I plot a map of the earth with all the quakes.
 
 .. admonition:: Technical Information
 
-    - I create a `CPT <https://docs.generic-mapping-tools.org/dev/reference/cpts.html#of-colors-and-color-legends>`_ to color the earthquakes.
+    - I use :gmt-module:`makecpt` to create a `CPT <https://docs.generic-mapping-tools.org/dev/reference/cpts.html#of-colors-and-color-legends>`_ to color the earthquakes.
     - I used the earthquakes from the file `quakes_2018.txt <https://github.com/GenericMappingTools/gmtserver-admin/blob/master/cache/quakes_2018.txt>`_ which has 5 columns.
 
-     ============== ========== ======== ================ ======================== 
-      Longitude      Latitude   Depth    Magnitude (x50)          Date           
-     ============== ========== ======== ================ ======================== 
-      46.4223        -38.9126     10        260           2018-01-02T02:16:18.11  
-      169.3488       -18.8355   242.77      260           2018-01-02T08:10:00.06  
-      ...                                                                
      ============== ========== ======== ================ ========================
-    - Note that the input file has the columns sorted as will be required by the plot and events modules. It was also used for `animation 08 <https://docs.generic-mapping-tools.org/dev//animations/anim08.html>`_. Check it to see how it was download and process.
+      Longitude      Latitude   Depth    Magnitude (x50)          Date
+     ============== ========== ======== ================ ========================
+      46.4223        -38.9126     10        260           2018-01-02T02:16:18.11
+      169.3488       -18.8355   242.77      260           2018-01-02T08:10:00.06
+      ...                                                 
+     ============== ========== ======== ================ ========================
+    - Note that the input file has the columns sorted as will be required by the :gmt-module:`plot` and :gmt-module:`events` modules. It was also used for `animation 08 <https://docs.generic-mapping-tools.org/dev//animations/anim08.html>`_. 
+    Check it to see how it was downloaded and processed.
 
 
 3.3. Make master frame
@@ -573,13 +555,12 @@ In this step I plot a map of the earth with all the quakes.
 
 In this step I create the master frame of the animation similar to the previous image. 
 
-.. In the previous animation there is map of the earth as background. script of the previous script there were three commands. 
 
 3.3.1. First attempt (first frame)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In this first attempt I create the first frame (``-Mf,png``) of the animation.
-.. the put the previous script within ``main.sh`` and I use the MOVIE_WIDTH parameter.
+
 
      .. gmtplot::
         :height: 400 px
@@ -605,37 +586,30 @@ In this first attempt I create the first frame (``-Mf,png``) of the animation.
   - I use ``-T2018-01-01T/2018-12-31T/1d`` to create a one-column data set with all days in 2018.
   - I use ``-Lc0`` to add a label with the first column (i.e. the dates).
   - **--FONT_TAG=18p,Helvetica,white**: This set the font for the label.
-  - **--FORMAT_CLOCK_MAP=-**: to NOT include the hours in the date and only plot year, month and day.
-  - I use a custom canvas of 24 x 12 cm with a resolution of 80 DPC.
+  - **--FORMAT_CLOCK_MAP=-**: to NOT include the hours in the date and only plot year, month and day in the label.
+  - I use a custom canvas of 24 x 12 cm with a resolution of 80 DPC (``-C24cx12cx80``).
 
 
 .. Error::
 
-  - The first frame contains all the quakes when none of them should be plotted. I must use \:gmt-module:`events` instead.
+  - The first frame contains all the quakes when none of them should be plotted. I must use :gmt-module:`events` instead.
 
 
-3.3.3. The events module
+3.3.2. The events module
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
 In the previous figure, I use the :gmt-module:`plot` module to draw the symbols. This results that the symbols appear on all frames.
-However if I want to plot quakes as they unfold, them I have to use the :gmt-module:`events` instead. 
-
-.. For this, it has to be used used in conjunction with :gmt-module:`movie`. 
-.. This module is typically used in conjunction with :gmt-module:`movie` where is used to call events over a time-sequence and thus plot symbols as the events unfold.
+However if I want to plot quakes as they unfold, I have to use the :gmt-module:`events` instead. 
 
 
 .. Important::
-    
-  **Required Arguments:**
-  - **-T**: Set the current plot time.
+
+  - :gmt-module:`events` requires a time column in the input data and will use it and the animation time to determine when symbols should be plotted.
+  - The ``-T`` is a required argument and is used to set the current plot time.
 
 
-.. Note:: 
-  - events requires a time column in the input data and will use it and the animation time to determine when symbols should be plotted.
-
-
-3.3.4. Second attempt (first and last frame with events)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+3.3.3. Second attempt (first frame with events)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Now, in this attempt I use :gmt-module:`events`. I use with ``-T${MOVIE_COL0}`` to plot the quakes as dates progresses
 
 
@@ -664,8 +638,9 @@ Now, in this attempt I use :gmt-module:`events`. I use with ``-T${MOVIE_COL0}`` 
   I must plot the frame from another date to see if the quakes appear.
 
 
-3.3.5. Third attempt (last frame)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+3.3.4. Third attempt (last frame with events)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 Now, I also plot the last frame (``-Ml``). 
 
      .. gmtplot::
@@ -686,12 +661,15 @@ Now, I also plot the last frame (``-Ml``).
         gmt movie main.sh -NQuakes -Ml,png -Zs -V -C24cx12cx80 -T2018-01-01T/2018-12-31T/1d -Gblack \
         -Lc0 --FONT_TAG=18p,Helvetica,white --FORMAT_CLOCK_MAP=-
 
-Everything looks fine. I can go to the next step.
 
-3.5. Make draft animation
+
+3.4. Make draft animation
 ==========================
 
 In this step, we can make a draft animation. For this example, I recommend to make a low quality (with 30 DPC) video to see if the quakes appear correctly.
+
+3.4.1. First attempt
+^^^^^^^^^^^^^^^^^^^^^
 
 
     .. code-block:: bash
@@ -720,11 +698,12 @@ In this step, we can make a draft animation. For this example, I recommend to ma
 
 .. Warning::
   - The above script works well but it can be more efficient if a background script is used as well.
+  - But the movie-making process can be faster if a background script is used as well.
 
-3.3.4. The background script
+3.4.2. The background script
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Within :gmt-module:`movie` module, there is an optional background (`-Sb<https://docs.generic-mapping-tools.org/dev/movie.html#sb>`_) script that it is used for two purposes:
+Within :gmt-module:`movie` module, there is an optional background (`-Sb <https://docs.generic-mapping-tools.org/dev/movie.html#sb>`_) script that it is used for two purposes:
 
 #. Create files that will be needed by main script to make the movie.
 #. Make a static background plot that should form the background for all frames.
@@ -732,24 +711,25 @@ Within :gmt-module:`movie` module, there is an optional background (`-Sb<https:/
 .. admonition:: Technical Information
 
   The background script is run only once.
-  
 
 
-3.3.5. Second attempt (with background script)
+3.4.3. Second attempt (with background script)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-For this step, I use a background script (call ``pre.sh``) to: 
+In this step, instead of creating just the main script as before, I now create both a background script and a main script.
+The background script (``pre.sh``) is used to:
 
-#. To create a cpt file that will be used to color the quakes.
-#. To make a **static** worldwide background map.
+#. create a cpt file that will be used to color the quakes.
+#. make a **static** worldwide background map.
 
 .. Important:: 
-  - This allows to create the animation much faster because the CPT and the map will be created only once (instead of 365 times).
 
+  - The animation created is identical to the previous one.
+  - The use of a background script allows to create the animation much faster because the CPT and the **static** background map will be created only once (instead of 365 times).
+..
 
-     .. gmtplot::
-        :height: 400 px
-        
+    .. code-block:: bash
+
         cat << 'EOF' > pre.sh
         gmt begin
           # Set parameters and position
@@ -773,13 +753,14 @@ For this step, I use a background script (call ``pre.sh``) to:
 
 
 .. admonition:: Technical Information
-  - For the CPT, I must use `-H <https://docs.generic-mapping-tools.org/latest/makecpt.html#h>`_ and give it a name, and then use that name in \``main.sh``.
-  - I add \``-Sbpre.sh`` within the \:gmt-module:`movie` module to use the background script.
-  - I repeat the \``basemap`` command in the main and background scripts so both have the same positioning (i.e., ``-X`` and ``-Y``) and parameters (i.e. ``-R``and ``-J``).
+
+  - For the CPT, I must use `-H <https://docs.generic-mapping-tools.org/latest/makecpt.html#h>`_ and give it a name, and then use that name in ``main.sh``.
+  - I add ``-Sbpre.sh`` within the :gmt-module:`movie` module to use the background script.
+  - I repeat the ``basemap`` command in the main and background scripts so both have the same positioning (i.e., ``-X`` and ``-Y``) and parameters (i.e. ``-R`` and ``-J``).
   
 
-3.4. Make full animation without enhancement
-=============================================
+3.5. Make full animation
+=========================
 
 Now I make the final high-quality animation (i.e. 80 DPC).
 
@@ -812,27 +793,51 @@ Now I make the final high-quality animation (i.e. 80 DPC).
     :aspect: 2:1
 
 |
-3.5. Make full animation with enhancement
-=========================================
 
-3.5.1. How to enhance symbols with events
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+3.6. Make full animation with enhancement
+=========================================
 
 In the previous animation, the earthquakes appear but it is hard to see when they do it. 
 With :gmt-module:`events` is possible to draw attention to the arrival of a new event.
-This can be done by temporarily changing four attributes of the symbol (via `-M <https://docs.generic-mapping-tools.org/dev/events.html#m>`_ optional argument): 
+
+3.6.1. How to enhance symbols with events
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The idea is to change the default behavior of the symbols to enhance their appearance as shown in the following video:
+
+..  youtube:: 77a2XrfWsHM
+    :align: center
+    :height: 400px
+    :aspect: 16:9
+
+
+|
+
+This can be done by using `-M <https://docs.generic-mapping-tools.org/dev/events.html#m>`_ and `-E <https://docs.generic-mapping-tools.org/dev/events.html#e>`_ arguments.
+The -M arguments allows to temporarily change attributes of the symbol like:
  
-- Size
-- Color intensity 
-- Transparency 
-- Color (via CPT look-up).
+- -Ms: Provide a factor to modify the size.
+- -Mc: Provide a value to brighten (up to 1) or darken (up to -1) the `color intensity <https://docs.generic-mapping-tools.org/dev/reference/colorspace.html#artificial-illumination>`_.
+- -Mt: Transparency. Set a value between 100 (invisible) to 0 (opaque).
 
 The duration of the temporary changes are control via the `-E <https://docs.generic-mapping-tools.org/dev/events.html#e>`_ argument.
 
-3.5.2. Make full animation
+- -Er: rise phase.
+- -Ep: plateau phase.
+- -Ed: decay phase.
+
+
+.. Note::
+ 
+  For finite symbols there are also *normal* and *fade* phases.
+  It is also possible to change the data value with ``-Mv``. 
+
+
+3.6.2. Make full animation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In this example I announce each quake by magnifying size and whitening the color for a little bit. Later the symbols return to its original properties.
+In this step I announce each quake by magnifying size and whitening the color for a little bit (during the rise phase). Later the symbols return to its original properties during the decay phase.
+The plateau phase is not used.
 
 
     .. code-block:: bash
@@ -849,13 +854,11 @@ In this example I announce each quake by magnifying size and whitening the color
         cat << 'EOF' > main.sh
         gmt begin
           gmt basemap -Rg -JN${MOVIE_WIDTH} -X0 -Y0 -B+n
-          gmt events @quakes_2018.txt -SE- -Cquakes.cpt -T${MOVIE_COL0} \
-          -Es+r2+d6 -Ms5+c1 -Mi1+c0 -Mt+c0 --TIME_UNIT=d
+          gmt events @quakes_2018.txt -SE- -Cquakes.cpt -T${MOVIE_COL0} -Es+r2+d6 -Ms5+c1 -Mi1+c0 -Mt+c0 --TIME_UNIT=d
         gmt end
         EOF
 
-        gmt movie main.sh -Sbpre.sh -NQuakes -Ml,png -Zs -V -C24cx12cx80 \
-        -T2018-01-01T/2018-12-31T/1d -Gblack -Fmp4 \
+        gmt movie main.sh -Sbpre.sh -NQuakes -Ml,png -Zs -V -C24cx12cx80 -T2018-01-01T/2018-12-31T/1d -Gblack -Fmp4 \
         -Lc0 --FONT_TAG=18p,Helvetica,white --FORMAT_CLOCK_MAP=-
 
 
@@ -870,24 +873,18 @@ In this example I announce each quake by magnifying size and whitening the color
   - \--TIME_UNIT=d: This sets that the values of -E are in days (d).
   - -Es+r2+d6: This sets the duration of the rise phase and the decay phase.
   - -Ms5+c1: modify the size. The size will increase 5 times during the rise phase and them reduce to the original size in the coda phase.
-  - -Mt+c0: modify the transparency. The transparency will remain to 0 at the end. This allows to be seen after its occurrence in the coda phase.
+  - -Mt+c0: modify the transparency. The transparency will remain to 0 at the coda phase. This allows to be seen after its occurrence.
   - -Mi1+c0: modify the intensity of the color. It gets lighter during the rise phase and them returns to its original color in the coda phase.
-
 
 
 4. See also
 ~~~~~~~~~~~
 
-The paper about animations which include explanation and examples (`Wessel et al. 2024 <https://doi.org/10.1029/2024GC011545>`_).
+- The paper about animations which include explanation and examples (`Wessel et al. 2024 <https://doi.org/10.1029/2024GC011545>`_).
 
-Check the modules documentation for full technical information:
+- Check the :gmt-module:`movie` and - :gmt-module:`events` modules documentation for full technical information.
 
-- :gmt-module:`movie`
-- :gmt-module:`events`
-
-You can find more examples here:
-
-- GMT animation gallery: https://docs.generic-mapping-tools.org/6.5/animations.html. 
+- See the `GMT animation gallery <https://docs.generic-mapping-tools.org/6.5/animations.html>`_ for more examples.
 
 5. References
 ~~~~~~~~~~~~~

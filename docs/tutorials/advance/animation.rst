@@ -351,7 +351,7 @@ There are two sets of parameters:
 **Variable parameters**: 
 
 - These values change with the frame number.
-- We must use them in the *main script* to introduce variations in the frames.
+- They must be used in the *main script* to introduce variations in the frames.
 
 
  ============== ============================================= ===============
@@ -369,7 +369,7 @@ There are two sets of parameters:
 **Constant parameters**:
 
 - These values do NOT change during the whole movie.
-- It can use them in the *main script* (and in the optional background and foreground scripts).
+- They can be used in the *main script* (and in the optional background and foreground scripts).
 
 
  ============== ================================================= =====================
@@ -396,23 +396,21 @@ There are 3 ways to do it:
 1. **-TNumber**: 
 
 If you supply a single (integer) value, then it will be the total number of frames. 
-Under the hood, this will create a one-column data set from 0 to that number minus 1.
+Under the hood, this will create a one-column data set from 0 to that number minus one.
 For example, for ``-T10`` I get values from 0 to 9.
-In this case, you can use the MOVIE_FRAME parameter to make the animation.
-
+In the main script, you have to use the MOVIE_FRAME parameter to access the values.
 
 
 2. **-Tmin/max/inc**:
 
 If you supply 3 values, then GMT will create a one-column data set from *min* to *max*, incrementing by *inc*.
-In this case the total of number of frames will be:
+You have to use the MOVIE_COL0 parameter to access the values of the one-column data set.
+The total of number of frames will be:
 
 .. math::
 
      \text{total frames} = \frac{\text{max} - \text{min}}{\text{inc}} + 1
 
-
-In this case, you have to use the MOVIE_COL0 parameter to access the values of the one-column data set.
 
 3. **-Ttimefile**:
 

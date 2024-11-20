@@ -4,23 +4,22 @@ Making animations
 By F. Esteban (@esteban82). November, 2024
 
 
-- This tutorial explain the basic aspect of doing animations with GMT.
-- It serve as a guide to help beginners understand and troubleshoot potential issues.
-- It explain basic aspect of the :gmt-module:`movie` and :gmt-module:`events` modules.
+- This tutorial explains the basic aspect of doing animations with GMT.
+- It serves as a guide to help beginners understand and troubleshoot potential issues.
+- It explains the basic aspect of the :gmt-module:`movie` and :gmt-module:`events` modules.
 
 
 1. Introduction
 ~~~~~~~~~~~~~~~
 
-Prior to GMT 6.0, ambitious movie makers would have to write complicated scripts where the advancement of frames was explicitly done by a shell loop, 
-and then perhaps that frame counter was used to make some changes to other parameters so that when the plotting started the plot would differ from the previous one. 
+Prior to GMT 6.0, ambitious movie makers had to write complicated scripts where the advancement of frames was explicitly done by a shell loop.
 At the end of the script, you would have to convert your PostScript plot to a raster image with a name that is lexically increasing, 
 and then later you would use some external software to assemble the movie. Hence, only very brave GMT users attempted to make GMT animations. 
 Here you can see a `more complete explanation <https://docs.generic-mapping-tools.org/5.4/gallery/anim_introduction.html>`_ 
-and `some examples <https://docs.generic-mapping-tools.org/5.4/Gallery.html#animations>`_ of that times.
+and `some examples <https://docs.generic-mapping-tools.org/5.4/Gallery.html#animations>`_ of those times.
 
-GMT 6 (`Wessel et al 2019 <https://doi.org/10.1029/2019GC008515>`_) simplified all that by adding movie-making modules
-that were later refined with GMT 6.5 (`Wessel et al 2024 <https://doi.org/10.1029/2024GC011545>`_). 
+GMT 6 (`Wessel et al. 2019 <https://doi.org/10.1029/2019GC008515>`_) simplified all that by adding movie-making modules
+that were later refined with GMT 6.5 (`Wessel et al. 2024 <https://doi.org/10.1029/2024GC011545>`_). 
 These modules empower users to create animations by taking over non-trivial tasks.
 
 
@@ -56,7 +55,7 @@ GMT is ideal for animations that require:
 1.4. Types of animations in GMT
 ================================
 
-In GMT, animations can generally be categorized by their complexity:
+For the purposes of this tutorial, I define two types of animations that can be made based on their complexity:
 
 #. **Moving objects** (e.g., Earth spinning), created using the :gmt-module:`movie` module.
 #. **Appearing Objects** (e.g., earthquakes), created using both the :gmt-module:`movie` and :gmt-module:`events` modules.
@@ -72,9 +71,9 @@ In GMT, animations can generally be categorized by their complexity:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 In this part of the tutorial, I will explain the simplest type of animation, 
-which only requires :gmt-module:`movie` module. 
+which only requires the :gmt-module:`movie` module. 
 
-As an example, I will create an animation of the Earth spinning similar to the one below.
+As an example, I will create an animation of the Earth spinning like the one below.
 
 ..  youtube:: uZtyTv6DLnM
     :align: center
@@ -153,11 +152,11 @@ by executing a single plot script that is repeated across all frames.
 
 **Required Arguments:**
 
-- **mainscript**: Script that will use to create all the frames.
+- **mainscript**: Script that will be used to create all the frames.
 - **-N**: Name for the output file.
 - **-C**: Canvas Size (see below).
 - **-T**: Number of frames (see below).
-- There are two type of outputs. An image (called *master frame*; **-M**) or a video (**-F**). You have to asks for at least one of them.
+- There are two types of outputs. An image (called *master frame*; **-M**) or a video (**-F**). You have to ask for at least one of them.
 
 **Optional Arguments** (useful for this tutorial):
 
@@ -191,7 +190,7 @@ In the first attempt, I create the first frame (``-M0,png``) over a black canvas
 
   - The previous script is enclosed between ``cat << 'EOF' > main.sh`` and ``EOF``.
   - This creates the ``main.sh`` file on-the-fly (using a `Here Document <https://en.wikipedia.org/wiki/Here_document>`_).
-  - This is useful because allow us to see (and edit) the main script and the arguments of :gmt-module:`movie` just using a single file.
+  - This is useful because it allows us to see (and edit) the main script and the arguments of :gmt-module:`movie` just using a single file.
 
 
 2.3.3. The Canvas
@@ -257,12 +256,12 @@ In the first attempt, I create the first frame (``-M0,png``) over a black canvas
 .. Note::
 
    - You can also specify the dimensions in inches (or points).
-   - There are also presets formats for 4:3 (uxga, sxga+, xga, svga, dvd).
+   - There are also preset formats for 4:3 (uxga, sxga+, xga, svga, dvd).
 
 
 **Custom format**:
 
-- If you want another dimensions, you can request a custom format directly by giving width and height and dpu (*widthxheightxdpu*).
+- If you want another dimension, you can request a custom format directly by giving width and height and dpu (*widthxheightxdpu*).
 
 
 .. Important::
@@ -293,7 +292,7 @@ For this new attempt I:
 2.4. Make draft animation
 =========================
 
-Once you are happy with the master frame, I recommend to make a very short and small movie so you don't have to wait very long to see the result.
+Once you are happy with the master frame, I recommend making a very short and small movie so you don't have to wait very long to see the result.
 
 .. admonition:: **Step Goals**:
 
@@ -343,7 +342,7 @@ Also, I add the following arguments to :gmt-module:`movie`:
 2.4.2. Movie Parameters
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-The movie parameters are key to make animations.
+The movie parameters are key to making animations.
 They are automatically assigned by different movie arguments (see tables below). 
 There are two sets of parameters:
 
@@ -399,7 +398,7 @@ There are 3 ways to do it:
 If you supply a single (integer) value, then it will be the total number of frames. 
 Under the hood, this will create a one-column data set from 0 to that number minus 1.
 For example, for ``-T10`` I get values from 0 to 9.
-In this case, you can use MOVIE_FRAME parameter to make the animation.
+In this case, you can use the MOVIE_FRAME parameter to make the animation.
 
 
 
@@ -413,7 +412,7 @@ In this case the total of number of frames will be:
      \text{total frames} = \frac{\text{max} - \text{min}}{\text{inc}} + 1
 
 
-In this case, you have to use the MOVIE_COL0 parameter to access the values of the of the one-column data set.
+In this case, you have to use the MOVIE_COL0 parameter to access the values of the one-column data set.
 
 3. **-Ttimefile**:
 
@@ -427,7 +426,7 @@ The file can even have trailing text that will be accessed with MOVIE_TEXT.
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Now I update the script with movie parameters. 
-First, I use ``MOVIE_FRAME`` variable parameter to set the central longitude of the map. Th
+First, I use the ``MOVIE_FRAME`` variable parameter to set the central longitude of the map.
 I also use the ``MOVIE_WIDTH`` constant parameter (in ``main.sh``) to set the width of the map (instead of 13c).
 
 
@@ -454,7 +453,7 @@ I also use the ``MOVIE_WIDTH`` constant parameter (in ``main.sh``) to set the wi
 2.5. Make full animation
 =========================
 
-Once that the draft animation is working it is possible to increment the number of frames (-T) and movie quality (-C).
+Once the draft animation is working it is possible to increment the number of frames (-T) and movie quality (-C).
 
 In the step, I increase:
 
@@ -487,7 +486,7 @@ In the step, I increase:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Here I explain how to make an animation with appearing objects. 
-This is more complex and requires to use :gmt-module:`events` and :gmt-module:`movie` modules.
+This is more complex and requires the use :gmt-module:`events` and :gmt-module:`movie` modules.
 In this example, I create an animation showing the occurrences of earthquakes during the year 2018 (with one frame per day).
 Note that the earthquakes are drawn as they occur and remain visible until the end of the animation.
 
@@ -585,7 +584,7 @@ In this first attempt I create the first frame (``-Mf,png``) of the animation.
 
   - I use ``-T2018-01-01T/2018-12-31T/1d`` to create a one-column data set with all days in 2018.
   - I use ``-Lc0`` to add a label with the first column (i.e. the dates).
-  - **--FONT_TAG=18p,Helvetica,white**: This set the font for the label.
+  - **--FONT_TAG=18p,Helvetica,white**: This sets the font for the label.
   - **--FORMAT_CLOCK_MAP=-**: to NOT include the hours in the date and only plot year, month and day in the label.
   - I use a custom canvas of 24 x 12 cm with a resolution of 80 DPC (``-C24cx12cx80``).
 
@@ -633,7 +632,7 @@ Now, in this attempt I use :gmt-module:`events`. I use with ``-T${MOVIE_COL0}`` 
 
 
 .. Warning::
-  The map shows NO earthquakes. This is expected because there is no quakes (in the data file) before January first.
+  The map shows NO earthquakes. This is expected because there are no quakes (in the data file) before January first.
   However, this could also be due to an error in the command.
   I must plot the frame from another date to see if the quakes appear.
 
@@ -666,7 +665,7 @@ Now, I also plot the last frame (``-Ml``).
 3.4. Make draft animation
 ==========================
 
-In this step, we can make a draft animation. For this example, I recommend to make a low quality (with 30 DPC) video to see if the quakes appear correctly.
+In this step, we can make a draft animation. For this example, I recommend making a low quality (with 30 DPC) video to see if the quakes appear correctly.
 
 3.4.1. First attempt
 ^^^^^^^^^^^^^^^^^^^^^
@@ -705,7 +704,7 @@ In this step, we can make a draft animation. For this example, I recommend to ma
 
 Within :gmt-module:`movie` module, there is an optional background (`-Sb <https://docs.generic-mapping-tools.org/dev/movie.html#sb>`_) script that it is used for two purposes:
 
-#. Create files that will be needed by main script to make the movie.
+#. Create files that will be needed by the main script to make the movie.
 #. Make a static background plot that should form the background for all frames.
 
 .. admonition:: Technical Information
@@ -719,13 +718,13 @@ Within :gmt-module:`movie` module, there is an optional background (`-Sb <https:
 In this step, instead of creating just the main script as before, I now create both a background script and a main script.
 The background script (``pre.sh``) is used to:
 
-#. create a cpt file that will be used to color the quakes.
+#. create a CPT file that will be used to color the quakes.
 #. make a **static** worldwide background map.
 
 .. Important:: 
 
   - The animation created is identical to the previous one.
-  - The use of a background script allows to create the animation much faster because the CPT and the **static** background map will be created only once (instead of 365 times).
+  - The use of a background script allows the creation of the animation much faster because the CPT and the **static** background map will be created only once (instead of 365 times).
 ..
 
     .. code-block:: bash
@@ -803,7 +802,7 @@ With :gmt-module:`events` is possible to draw attention to the arrival of a new 
 3.6.1. How to enhance symbols with events
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The idea is to change the default behavior of the symbols to enhance their appearance as shown in the following video:
+The idea is to change the default behaviour of the symbols to enhance their appearance as shown in the following video:
 
 ..  youtube:: 77a2XrfWsHM
     :align: center
@@ -822,21 +821,22 @@ The -M arguments allows to temporarily change attributes of the symbol like:
 
 The duration of the temporary changes are control via the `-E <https://docs.generic-mapping-tools.org/dev/events.html#e>`_ argument.
 
-- -Er: rise phase.
-- -Ep: plateau phase.
-- -Ed: decay phase.
+- -Er: rise phase. It takes place before the start of the event.
+- -Ep: plateau phase. It takes place after the start of the event.
+- -Ed: decay phase. It develops after the plateau phase. If the plateau phase does not occur, then it takes place after the start of the event.
 
 
 .. Note::
  
-  For finite symbols there are also *normal* and *fade* phases.
-  It is also possible to change the data value with ``-Mv``. 
+  -For finite symbols there are also *normal* and *fade* phases.
+  -It is also possible to change the data value with ``-Mv``. 
 
 
 3.6.2. Make full animation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In this step I announce each quake by magnifying size and whitening the color for a little bit (during the rise phase). Later the symbols return to its original properties during the decay phase.
+In this step I announce each quake by magnifying size and whitening the color for a little bit (during the rise phase). 
+Later the symbols return to their original properties during the decay phase.
 The plateau phase is not used.
 
 
@@ -872,9 +872,9 @@ The plateau phase is not used.
 
   - \--TIME_UNIT=d: This sets that the values of -E are in days (d).
   - -Es+r2+d6: This sets the duration of the rise phase and the decay phase.
-  - -Ms5+c1: modify the size. The size will increase 5 times during the rise phase and them reduce to the original size in the coda phase.
-  - -Mt+c0: modify the transparency. The transparency will remain to 0 at the coda phase. This allows to be seen after its occurrence.
-  - -Mi1+c0: modify the intensity of the color. It gets lighter during the rise phase and them returns to its original color in the coda phase.
+  - -Ms5+c1: modify the size. The size will increase 5 times during the rise phase and then reduce to the original size in the coda phase.
+  - -Mt+c0: modify the transparency. The transparency will remain to 0 at the coda phase. This allows it to be seen after its occurrence.
+  - -Mi1+c0: modify the intensity of the color. It gets lighter during the rise phase and then returns to its original color in the coda phase.
 
 
 4. See also
@@ -882,7 +882,7 @@ The plateau phase is not used.
 
 - The paper about animations which include explanation and examples (`Wessel et al. 2024 <https://doi.org/10.1029/2024GC011545>`_).
 
-- Check the :gmt-module:`movie` and - :gmt-module:`events` modules documentation for full technical information.
+- Check the :gmt-module:`movie` and :gmt-module:`events` modules documentation for full technical information.
 
 - See the `GMT animation gallery <https://docs.generic-mapping-tools.org/6.5/animations.html>`_ for more examples.
 

@@ -57,8 +57,8 @@ GMT is ideal for animations that require:
 
 For the purposes of this tutorial, I define two types of animations that can be made based on their complexity:
 
-#. **Moving objects** (e.g., Earth spinning), created using the :gmt-module:`movie` module.
-#. **Appearing Objects** (e.g., earthquakes), created using both the :gmt-module:`movie` and :gmt-module:`events` modules.
+#. **Moving object** (e.g., Earth spinning), created using the :gmt-module:`movie` module.
+#. **Appearing object** (e.g., earthquakes), created using both the :gmt-module:`movie` and :gmt-module:`events` modules.
 
 
 1.5. Prerequisites
@@ -70,8 +70,7 @@ For the purposes of this tutorial, I define two types of animations that can be 
 2. Tutorial 1. Earth spinning
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In this part of the tutorial, I will explain the simplest type of animation, 
-which only requires the :gmt-module:`movie` module. 
+Here I explain how to make an animation of a moving object which only requires the :gmt-module:`movie` module. 
 
 As an example, I will create an animation of the Earth spinning like the one below.
 
@@ -83,26 +82,28 @@ As an example, I will create an animation of the Earth spinning like the one bel
 
 .. admonition:: Technical Information
 
-  This animation was created from 360 images (or frames), each frame rotating by 1 degree in the central longitude of the map, 
-  and is displayed at 24 fps.
+  This animation was created using 360 images (or frames), with each frame representing a 1-degree rotation in the central longitude of the map, 
+  displayed at 24 fps.
+
+
+To create the animation, I follow these four steps:
+
+#. Make first image
+#. Make master frame with gmt movie
+#. Make draft animation
+#. Make full animation
+
 
 2.1. Goals of the Tutorial
 ==========================
 
 - Explain the most important aspects of using the :gmt-module:`movie` module which include:
 
-  - What is GMT movie
+  - What is :gmt-module:`movie`
   - How to set the Canvas (-C)
   - What are and how to use the movie parameters
   - How to set the number of Frames (-T)
 
-
-To create an animation, follow these step-by-step instructions:
-
-#. Make first image
-#. Make master frame with gmt movie
-#. Make draft animation
-#. Make full animation
 
 2.2. Make first image
 ======================
@@ -137,7 +138,7 @@ For this example, I create a map of the Earth with:
 2.3. Make the Master Frame
 ===========================
 
-In this step, I recreate the previous image but with the :gmt-module:`movie` module which is use to create animations. 
+In this second step, I recreate the previous image but with the :gmt-module:`movie` module which is use to create animations. 
 
 
 .. Important::
@@ -201,11 +202,12 @@ In the first attempt, I create the first frame (``-M0,png``) over a black canvas
 - The canvas is the black area of the previous image.
 - This is the working area of the frames. 
 - The elements of the main script must be drawn inside the canvas.
-- The elements that are outside will not (totally or partially) appear in the animation.
+- The elements that are outside will be (totally or partially) hidden in the animation.
 - The canvas size is important by two reasons:
 
-  - to set the final dimension in pixels of the frames/movie (i.e. the quality).
-  - set the width and height (in cm or inches) of the frames.
+  - to set the width and height (in cm or inches) of the frames.
+  - to set the dimensions in pixels of the frames/movie (i.e. the quality).
+  
 
 **How to set the canvas**:
 
@@ -292,7 +294,7 @@ For this new attempt I:
 2.4. Make draft animation
 =========================
 
-Once you are happy with the master frame, I recommend making a very short and small movie so you don't have to wait very long to see the result.
+Once the master frame is ok, I recommend making a very short and small movie so you don't have to wait very long to see the result.
 
 .. admonition:: **Step Goals**:
 
@@ -332,6 +334,7 @@ Also, I add the following arguments to :gmt-module:`movie`:
     :aspect: 1:1
 
 .. Note::
+
   The display frame rate is set by default to 24 `fps <https://en.wikipedia.org/wiki/Frame_rate>`_. It can be change with `-D <https://docs.generic-mapping-tools.org/dev/movie.html#d>`_.
 
 
@@ -495,14 +498,7 @@ Note that the earthquakes are drawn as they occur and remain visible until the e
     :aspect: 2:1
 
 
-|
-
-3.1. Goals of the Tutorial
-==========================
-
-- What is gmt :gmt-module:`events`.
-- How to use a background script for a movie.
-- How to enhance symbols with :gmt-module:`events`.
+.. |
 
 For this tutorial I follow these steps:
 
@@ -511,6 +507,15 @@ For this tutorial I follow these steps:
 #. Make draft animation
 #. Make animation without enhancement
 #. Make animation with enhancement
+
+
+3.1. Goals of the Tutorial
+==========================
+
+- What is gmt :gmt-module:`events`.
+- How to use a background script for a movie.
+- How to enhance symbols with :gmt-module:`events`.
+
 
 3.2 Make image
 ===============
@@ -695,7 +700,7 @@ In this step, we can make a draft animation. For this example, I recommend makin
 
 .. Warning::
   - The above script works well but it can be more efficient if a background script is used as well.
-  - But the movie-making process can be faster if a background script is used as well.
+
 
 3.4.2. The background script
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -754,7 +759,7 @@ The background script (``pre.sh``) is used to:
   - For the CPT, I must use `-H <https://docs.generic-mapping-tools.org/latest/makecpt.html#h>`_ and give it a name, and then use that name in ``main.sh``.
   - I add ``-Sbpre.sh`` within the :gmt-module:`movie` module to use the background script.
   - I repeat the ``basemap`` command in the main and background scripts so both have the same positioning (i.e., ``-X`` and ``-Y``) and parameters (i.e. ``-R`` and ``-J``).
-  
+
 
 3.5. Make full animation
 =========================
@@ -800,7 +805,7 @@ With :gmt-module:`events` is possible to draw attention to the arrival of a new 
 3.6.1. How to enhance symbols with events
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The idea is to change the default behaviour of the symbols to enhance their appearance as shown in the following video:
+The idea is to change the default behavior of the symbols to enhance their appearance as shown in the following video:
 
 ..  youtube:: 77a2XrfWsHM
     :align: center
@@ -825,9 +830,9 @@ The duration of the temporary changes are control via the `-E <https://docs.gene
 
 
 .. Note::
- 
-  -For finite symbols there are also *normal* and *fade* phases.
-  -It is also possible to change the data value with ``-Mv``. 
+
+   - For finite symbols there are also *normal* and *fade* phases.
+   - It is also possible to change the data value with ``-Mv``. 
 
 
 3.6.2. Make full animation

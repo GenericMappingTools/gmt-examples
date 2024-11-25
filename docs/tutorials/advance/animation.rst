@@ -889,6 +889,7 @@ The plateau phase is not used.
 
 - See the `GMT animation gallery <https://docs.generic-mapping-tools.org/6.5/animations.html>`_ for more examples.
 
+
 5. References
 ~~~~~~~~~~~~~
 

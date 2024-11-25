@@ -612,7 +612,7 @@ However if I want to plot quakes as they unfold, I have to use the :gmt-module:`
 
 3.3.3. Second attempt (first frame with events)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Now, in this attempt I use :gmt-module:`events`. I use with ``-T${MOVIE_COL0}`` to plot the quakes as dates progresses
+Now, in this attempt I use :gmt-module:`events` with ``-T${MOVIE_COL0}`` to plot the quakes as dates progresses
 
 
      .. gmtplot::

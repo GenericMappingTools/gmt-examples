@@ -138,7 +138,7 @@ For this example, I create a map of the Earth with:
 2.3. Make the Master Frame
 ===========================
 
-In this second step, I recreate the previous image but with the :gmt-module:`movie` module which is use to create animations. 
+In this second step, I recreate the previous image but with the :gmt-module:`movie` module which is used to create animations. 
 
 
 .. Important::

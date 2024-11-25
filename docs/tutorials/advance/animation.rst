@@ -268,7 +268,7 @@ In the first attempt, I create the first frame (``-M0,png``) over a black canvas
 
 .. Important::
 
-  - DPU: Dots-per-unit pixel density. So it is DPI for inches or DPC for cm. 
+  - DPU: Dots-per-unit pixel density. So, it is DPI for inches or DPC for centimeters.
 
 
 2.3.4. Second attempt. Fix the canvas

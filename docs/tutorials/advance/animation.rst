@@ -803,7 +803,7 @@ In the previous animation, the earthquakes appear but it is hard to see when the
 With :gmt-module:`events` is possible to draw attention to the arrival of a new event.
 
 3.6.1. How to enhance symbols with events
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The idea is to change the default behavior of the symbols to enhance their appearance as shown in the following video:
 

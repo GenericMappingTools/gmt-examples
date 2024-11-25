@@ -671,7 +671,7 @@ Now, I also plot the last frame (``-Ml``).
 In this step, we can make a draft animation. For this example, I recommend making a low quality (with 30 DPC) video to see if the quakes appear correctly.
 
 3.4.1. First attempt
-^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^
 
 
     .. code-block:: bash

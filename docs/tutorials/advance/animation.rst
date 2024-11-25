@@ -800,7 +800,7 @@ Now I make the final high-quality animation (i.e. 80 DPC).
 =========================================
 
 In the previous animation, the earthquakes appear but it is hard to see when they do it. 
-With :gmt-module:`events` is possible to draw attention to the arrival of a new event.
+With :gmt-module:`events` it is possible to draw attention to the arrival of a new event.
 
 3.6.1. How to enhance symbols with events
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

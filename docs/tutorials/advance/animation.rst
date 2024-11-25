@@ -484,7 +484,7 @@ In the step, I increase:
 
 
 3. Tutorial 2. Earthquakes
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Here I explain how to make an animation with appearing objects. 
 This is more complex and requires the use :gmt-module:`events` and :gmt-module:`movie` modules.

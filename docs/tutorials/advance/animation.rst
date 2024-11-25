@@ -822,7 +822,7 @@ The -M arguments allows to temporarily change attributes of the symbol like:
 - -Mc: Provide a value to brighten (up to 1) or darken (up to -1) the `color intensity <https://docs.generic-mapping-tools.org/dev/reference/colorspace.html#artificial-illumination>`_.
 - -Mt: Transparency. Set a value between 100 (invisible) to 0 (opaque).
 
-The duration of the temporary changes are control via the `-E <https://docs.generic-mapping-tools.org/dev/events.html#e>`_ argument.
+The duration of the temporary changes is controlled via the `-E <https://docs.generic-mapping-tools.org/dev/events.html#e>`_ argument.
 
 - -Er: rise phase. It takes place before the start of the event.
 - -Ep: plateau phase. It takes place after the start of the event.

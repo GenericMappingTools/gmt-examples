@@ -553,7 +553,7 @@ In this step I plot a map of the earth with all the quakes from 2018.
 
 
 3.3. Make master frame
-=======================
+======================
 
 In this step I create the master frame of the animation similar to the previous image. 
 

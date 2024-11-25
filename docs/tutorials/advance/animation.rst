@@ -836,7 +836,7 @@ The duration of the temporary changes is controlled via the `-E <https://docs.ge
 
 
 3.6.2. Make full animation
-^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 In this step I announce each quake by magnifying size and whitening the color for a little bit (during the rise phase). 
 Later the symbols return to their original properties during the decay phase.

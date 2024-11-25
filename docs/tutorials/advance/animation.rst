@@ -452,7 +452,7 @@ I also use the ``MOVIE_WIDTH`` constant parameter (in ``main.sh``) to set the wi
 
 
 2.5. Make full animation
-=========================
+========================
 
 Once the draft animation is working it is possible to increment the number of frames (-T) and movie quality (-C).
 

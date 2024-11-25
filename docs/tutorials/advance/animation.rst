@@ -703,7 +703,7 @@ In this step, we can make a draft animation. For this example, I recommend makin
 
 
 3.4.2. The background script
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Within :gmt-module:`movie` module, there is an optional background (`-Sb <https://docs.generic-mapping-tools.org/dev/movie.html#sb>`_) script that it is used for two purposes:
 

@@ -518,7 +518,7 @@ For this tutorial I follow these steps:
 
 
 3.2 Make image
-===============
+==============
 
 In this step I plot a map of the earth with all the quakes from 2018.
 

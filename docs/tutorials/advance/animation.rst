@@ -666,7 +666,7 @@ Now, I also plot the last frame (``-Ml``).
 
 
 3.4. Make draft animation
-==========================
+=========================
 
 In this step, we can make a draft animation. For this example, I recommend making a low quality (with 30 DPC) video to see if the quakes appear correctly.
 

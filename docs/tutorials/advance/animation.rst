@@ -458,7 +458,7 @@ Once the draft animation is working it is possible to increment the number of fr
 
 In the step, I increase:
 
-- the amount of frames to 360 (``-T360``) to get the whole spin.
+- the number of frames to 360 (``-T360``) to get the whole spin.
 - the resolution to 80 DPC (``-C13cx13cx80``) to get a high-quality video.
 
     .. code-block:: bash

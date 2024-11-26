@@ -214,10 +214,10 @@ In the first attempt, I create the first frame (``-M0,png``) over a black canvas
 - This is set via ``movie -C``.
 - There are two ways to the set the canvas:
 
-  - Presets format
+  - Preset formats
   - Custom format
 
-**Presets format**:
+**Preset formats**:
 
 - It is the easiest way to specify the canvas.
 - Use the name (or alias) to select a format based on this table (for 16:9 format):

@@ -109,7 +109,7 @@ To create the animation, I follow these four steps:
 ======================
 
 The first step is to create an image using a standard GMT script 
-(with `modern mode <https://docs.generic-mapping-tools.org/dev/reference/introduction.html#modern-and-classic-mode>`_) 
+(with `modern mode <https://docs.generic-mapping-tools.org/6.5/reference/introduction.html#modern-and-classic-mode>`_) 
 that will serve as the base for the animation.
 
 .. Important::
@@ -335,7 +335,7 @@ Also, I add the following arguments to :gmt-module:`movie`:
 
 .. Note::
 
-  The display frame rate is set by default to 24 `fps <https://en.wikipedia.org/wiki/Frame_rate>`_. It can be change with `-D <https://docs.generic-mapping-tools.org/dev/movie.html#d>`_.
+  The display frame rate is set by default to 24 `fps <https://en.wikipedia.org/wiki/Frame_rate>`_. It can be change with `-D <https://docs.generic-mapping-tools.org/6.5/movie.html#d>`_.
 
 
 .. Error::
@@ -480,7 +480,7 @@ In the step, I increase:
   Be careful. This step can be quite time (and resource) consuming.
   By default, :gmt-module:`movie` uses all the cores available to speed up the frame creation process.
   So probably you can't do anything else while GMT is creating all the frames (maybe you can take a break, or have lunch).
-  Also you could use `-x <https://docs.generic-mapping-tools.org/dev/gmt.html#core-full>`_ to specify the number of active cores to be used.
+  Also you could use `-x <https://docs.generic-mapping-tools.org/6.5/gmt.html#core-full>`_ to specify the number of active cores to be used.
 
 
 3. Tutorial 2. Earthquakes
@@ -538,7 +538,7 @@ In this step I plot a map of the earth with all the quakes from 2018.
 
 .. admonition:: Technical Information
 
-    - I use :gmt-module:`makecpt` to create a `CPT <https://docs.generic-mapping-tools.org/dev/reference/cpts.html#of-colors-and-color-legends>`_ to color the earthquakes.
+    - I use :gmt-module:`makecpt` to create a `CPT <https://docs.generic-mapping-tools.org/6.5/reference/cpts.html#of-colors-and-color-legends>`_ to color the earthquakes.
     - I used the earthquakes from the file `quakes_2018.txt <https://github.com/GenericMappingTools/gmtserver-admin/blob/master/cache/quakes_2018.txt>`_ which has 5 columns.
 
      ============== ========== ======== ================ ========================
@@ -548,7 +548,7 @@ In this step I plot a map of the earth with all the quakes from 2018.
       169.3488       -18.8355   242.77      260           2018-01-02T08:10:00.06
       ...                                                 
      ============== ========== ======== ================ ========================
-    - Note that the input file has the columns sorted as will be required by the :gmt-module:`plot` and :gmt-module:`events` modules. It was also used for `animation 08 <https://docs.generic-mapping-tools.org/dev//animations/anim08.html>`_. 
+    - Note that the input file has the columns sorted as will be required by the :gmt-module:`plot` and :gmt-module:`events` modules. It was also used for `animation 08 <https://docs.generic-mapping-tools.org/6.5//animations/anim08.html>`_. 
     Check it to see how it was downloaded and processed.
 
 
@@ -705,7 +705,7 @@ In this step, we can make a draft animation. For this example, I recommend makin
 3.4.2. The background script
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Within :gmt-module:`movie` module, there is an optional background (`-Sb <https://docs.generic-mapping-tools.org/dev/movie.html#sb>`_) script that it is used for two purposes:
+Within :gmt-module:`movie` module, there is an optional background (`-Sb <https://docs.generic-mapping-tools.org/6.5/movie.html#sb>`_) script that it is used for two purposes:
 
 #. Create files that will be needed by the main script to make the movie.
 #. Make a static background plot that should form the background for all frames.
@@ -815,14 +815,14 @@ The idea is to change the default behavior of the symbols to enhance their appea
 
 |
 
-This can be done by using `-M <https://docs.generic-mapping-tools.org/dev/events.html#m>`_ and `-E <https://docs.generic-mapping-tools.org/dev/events.html#e>`_ arguments.
+This can be done by using `-M <https://docs.generic-mapping-tools.org/6.5/events.html#m>`_ and `-E <https://docs.generic-mapping-tools.org/6.5/events.html#e>`_ arguments.
 The -M arguments allows to temporarily change attributes of the symbol like:
  
 - -Ms: Provide a factor to modify the size.
-- -Mc: Provide a value to brighten (up to 1) or darken (up to -1) the `color intensity <https://docs.generic-mapping-tools.org/dev/reference/colorspace.html#artificial-illumination>`_.
+- -Mc: Provide a value to brighten (up to 1) or darken (up to -1) the `color intensity <https://docs.generic-mapping-tools.org/6.5/reference/colorspace.html#artificial-illumination>`_.
 - -Mt: Transparency. Set a value between 100 (invisible) to 0 (opaque).
 
-The duration of the temporary changes is controlled via the `-E <https://docs.generic-mapping-tools.org/dev/events.html#e>`_ argument.
+The duration of the temporary changes is controlled via the `-E <https://docs.generic-mapping-tools.org/6.5/events.html#e>`_ argument.
 
 - -Er: rise phase. It takes place before the start of the event.
 - -Ep: plateau phase. It takes place after the start of the event.

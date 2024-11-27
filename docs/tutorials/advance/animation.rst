@@ -65,7 +65,7 @@ For the purposes of this tutorial, I define two types of animations that can be 
 ==================
 
 - GMT version 6.5 or later.
-
+- Bash scripting environment: The examples in this tutorial are written in Bash and may not work correctly in other shell environments (e.g., zsh, fish, or Windows cmd).
 
 2. Tutorial 1. Earth spinning
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -819,7 +819,7 @@ This can be done by using `-M <https://docs.generic-mapping-tools.org/6.5/events
 The -M arguments allows to temporarily change attributes of the symbol like:
  
 - -Ms: Provide a factor to modify the size.
-- -Mc: Provide a value to brighten (up to 1) or darken (up to -1) the `color intensity <https://docs.generic-mapping-tools.org/6.5/reference/colorspace.html#artificial-illumination>`_.
+- -Mi: Provide a value to brighten (up to 1) or darken (up to -1) the `color intensity <https://docs.generic-mapping-tools.org/6.5/reference/colorspace.html#artificial-illumination>`_.
 - -Mt: Transparency. Set a value between 100 (invisible) to 0 (opaque).
 
 The duration of the temporary changes is controlled via the `-E <https://docs.generic-mapping-tools.org/6.5/events.html#e>`_ argument.

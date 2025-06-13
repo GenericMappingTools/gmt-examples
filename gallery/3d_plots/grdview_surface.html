@@ -1,0 +1,149 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plotting a surface &mdash; GMT Examples  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/style.css?v=0a3a2672" />
+
+  
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+    <link rel="canonical" href="https://www.generic-mapping-tools.org/gmt-examples/gallery/3d_plots/grdview_surface.html" />
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="How to make a slope map" href="../images/slope.html" />
+    <link rel="prev" title="GMT Tutorials and Examples" href="../../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            GMT Examples
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Gallery</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Plotting a surface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../images/slope.html">How to make a slope map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../maps/gadm.html">How to use political borders from GADM</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/advance/animation.html">Making animations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/basics/coastlines.html">Coastlines and boarders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/basics/color.html">How to use colors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/basics/frames.html">Frames, ticks, titles, and labels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/basics/line.html">Setting attributes of lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/basics/region.html">Setting the Region</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributors Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">GMT Examples</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Plotting a surface</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/gallery/3d_plots/grdview_surface.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="plotting-a-surface">
+<h1>Plotting a surface<a class="headerlink" href="#plotting-a-surface" title="Link to this heading"></a></h1>
+<p><a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/grdview">grdview</a> can plot 3-D surfaces using the <a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/grdview#q">-Q</a>
+parameter with the <code class="docutils literal notranslate"><span class="pre">s</span></code> directive. Here, we use <a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/grdmath">grdmath</a> to create
+a netCDF file containing a grid for plotting.</p>
+<p>Note that the <strong>-p</strong> parameter here controls the azimuth and elevation angle of
+the view.</p>
+<p>We use the <a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/grdview#b">-B</a> parameter twice - the first specifies
+the <span class="math notranslate nohighlight">\(x\)</span>- and <span class="math notranslate nohighlight">\(y\)</span>-axes frame attributes and the second specifies the
+<span class="math notranslate nohighlight">\(z\)</span>-axis frame attributes using the <code class="docutils literal notranslate"><span class="pre">z</span></code> directive.</p>
+<p>The <a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/grdview#i">-I</a> parameter specifies the illumination; here we
+use an azimuth of 45° using the <code class="docutils literal notranslate"><span class="pre">+a</span></code> modifier.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmt<span class="w"> </span>grdmath<span class="w"> </span>-R-15/15/-15/15<span class="w"> </span>-I0.3<span class="w"> </span>X<span class="w"> </span>Y<span class="w"> </span>HYPOT<span class="w"> </span>DUP<span class="w"> </span><span class="m">2</span><span class="w"> </span>MUL<span class="w"> </span>PI<span class="w"> </span>MUL<span class="w"> </span><span class="m">8</span><span class="w"> </span>DIV<span class="w"> </span>COS<span class="w"> </span>EXCH<span class="w"> </span>NEG<span class="w"> </span><span class="m">10</span><span class="w"> </span>DIV<span class="w"> </span>EXP<span class="w"> </span>MUL<span class="w"> </span><span class="m">0</span>.001<span class="w"> </span><span class="nv">SUB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>example_grid.nc
+gmt<span class="w"> </span>begin<span class="w"> </span>grdview_surface<span class="w"> </span>png
+<span class="w">   </span>gmt<span class="w"> </span>grdview<span class="w"> </span>example_grid.nc<span class="w"> </span>-Ba5f1<span class="w"> </span>-Bza5f1<span class="w"> </span>-JX10C<span class="w"> </span>-JZ2c<span class="w"> </span>-Qs<span class="w"> </span>-Croma<span class="w"> </span>-p135/30<span class="w"> </span>-I+a45
+gmt<span class="w"> </span>end<span class="w"> </span>show
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-4546e1b4bf691b3b38010ff66e835609">
+<img alt="../../_images/4546e1b4bf691b3b38010ff66e835609.png" src="../../_images/4546e1b4bf691b3b38010ff66e835609.png" />
+</figure>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../index.html" class="btn btn-neutral float-left" title="GMT Tutorials and Examples" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../images/slope.html" class="btn btn-neutral float-right" title="How to make a slope map" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022-2025, The GMT Examples Authors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>

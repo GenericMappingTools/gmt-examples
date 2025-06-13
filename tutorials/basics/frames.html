@@ -1,0 +1,244 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frames, ticks, titles, and labels &mdash; GMT Examples  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/style.css?v=0a3a2672" />
+
+  
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+    <link rel="canonical" href="https://www.generic-mapping-tools.org/gmt-examples/tutorials/basics/frames.html" />
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Setting attributes of lines" href="line.html" />
+    <link rel="prev" title="How to use colors" href="color.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            GMT Examples
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Gallery</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../gallery/3d_plots/grdview_surface.html">Plotting a surface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gallery/images/slope.html">How to make a slope map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gallery/maps/gadm.html">How to use political borders from GADM</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../advance/animation.html">Making animations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coastlines.html">Coastlines and boarders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="color.html">How to use colors</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Frames, ticks, titles, and labels</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#plot-frame">Plot Frame</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tick-labels">Tick labels</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#gridlines">Gridlines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#custom-annotations-and-intervals">Custom annotations and intervals</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#title">Title</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#subtitle">Subtitle</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="line.html">Setting attributes of lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="region.html">Setting the Region</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributors Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">GMT Examples</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Frames, ticks, titles, and labels</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/tutorials/basics/frames.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="frames-ticks-titles-and-labels">
+<h1>Frames, ticks, titles, and labels<a class="headerlink" href="#frames-ticks-titles-and-labels" title="Link to this heading"></a></h1>
+<p>Setting frame, ticks, title, etc., of the plot is handled by the <a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/basemap#b">-B</a> parameter that most plotting modules contain like <a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/basemap">basemap</a>.</p>
+<section id="plot-frame">
+<h2>Plot Frame<a class="headerlink" href="#plot-frame" title="Link to this heading"></a></h2>
+<p>By default, GMT does not add a frame to your plot. For example, we can plot
+the coastlines of the world with a Mercator projection:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmt<span class="w"> </span>begin<span class="w"> </span>frames<span class="w"> </span>png
+<span class="w">   </span>gmt<span class="w"> </span>coast<span class="w"> </span>-R-180/180/-60/60<span class="w"> </span>-JM25c<span class="w"> </span>-W
+gmt<span class="w"> </span>end<span class="w"> </span>show
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-0d6a6739ffc4ab6b4b79b0e994ab313a">
+<img alt="../../_images/0d6a6739ffc4ab6b4b79b0e994ab313a.png" src="../../_images/0d6a6739ffc4ab6b4b79b0e994ab313a.png" />
+</figure>
+</div></blockquote>
+<p>To add the default GMT frame style to the plot, add <code class="docutils literal notranslate"><span class="pre">f</span></code> to the <a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/basemap#b">-B</a>.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmt<span class="w"> </span>begin<span class="w"> </span>frames<span class="w"> </span>png
+<span class="w">   </span>gmt<span class="w"> </span>coast<span class="w"> </span>-R-180/180/-60/60<span class="w"> </span>-JM25c<span class="w"> </span>-W
+<span class="w">   </span>gmt<span class="w"> </span>basemap<span class="w"> </span>-Bf
+gmt<span class="w"> </span>end<span class="w"> </span>show
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-e9ea479bd2d8b74ba6930265852ce89d">
+<img alt="../../_images/e9ea479bd2d8b74ba6930265852ce89d.png" src="../../_images/e9ea479bd2d8b74ba6930265852ce89d.png" />
+</figure>
+</div></blockquote>
+</section>
+<section id="tick-labels">
+<h2>Tick labels<a class="headerlink" href="#tick-labels" title="Link to this heading"></a></h2>
+<p>In GMT the tick labels are called annotations. Add them by passing <code class="docutils literal notranslate"><span class="pre">a</span></code> through the <a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/basemap#b">-B</a> parameter:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmt<span class="w"> </span>begin<span class="w"> </span>frames<span class="w"> </span>png
+<span class="w">   </span>gmt<span class="w"> </span>coast<span class="w"> </span>-R-180/180/-60/60<span class="w"> </span>-JM25c<span class="w"> </span>-W
+<span class="w">   </span>gmt<span class="w"> </span>basemap<span class="w"> </span>-Baf
+gmt<span class="w"> </span>end<span class="w"> </span>show
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-400319cd8ba088ace1c0e9bca287124a">
+<img alt="../../_images/400319cd8ba088ace1c0e9bca287124a.png" src="../../_images/400319cd8ba088ace1c0e9bca287124a.png" />
+</figure>
+</div></blockquote>
+</section>
+<section id="gridlines">
+<h2>Gridlines<a class="headerlink" href="#gridlines" title="Link to this heading"></a></h2>
+<p>Add automatic grid lines to the plot by adding <code class="docutils literal notranslate"><span class="pre">g</span></code>:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmt<span class="w"> </span>begin<span class="w"> </span>frames<span class="w"> </span>png
+<span class="w">   </span>gmt<span class="w"> </span>coast<span class="w"> </span>-R-180/180/-60/60<span class="w"> </span>-JM25c<span class="w"> </span>-W
+<span class="w">   </span>gmt<span class="w"> </span>basemap<span class="w"> </span>-Bafg
+gmt<span class="w"> </span>end<span class="w"> </span>show
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-622dffbd69bc84ce7dceb5663a698252">
+<img alt="../../_images/622dffbd69bc84ce7dceb5663a698252.png" src="../../_images/622dffbd69bc84ce7dceb5663a698252.png" />
+</figure>
+</div></blockquote>
+</section>
+<section id="custom-annotations-and-intervals">
+<h2>Custom annotations and intervals<a class="headerlink" href="#custom-annotations-and-intervals" title="Link to this heading"></a></h2>
+<p>To adjust the step widths of annotations, frame, and grid lines we can
+add the desired step widths after <code class="docutils literal notranslate"><span class="pre">a</span></code>, <code class="docutils literal notranslate"><span class="pre">f</span></code>, or <code class="docutils literal notranslate"><span class="pre">g</span></code>. In the example
+below, the step widths are set to 30°, 7.5°, and 15°, respectively.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmt<span class="w"> </span>begin<span class="w"> </span>frames<span class="w"> </span>png
+<span class="w">   </span>gmt<span class="w"> </span>coast<span class="w"> </span>-R-180/180/-60/60<span class="w"> </span>-JM25c<span class="w"> </span>-W
+<span class="w">   </span>gmt<span class="w"> </span>basemap<span class="w"> </span>-Ba30f7.5g15
+gmt<span class="w"> </span>end<span class="w"> </span>show
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-4024575257cabbea8030488db22256c4">
+<img alt="../../_images/4024575257cabbea8030488db22256c4.png" src="../../_images/4024575257cabbea8030488db22256c4.png" />
+</figure>
+</div></blockquote>
+</section>
+<section id="title">
+<h2>Title<a class="headerlink" href="#title" title="Link to this heading"></a></h2>
+<p>The figure title can be set by passing <code class="docutils literal notranslate"><span class="pre">+ttitle</span></code>:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmt<span class="w"> </span>begin<span class="w"> </span>frames<span class="w"> </span>png
+<span class="w">   </span>gmt<span class="w"> </span>coast<span class="w"> </span>-R-180/180/-60/60<span class="w"> </span>-JM25c<span class="w"> </span>-W
+<span class="w">   </span>gmt<span class="w"> </span>basemap<span class="w"> </span>-Bafg
+<span class="w">   </span>gmt<span class="w"> </span>basemap<span class="w"> </span>-B+t<span class="s2">&quot;Mercator Map&quot;</span>
+gmt<span class="w"> </span>end<span class="w"> </span>show
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-18736ae188d169a16383b28a3a7afcb8">
+<img alt="../../_images/18736ae188d169a16383b28a3a7afcb8.png" src="../../_images/18736ae188d169a16383b28a3a7afcb8.png" />
+</figure>
+</div></blockquote>
+</section>
+<section id="subtitle">
+<h2>Subtitle<a class="headerlink" href="#subtitle" title="Link to this heading"></a></h2>
+<p>Then you can add a subtitle with <code class="docutils literal notranslate"><span class="pre">+ssubtitle</span></code>:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmt<span class="w"> </span>begin<span class="w"> </span>frames<span class="w"> </span>png
+<span class="w">   </span>gmt<span class="w"> </span>coast<span class="w"> </span>-R-180/180/-60/60<span class="w"> </span>-JM25c<span class="w"> </span>-W
+<span class="w">   </span>gmt<span class="w"> </span>basemap<span class="w"> </span>-Bafg
+<span class="w">   </span>gmt<span class="w"> </span>basemap<span class="w"> </span>-B+t<span class="s2">&quot;Mercator Map&quot;</span>+s<span class="s2">&quot;Subtitle&quot;</span>
+gmt<span class="w"> </span>end<span class="w"> </span>show
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-f179478fe64edee807e938e52a7a7944">
+<img alt="../../_images/f179478fe64edee807e938e52a7a7944.png" src="../../_images/f179478fe64edee807e938e52a7a7944.png" />
+</figure>
+</div></blockquote>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="color.html" class="btn btn-neutral float-left" title="How to use colors" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="line.html" class="btn btn-neutral float-right" title="Setting attributes of lines" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022-2025, The GMT Examples Authors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>

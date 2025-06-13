@@ -1,0 +1,206 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to use political borders from GADM &mdash; GMT Examples  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/style.css?v=0a3a2672" />
+
+  
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+    <link rel="canonical" href="https://www.generic-mapping-tools.org/gmt-examples/gallery/maps/gadm.html" />
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Making animations" href="../../tutorials/advance/animation.html" />
+    <link rel="prev" title="How to make a slope map" href="../images/slope.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            GMT Examples
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Gallery</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../3d_plots/grdview_surface.html">Plotting a surface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../images/slope.html">How to make a slope map</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">How to use political borders from GADM</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/advance/animation.html">Making animations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/basics/coastlines.html">Coastlines and boarders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/basics/color.html">How to use colors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/basics/frames.html">Frames, ticks, titles, and labels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/basics/line.html">Setting attributes of lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/basics/region.html">Setting the Region</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributors Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">GMT Examples</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">How to use political borders from GADM</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/gallery/maps/gadm.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="how-to-use-political-borders-from-gadm">
+<h1>How to use political borders from GADM<a class="headerlink" href="#how-to-use-political-borders-from-gadm" title="Link to this heading"></a></h1>
+<p>GADM (<a class="reference external" href="https://gadm.org/">https://gadm.org/</a>) is a project that provides spatial data for all countries and their sub-divisions.
+They allow you to freely use their data (see <a class="reference external" href="https://gadm.org/license.html">license</a>) to make your own maps.
+You can use this script to download the data from their server.
+You only need to select a data set (using a three-letter code) and a level.
+Not all levels are available. Check first in their website if the data set exists.
+Here is a table with the number of file available for each level.</p>
+<blockquote>
+<div><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Level</p></th>
+<th class="head"><p># of files</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0</p></td>
+<td><p>254</p></td>
+</tr>
+<tr class="row-odd"><td><p>1</p></td>
+<td><p>230</p></td>
+</tr>
+<tr class="row-even"><td><p>2</p></td>
+<td><p>171</p></td>
+</tr>
+<tr class="row-odd"><td><p>3</p></td>
+<td><p>69</p></td>
+</tr>
+<tr class="row-even"><td><p>4</p></td>
+<td><p>21</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>2</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>The script will download the selected data and level in KMZ format.
+Then, it will unzip that file (to KML) and convert it to a GMT format.
+At the end, you will have a GMT file in the same directory.
+To demostrate, we will create a level 1 map of Mexico (code MEX).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># How to plot political borders from GADM data set</span>
+<span class="c1">#</span>
+<span class="c1"># GDAM data</span>
+<span class="c1"># ------------------------------------</span>
+<span class="c1"># Set country with three-leter code.</span>
+<span class="nv">COUNTRY</span><span class="o">=</span>MEX
+<span class="c1"># Set level from 0 to 5. 0 = Country outline.</span>
+<span class="nv">LEVEL</span><span class="o">=</span><span class="m">1</span>
+<span class="c1"># GADM data set version</span>
+<span class="nv">VERSION</span><span class="o">=</span><span class="m">4</span>.1
+<span class="c1"># File formats (https://gadm.org/formats.html)</span>
+<span class="nv">FORMAT</span><span class="o">=</span>kmz
+<span class="nv">SITE</span><span class="o">=</span><span class="s2">&quot;https://geodata.ucdavis.edu/gadm/&quot;</span>
+<span class="c1"># Remove dot from version</span>
+<span class="nv">VERSION_WITHOUT_DOT</span><span class="o">=</span><span class="k">$(</span><span class="nb">echo</span><span class="w"> </span><span class="si">${</span><span class="nv">VERSION</span><span class="si">}</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>tr<span class="w"> </span>-d<span class="w"> </span><span class="s1">&#39;.&#39;</span><span class="k">)</span>
+<span class="c1"># Set file name without extension</span>
+<span class="nv">NAME</span><span class="o">=</span><span class="s2">&quot;gadm</span><span class="si">${</span><span class="nv">VERSION_WITHOUT_DOT</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">COUNTRY</span><span class="si">}</span><span class="s2">_</span><span class="si">${</span><span class="nv">LEVEL</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="c1"># URL</span>
+<span class="nv">URL</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">SITE</span><span class="si">}</span><span class="s2">gadm</span><span class="si">${</span><span class="nv">VERSION</span><span class="si">}</span><span class="s2">/</span><span class="si">${</span><span class="nv">FORMAT</span><span class="si">}</span><span class="s2">/</span><span class="si">${</span><span class="nv">NAME</span><span class="si">}</span><span class="s2">.</span><span class="si">${</span><span class="nv">FORMAT</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="c1"># ------------------------------------</span>
+<span class="c1"># Download data from GADM</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Downloading geographic data provided by the https://gadm.org project. It may take a while.&quot;</span>
+gmt<span class="w"> </span>which<span class="w"> </span><span class="nv">$URL</span><span class="w"> </span>-Gc
+<span class="c1"># Unzip KMZ to KML. Set to NOT (-n) overwrite existing file.</span>
+unzip<span class="w"> </span>-n<span class="w"> </span><span class="si">${</span><span class="nv">NAME</span><span class="si">}</span>.<span class="si">${</span><span class="nv">FORMAT</span><span class="si">}</span>
+<span class="c1"># Convert KML file to GMT format with OGR/GDAL</span>
+ogr2ogr<span class="w"> </span>-f<span class="w"> </span><span class="s2">&quot;GMT&quot;</span><span class="w"> </span><span class="si">${</span><span class="nv">NAME</span><span class="si">}</span>.gmt<span class="w"> </span><span class="si">${</span><span class="nv">NAME</span><span class="si">}</span>.kml
+<span class="c1"># Test Plot data</span>
+gmt<span class="w"> </span>begin<span class="w"> </span><span class="si">${</span><span class="nv">COUNTRY</span><span class="si">}</span><span class="w"> </span>png
+<span class="w">    </span>gmt<span class="w"> </span>plot<span class="w"> </span><span class="si">${</span><span class="nv">NAME</span><span class="si">}</span>.gmt<span class="w"> </span>-Wred<span class="w"> </span>-JM15c<span class="w"> </span>-Bf<span class="w"> </span>-Re
+gmt<span class="w"> </span>end
+<span class="c1"># Delete KMZ and KML files</span>
+rm<span class="w"> </span><span class="si">${</span><span class="nv">NAME</span><span class="si">}</span>.km?
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-7dd36e07258e1015a0673dea4e472db1">
+<img alt="../../_images/7dd36e07258e1015a0673dea4e472db1.png" src="../../_images/7dd36e07258e1015a0673dea4e472db1.png" />
+</figure>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../images/slope.html" class="btn btn-neutral float-left" title="How to make a slope map" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../tutorials/advance/animation.html" class="btn btn-neutral float-right" title="Making animations" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022-2025, The GMT Examples Authors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>

@@ -4,7 +4,7 @@ channels:
   - nodefaults
 dependencies:
   - python=3.12
-  - gmt=6.5.0
+  - gmt=6.6.0
   - myst-parser
   - sphinx
   - sphinx-design

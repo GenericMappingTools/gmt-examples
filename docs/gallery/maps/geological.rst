@@ -17,10 +17,8 @@ This example shows how to combine a geological time scale CPT with the age grids
    # Calculate gradient magnitude
    gmt grdgradient -R$REGION @earth_relief_05m_p -G$SHADOW -A270 -Ne0.5
    # Get CPT
-   #gmt which -G "http://soliton.vm.bytemark.co.uk/pub/cpt-city/heine/GTS2012_epochs.cpt" > $CPT 
-   gmt which -G "https://git.sr.ht/~chhei/geotimecpts/tree/56051dce9b2afc75ca76b1ec9031f55c201f6fad/item/GTS2012/GTS2012_ages.cpt" > $CPT
-   
-
+   gmt which -G "http://www.seaviewsensing.com/pub/cpt-city/heine/GTS2012_epochs.cpt" > $CPT   
+  #gmt which -G "http://www.seaviewsensing.com/pub/cpt-city/heine/GTS2012_periods.cpt"
    # ------------------------------------
    gmt begin Age png
        gmt grdimage    -R$REGION -JW15c @earth_age_05m_p -I$SHADOW -C$CPT

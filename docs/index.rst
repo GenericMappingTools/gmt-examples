@@ -96,6 +96,14 @@ Basemaps
        .. image:: _images/7dd36e07258e1015a0673dea4e472db1.png
 
 
+    .. grid-item-card:: :doc:`gallery/maps/geological`
+       :padding: 1
+       :link-type: doc
+       :link: gallery/maps/geological
+
+       .. image:: _images/04a8b14796cfd86bef8fd0b7535f37ec.png         
+
+
 Histograms
 ~~~~~~~~~~
 

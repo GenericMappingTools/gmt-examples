@@ -1,5 +1,5 @@
-Visualizing oceanic crustal ages with geological time scale colors
--------------------------------------------------------------------
+Visualizing oceanic crustal ages with the geological time scale
+---------------------------------------------------------------
 
 This example demonstrates how to plot the age of the oceanic crust using the EarthByte age grid combined with the GTS2012 geological time scale color palette. To enhance the visualization, we also compute shading from the Earth relief model and overlay coastlines.
 

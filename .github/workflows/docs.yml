@@ -31,7 +31,7 @@ jobs:
         run: echo "date=$(date +%Y-W%W)" >> $GITHUB_OUTPUT  # e.g., 2024-W19
 
       - name: Setup Micromamba
-        uses: mamba-org/setup-micromamba@v2.0.5
+        uses: mamba-org/setup-micromamba@v2.0.6
         with:
           environment-file: environment.yml
           cache-downloads: false

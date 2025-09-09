@@ -1,0 +1,1140 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Making animations &mdash; GMT Examples  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/style.css?v=0a3a2672" />
+
+  
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+    <link rel="canonical" href="https://www.generic-mapping-tools.org/gmt-examples/tutorials/advance/animation.html" />
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Coastlines and boarders" href="../basics/coastlines.html" />
+    <link rel="prev" title="How to use political borders from GADM" href="../../gallery/maps/gadm.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            GMT Examples
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Gallery</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../gallery/3d_plots/grdview_surface.html">Plotting a surface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gallery/images/slope.html">How to make a slope map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gallery/maps/gadm.html">How to use political borders from GADM</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Making animations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">1. Introduction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#what-is-an-animation">1.1. What is an Animation?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-make-an-animation">1.2. How to Make an Animation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#why-use-gmt-for-animations">1.3. Why use GMT for animations?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#types-of-animations-in-gmt">1.4. Types of animations in GMT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#prerequisites">1.5. Prerequisites</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tutorial-1-earth-spinning">2. Tutorial 1. Earth spinning</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#goals-of-the-tutorial">2.1. Goals of the Tutorial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#make-first-image">2.2. Make first image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#make-the-master-frame">2.3. Make the Master Frame</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#what-is-gmt-movie">2.3.1. What is GMT movie?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#first-attempt">2.3.2. First Attempt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-canvas">2.3.3. The Canvas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#second-attempt-fix-the-canvas">2.3.4. Second attempt. Fix the canvas</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#make-draft-animation">2.4. Make draft animation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">2.4.1. First attempt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#movie-parameters">2.4.2. Movie Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-to-set-the-number-of-frames">2.4.3. How to set the number of Frames</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#second-attempt-use-parameters">2.4.4. Second attempt. Use parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#make-full-animation">2.5. Make full animation</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tutorial-2-earthquakes">3. Tutorial 2. Earthquakes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">3.1. Goals of the Tutorial</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#make-image">3.2 Make image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#make-master-frame">3.3. Make master frame</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#first-attempt-first-frame">3.3.1. First attempt (first frame)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-events-module">3.3.2. The events module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#second-attempt-first-frame-with-events">3.3.3. Second attempt (first frame with events)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#third-attempt-last-frame-with-events">3.3.4. Third attempt (last frame with events)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">3.4. Make draft animation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">3.4.1. First attempt</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-background-script">3.4.2. The background script</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#second-attempt-with-background-script">3.4.3. Second attempt (with background script)</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">3.5. Make full animation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#make-full-animation-with-enhancement">3.6. Make full animation with enhancement</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#how-to-enhance-symbols-with-events">3.6.1. How to enhance symbols with events</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">3.6.2. Make full animation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#see-also">4. See also</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#references">5. References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/coastlines.html">Coastlines and boarders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/color.html">How to use colors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/frames.html">Frames, ticks, titles, and labels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/line.html">Setting attributes of lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../basics/region.html">Setting the Region</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributors Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">GMT Examples</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Making animations</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/tutorials/advance/animation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="making-animations">
+<h1>Making animations<a class="headerlink" href="#making-animations" title="Link to this heading"></a></h1>
+<p>By F. Esteban (&#64;esteban82). November, 2024</p>
+<ul class="simple">
+<li><p>This tutorial explains the basic aspect of doing animations with GMT.</p></li>
+<li><p>It serves as a guide to help beginners understand and troubleshoot potential issues.</p></li>
+<li><p>It explains the basic aspect of the <a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/movie">movie</a> and <a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/events">events</a> modules.</p></li>
+</ul>
+<section id="introduction">
+<h2>1. Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>Prior to GMT 6.0, ambitious movie makers had to write complicated scripts where the advancement of frames was explicitly done by a shell loop.
+At the end of the script, you would have to convert your PostScript plot to a raster image with a name that is lexically increasing,
+and then later you would use some external software to assemble the movie. Hence, only very brave GMT users attempted to make GMT animations.
+Here you can see a <a class="reference external" href="https://docs.generic-mapping-tools.org/5.4/gallery/anim_introduction.html">more complete explanation</a>
+and <a class="reference external" href="https://docs.generic-mapping-tools.org/5.4/Gallery.html#animations">some examples</a> of those times.</p>
+<p>GMT 6 (<a class="reference external" href="https://doi.org/10.1029/2019GC008515">Wessel et al. 2019</a>) simplified all that by adding movie-making modules
+that were later refined with GMT 6.5 (<a class="reference external" href="https://doi.org/10.1029/2024GC011545">Wessel et al. 2024</a>).
+These modules empower users to create animations by taking over non-trivial tasks.</p>
+<section id="what-is-an-animation">
+<h3>1.1. What is an Animation?<a class="headerlink" href="#what-is-an-animation" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Animation is a technique used to create the illusion of motion.</p></li>
+<li><p>This is achieved by displaying a rapid sequence of still images (at least 12 frames per second; fps).</p></li>
+</ul>
+</section>
+<section id="how-to-make-an-animation">
+<h3>1.2. How to Make an Animation<a class="headerlink" href="#how-to-make-an-animation" title="Link to this heading"></a></h3>
+<p>In order to make an animation we need:</p>
+<ol class="arabic simple">
+<li><p>A series of still images.</p></li>
+<li><p>A method to combine these images into a video format.</p></li>
+</ol>
+<div class="admonition-technical-information admonition">
+<p class="admonition-title">Technical Information</p>
+<p>A video file is essentially a container format that sequentially displays all the images it contains.</p>
+</div>
+</section>
+<section id="why-use-gmt-for-animations">
+<h3>1.3. Why use GMT for animations?<a class="headerlink" href="#why-use-gmt-for-animations" title="Link to this heading"></a></h3>
+<p>GMT is ideal for animations that require:</p>
+<ul class="simple">
+<li><p>Scientific precision.</p></li>
+<li><p>Handling geospatial data.</p></li>
+<li><p>High-quality graphical visualizations.</p></li>
+</ul>
+</section>
+<section id="types-of-animations-in-gmt">
+<h3>1.4. Types of animations in GMT<a class="headerlink" href="#types-of-animations-in-gmt" title="Link to this heading"></a></h3>
+<p>For the purposes of this tutorial, I define two types of animations that can be made based on their complexity:</p>
+<ol class="arabic simple">
+<li><p><strong>Moving object</strong> (e.g., Earth spinning), created using the <a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/movie">movie</a> module.</p></li>
+<li><p><strong>Appearing object</strong> (e.g., earthquakes), created using both the <a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/movie">movie</a> and <a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/events">events</a> modules.</p></li>
+</ol>
+</section>
+<section id="prerequisites">
+<h3>1.5. Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>GMT version 6.5 or later.</p></li>
+<li><p>Bash scripting environment: The examples in this tutorial are written in Bash and may not work correctly in other shell environments (e.g., zsh, fish, or Windows cmd).</p></li>
+</ul>
+</section>
+</section>
+<section id="tutorial-1-earth-spinning">
+<h2>2. Tutorial 1. Earth spinning<a class="headerlink" href="#tutorial-1-earth-spinning" title="Link to this heading"></a></h2>
+<p>Here I explain how to make an animation of a moving object which only requires the <a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/movie">movie</a> module.</p>
+<p>As an example, I will create an animation of the Earth spinning like the one below.</p>
+<div class="video_wrapper align-center" style="text-align: center">
+<iframe allowfullscreen="true" src="https://www.youtube.com/embed/uZtyTv6DLnM" style="border: 0; height: 430px; width: 400px">
+</iframe></div><div class="admonition-technical-information admonition">
+<p class="admonition-title">Technical Information</p>
+<p>This animation was created using 360 images (or frames), with each frame representing a 1-degree rotation in the central longitude of the map,
+displayed at 24 fps.</p>
+</div>
+<p>To create the animation, I follow these four steps:</p>
+<ol class="arabic simple">
+<li><p>Make first image</p></li>
+<li><p>Make master frame with gmt movie</p></li>
+<li><p>Make draft animation</p></li>
+<li><p>Make full animation</p></li>
+</ol>
+<section id="goals-of-the-tutorial">
+<h3>2.1. Goals of the Tutorial<a class="headerlink" href="#goals-of-the-tutorial" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Explain the most important aspects of using the <a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/movie">movie</a> module which include:</p>
+<ul>
+<li><p>What is <a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/movie">movie</a></p></li>
+<li><p>How to set the Canvas (-C)</p></li>
+<li><p>What are and how to use the movie parameters</p></li>
+<li><p>How to set the number of Frames (-T)</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="make-first-image">
+<h3>2.2. Make first image<a class="headerlink" href="#make-first-image" title="Link to this heading"></a></h3>
+<p>The first step is to create an image using a standard GMT script
+(with <a class="reference external" href="https://docs.generic-mapping-tools.org/6.5/reference/introduction.html#modern-and-classic-mode">modern mode</a>)
+that will serve as the base for the animation.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><strong>Step Goal</strong>: Create the first image of the animation.</p>
+</div>
+<p>For this example, I create a map of the Earth with:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmt<span class="w"> </span>begin<span class="w"> </span>Earth<span class="w"> </span>png
+<span class="w">    </span><span class="c1"># Plot relief grid</span>
+<span class="w">    </span>gmt<span class="w"> </span>grdimage<span class="w"> </span>@earth_relief_06m<span class="w"> </span>-I<span class="w"> </span>-JG0/0/13c
+gmt<span class="w"> </span>end
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-01920d6ddd40f8db1e4b9f6d23c1302d">
+<a class="reference internal image-reference" href="../../_images/01920d6ddd40f8db1e4b9f6d23c1302d.png"><img alt="../../_images/01920d6ddd40f8db1e4b9f6d23c1302d.png" src="../../_images/01920d6ddd40f8db1e4b9f6d23c1302d.png" style="height: 400px;" />
+</a>
+</figure>
+</div></blockquote>
+<div class="admonition-technical-information admonition">
+<p class="admonition-title">Technical Information</p>
+<ul class="simple">
+<li><p><strong>gmt begin; gmt end</strong>: Commands to start and end a GMT script using modern syntax.</p></li>
+<li><p><strong>&#64;earth_relief_06m</strong>: A remote grid of Earth’s relief with a 6-minute resolution.</p></li>
+<li><p><strong>-I</strong>: Apply illumination to the grid.</p></li>
+<li><p><strong>-JG0/0/13c</strong>: Perspective projection with the center at longitude 0 and latitude 0, with a 13 cm map width.</p></li>
+</ul>
+</div>
+</section>
+<section id="make-the-master-frame">
+<h3>2.3. Make the Master Frame<a class="headerlink" href="#make-the-master-frame" title="Link to this heading"></a></h3>
+<p>In this second step, I recreate the previous image but with the <a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/movie">movie</a> module which is used to create animations.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><strong>Step Goal</strong>: Make a master frame that looks identical to the first image.</p>
+</div>
+<section id="what-is-gmt-movie">
+<h4>2.3.1. What is GMT movie?<a class="headerlink" href="#what-is-gmt-movie" title="Link to this heading"></a></h4>
+<p>The <a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/movie">movie</a> module simplifies most of the steps needed to create an animation
+by executing a single plot script that is repeated across all frames.</p>
+<p><strong>Required Arguments:</strong></p>
+<ul class="simple">
+<li><p><strong>mainscript</strong>: Script that will be used to create all the frames.</p></li>
+<li><p><strong>-N</strong>: Name for the output file.</p></li>
+<li><p><strong>-C</strong>: Canvas Size (see below).</p></li>
+<li><p><strong>-T</strong>: Number of frames (see below).</p></li>
+<li><p>There are two types of outputs. An image (called <em>master frame</em>; <strong>-M</strong>) or a video (<strong>-F</strong>). You have to ask for at least one of them.</p></li>
+</ul>
+<p><strong>Optional Arguments</strong> (useful for this tutorial):</p>
+<ul class="simple">
+<li><p><strong>-G</strong>: Set the canvas color (or fill).</p></li>
+<li><p><strong>-V</strong>: Show verbose information during the movie-making process.</p></li>
+<li><p><strong>-L</strong>: Show a label with the frame number.</p></li>
+</ul>
+</section>
+<section id="first-attempt">
+<h4>2.3.2. First Attempt<a class="headerlink" href="#first-attempt" title="Link to this heading"></a></h4>
+<p>In the first attempt, I create the first frame (<code class="docutils literal notranslate"><span class="pre">-M0,png</span></code>) over a black canvas (<code class="docutils literal notranslate"><span class="pre">-Gblack</span></code>) for an HD video format (<code class="docutils literal notranslate"><span class="pre">-Chd</span></code>).</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39; &gt; main.sh</span>
+<span class="s">gmt begin</span>
+<span class="s">  gmt grdimage @earth_relief_06m -I -JG0/0/13c</span>
+<span class="s">gmt end</span>
+<span class="s">EOF</span>
+gmt<span class="w"> </span>movie<span class="w"> </span>main.sh<span class="w"> </span>-NEarth<span class="w"> </span>-Chd<span class="w"> </span>-T360<span class="w"> </span>-M0,png<span class="w"> </span>-V<span class="w"> </span>-L+f14p,Helvetica-Bold,white<span class="w"> </span>-Gblack
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-96a96f9adc86681d541c8bfc52a6820a">
+<a class="reference internal image-reference" href="../../_images/96a96f9adc86681d541c8bfc52a6820a.png"><img alt="../../_images/96a96f9adc86681d541c8bfc52a6820a.png" src="../../_images/96a96f9adc86681d541c8bfc52a6820a.png" style="height: 400px;" />
+</a>
+</figure>
+</div></blockquote>
+<div class="admonition error">
+<p class="admonition-title">Error</p>
+<ul class="simple">
+<li><p>The figure does not fit on the canvas!</p></li>
+<li><p>There is excess space on one side.</p></li>
+</ul>
+</div>
+<div class="admonition-technical-information admonition">
+<p class="admonition-title">Technical Information</p>
+<ul class="simple">
+<li><p>The previous script is enclosed between <code class="docutils literal notranslate"><span class="pre">cat</span> <span class="pre">&lt;&lt;</span> <span class="pre">'EOF'</span> <span class="pre">&gt;</span> <span class="pre">main.sh</span></code> and <code class="docutils literal notranslate"><span class="pre">EOF</span></code>.</p></li>
+<li><p>This creates the <code class="docutils literal notranslate"><span class="pre">main.sh</span></code> file on-the-fly (using a <a class="reference external" href="https://en.wikipedia.org/wiki/Here_document">Here Document</a>).</p></li>
+<li><p>This is useful because it allows us to see (and edit) the main script and the arguments of <a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/movie">movie</a> just using a single file.</p></li>
+</ul>
+</div>
+</section>
+<section id="the-canvas">
+<h4>2.3.3. The Canvas<a class="headerlink" href="#the-canvas" title="Link to this heading"></a></h4>
+<p><strong>What is the Canvas?</strong></p>
+<ul class="simple">
+<li><p>The canvas is the black area of the previous image.</p></li>
+<li><p>This is the working area of the frames.</p></li>
+<li><p>The elements of the main script must be drawn inside the canvas.</p></li>
+<li><p>The elements that are outside will be (totally or partially) hidden in the animation.</p></li>
+<li><p>The canvas size is important by two reasons:</p>
+<ul>
+<li><p>to set the width and height (in cm or inches) of the frames.</p></li>
+<li><p>to set the dimensions in pixels of the frames/movie (i.e. the quality).</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>How to set the canvas</strong>:</p>
+<ul class="simple">
+<li><p>This is set via <code class="docutils literal notranslate"><span class="pre">movie</span> <span class="pre">-C</span></code>.</p></li>
+<li><p>There are two ways to the set the canvas:</p>
+<ul>
+<li><p>Preset formats</p></li>
+<li><p>Custom format</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Preset formats</strong>:</p>
+<ul class="simple">
+<li><p>It is the easiest way to specify the canvas.</p></li>
+<li><p>Use the name (or alias) to select a format based on this table (for 16:9 format):</p></li>
+</ul>
+<blockquote>
+<div><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Preset format (alias)</p></th>
+<th class="head"><p>Pixel dimensions</p></th>
+<th class="head"><p>DPC</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>4320p (8k and uhd-2)</p></td>
+<td><p>7680 x 4320</p></td>
+<td><p>320</p></td>
+</tr>
+<tr class="row-odd"><td><p>2160p (4k and uhd)</p></td>
+<td><p>3840 x 2160</p></td>
+<td><p>160</p></td>
+</tr>
+<tr class="row-even"><td><p>1080p (fhd and hd)</p></td>
+<td><p>1920 x 1080</p></td>
+<td><p>80</p></td>
+</tr>
+<tr class="row-odd"><td><p>720p</p></td>
+<td><p>1280 x 720</p></td>
+<td><p>53.3333</p></td>
+</tr>
+<tr class="row-even"><td><p>540p</p></td>
+<td><p>960 x 540</p></td>
+<td><p>40</p></td>
+</tr>
+<tr class="row-odd"><td><p>480p</p></td>
+<td><p>854 x 480</p></td>
+<td><p>35.5833</p></td>
+</tr>
+<tr class="row-even"><td><p>360p</p></td>
+<td><p>640 x 360</p></td>
+<td><p>26.6667</p></td>
+</tr>
+<tr class="row-odd"><td><p>240p</p></td>
+<td><p>426 x 240</p></td>
+<td><p>17.75</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<ul>
+<li><p>Pixel density (dots-per-cm, dpc) is set automatically.</p></li>
+<li><p>For the 16:9 format, the canvas is 24 x 13.5 cm:</p>
+<blockquote>
+<div><p><a class="reference download internal" download="" href="../../_downloads/9ec62a97cc2714435644f724c23f5466/bdad12f59e7e210859362b2d1a0c2eb5.sh"><code class="xref download docutils literal notranslate"><span class="pre">Source</span> <span class="pre">Code</span></code></a></p>
+<figure class="align-center" id="gmtplot-bdad12f59e7e210859362b2d1a0c2eb5">
+<a class="reference internal image-reference" href="../../_images/bdad12f59e7e210859362b2d1a0c2eb5.png"><img alt="../../_images/bdad12f59e7e210859362b2d1a0c2eb5.png" src="../../_images/bdad12f59e7e210859362b2d1a0c2eb5.png" style="height: 400px;" />
+</a>
+</figure>
+</div></blockquote>
+</li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ul class="simple">
+<li><p>By default, the canvas has an offset of 2.54 cm (or 1 inch) in X and Y.</p></li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>You can also specify the dimensions in inches (or points).</p></li>
+<li><p>There are also preset formats for 4:3 (uxga, sxga+, xga, svga, dvd).</p></li>
+</ul>
+</div>
+<p><strong>Custom format</strong>:</p>
+<ul class="simple">
+<li><p>If you want another dimension, you can request a custom format directly by giving width and height and dpu (<em>widthxheightxdpu</em>).</p></li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ul class="simple">
+<li><p>DPU: Dots-per-unit pixel density. So, it is DPI for inches or DPC for centimeters.</p></li>
+</ul>
+</div>
+</section>
+<section id="second-attempt-fix-the-canvas">
+<h4>2.3.4. Second attempt. Fix the canvas<a class="headerlink" href="#second-attempt-fix-the-canvas" title="Link to this heading"></a></h4>
+<p>For this new attempt I:</p>
+<blockquote>
+<div><ul>
+<li><p>use a custom canvas of a square of 13 cm and 80 dpc (same resolution as full hd, <code class="docutils literal notranslate"><span class="pre">-C13cx13cx80</span></code>).</p></li>
+<li><p>use <code class="docutils literal notranslate"><span class="pre">-X0</span></code> and <code class="docutils literal notranslate"><span class="pre">-Y0</span></code> (in <code class="docutils literal notranslate"><span class="pre">main.sh</span></code>) to remove the default offset.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39; &gt; main.sh</span>
+<span class="s">gmt begin</span>
+<span class="s">  gmt grdimage @earth_relief_06m -I -JG0/0/13c -X0 -Y0</span>
+<span class="s">gmt end</span>
+<span class="s">EOF</span>
+gmt<span class="w"> </span>movie<span class="w"> </span>main.sh<span class="w"> </span>-NEarth<span class="w"> </span>-C13cx13cx80<span class="w"> </span>-T360<span class="w"> </span>-M0,png<span class="w"> </span>-V<span class="w"> </span>-L+f14p,Helvetica-Bold,white<span class="w"> </span>-Gblack
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-5847818951ca8fbc9b86a6f2c67389b6">
+<a class="reference internal image-reference" href="../../_images/5847818951ca8fbc9b86a6f2c67389b6.png"><img alt="../../_images/5847818951ca8fbc9b86a6f2c67389b6.png" src="../../_images/5847818951ca8fbc9b86a6f2c67389b6.png" style="height: 400px;" />
+</a>
+</figure>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</section>
+</section>
+<section id="make-draft-animation">
+<h3>2.4. Make draft animation<a class="headerlink" href="#make-draft-animation" title="Link to this heading"></a></h3>
+<p>Once the master frame is ok, I recommend making a very short and small movie so you don’t have to wait very long to see the result.</p>
+<div class="admonition-step-goals admonition">
+<p class="admonition-title"><strong>Step Goals</strong>:</p>
+<ul class="simple">
+<li><p>See that the video file is created properly.</p></li>
+<li><p>See that the frames are changing as expected.</p></li>
+</ul>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The conversion to a video format relies on <a class="reference external" href="https://www.ffmpeg.org/">FFmpeg</a> (for MP4 or WebM)
+and <a class="reference external" href="http://www.graphicsmagick.org/">GraphicsMagick</a> (for GIF).</p>
+</div>
+<section id="id1">
+<h4>2.4.1. First attempt<a class="headerlink" href="#id1" title="Link to this heading"></a></h4>
+<p>In this step I reduce the number of frames to 10 (<code class="docutils literal notranslate"><span class="pre">-T10</span></code>) and the quality to 30 DPC (<code class="docutils literal notranslate"><span class="pre">-C13cx13cx30</span></code>).
+Also, I add the following arguments to <a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/movie">movie</a>:</p>
+<ul>
+<li><p><strong>-Fmp4</strong>: to create a mp4 video (now it is possible to delete <code class="docutils literal notranslate"><span class="pre">-M</span></code>).</p></li>
+<li><p><strong>-Zs</strong>: to remove the temporary files created in the movie-making process. Useful to keep the working directory clean.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39; &gt; main.sh</span>
+<span class="s">gmt begin</span>
+<span class="s">  gmt grdimage @earth_relief_06m -I -JG0/0/13c -X0 -Y0</span>
+<span class="s">gmt end</span>
+<span class="s">EOF</span>
+gmt<span class="w"> </span>movie<span class="w"> </span>main.sh<span class="w"> </span>-NEarth<span class="w"> </span>-C13cx13cx30<span class="w"> </span>-T10<span class="w"> </span>-M0,png<span class="w"> </span>-V<span class="w"> </span>-Gblack<span class="w"> </span>-L+f14p,Helvetica-Bold,white<span class="w"> </span>-Fmp4<span class="w"> </span>-Zs
+</pre></div>
+</div>
+</div></blockquote>
+<div class="video_wrapper align-center" style="text-align: center">
+<iframe allowfullscreen="true" src="https://www.youtube.com/embed/hHmXSYpV0yw" style="border: 0; height: 430px; width: 400px">
+</iframe></div></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The display frame rate is set by default to 24 <a class="reference external" href="https://en.wikipedia.org/wiki/Frame_rate">fps</a>. It can be change with <a class="reference external" href="https://docs.generic-mapping-tools.org/6.5/movie.html#d">-D</a>.</p>
+</div>
+<div class="admonition error">
+<p class="admonition-title">Error</p>
+<ul class="simple">
+<li><p>The movie doesn’t change. We must learn about parameters.</p></li>
+</ul>
+</div>
+</section>
+<section id="movie-parameters">
+<h4>2.4.2. Movie Parameters<a class="headerlink" href="#movie-parameters" title="Link to this heading"></a></h4>
+<p>The movie parameters are key to making animations.
+They are automatically assigned by different movie arguments (see tables below).
+There are two sets of parameters:</p>
+<p><strong>Variable parameters</strong>:</p>
+<ul class="simple">
+<li><p>These values change with the frame number.</p></li>
+<li><p>They must be used in the <em>main script</em> to introduce variations in the frames.</p></li>
+</ul>
+<blockquote>
+<div><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Purpose or contents</p></th>
+<th class="head"><p>Set by Movie</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>MOVIE_FRAME</p></td>
+<td><p>Number of current frame being processed</p></td>
+<td><p>-T</p></td>
+</tr>
+<tr class="row-odd"><td><p>MOVIE_TAG</p></td>
+<td><p>Formatted frame number (string)</p></td>
+<td><p>-T</p></td>
+</tr>
+<tr class="row-even"><td><p>MOVIE_NAME</p></td>
+<td><p>Prefix for current frame image</p></td>
+<td><p>-N and -T</p></td>
+</tr>
+<tr class="row-odd"><td><p>MOVIE_COLk</p></td>
+<td><p>Variable k from data column k, current row</p></td>
+<td><p>-T<em>timefile</em></p></td>
+</tr>
+<tr class="row-even"><td><p>MOVIE_TEXT</p></td>
+<td><p>The full trailing text for current row</p></td>
+<td><p>-T<em>timefile</em></p></td>
+</tr>
+<tr class="row-odd"><td><p>MOVIE_WORDw</p></td>
+<td><p>Word w from trailing text, current row</p></td>
+<td><p>-T<em>timefile</em></p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p><strong>Constant parameters</strong>:</p>
+<ul class="simple">
+<li><p>These values do NOT change during the whole movie.</p></li>
+<li><p>They can be used in the <em>main script</em> (and in the optional background and foreground scripts).</p></li>
+</ul>
+<blockquote>
+<div><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parameter</p></th>
+<th class="head"><p>Purpose or contents</p></th>
+<th class="head"><p>Set by Movie</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>MOVIE_NFRAMES</p></td>
+<td><p>Total number of frames in the movie</p></td>
+<td><p>-T</p></td>
+</tr>
+<tr class="row-odd"><td><p>MOVIE_WIDTH</p></td>
+<td><p>Width of the movie canvas</p></td>
+<td><p>-C</p></td>
+</tr>
+<tr class="row-even"><td><p>MOVIE_HEIGHT</p></td>
+<td><p>Height of the movie canvas</p></td>
+<td><p>-C</p></td>
+</tr>
+<tr class="row-odd"><td><p>MOVIE_DPU</p></td>
+<td><p>Dots (pixels) per unit used to convert to image</p></td>
+<td><p>-C</p></td>
+</tr>
+<tr class="row-even"><td><p>MOVIE_RATE</p></td>
+<td><p>Number of frames displayed per second</p></td>
+<td><p>-D</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ul class="simple">
+<li><p>In order to introduce changes in the frames we must use the <strong>variable parameters</strong>.</p></li>
+</ul>
+</div>
+</section>
+<section id="how-to-set-the-number-of-frames">
+<h4>2.4.3. How to set the number of Frames<a class="headerlink" href="#how-to-set-the-number-of-frames" title="Link to this heading"></a></h4>
+<p>The number of frames (<code class="docutils literal notranslate"><span class="pre">-T</span></code>) is another important aspect to make animations.
+There are 3 ways to do it:</p>
+<ol class="arabic simple">
+<li><p><strong>-TNumber</strong>:</p></li>
+</ol>
+<p>If you supply a single (integer) value, then it will be the total number of frames.
+Under the hood, this will create a one-column data set from 0 to that number minus one.
+For example, for <code class="docutils literal notranslate"><span class="pre">-T10</span></code> I get values from 0 to 9.
+In the main script, you have to use the MOVIE_FRAME parameter to access the values.</p>
+<ol class="arabic simple" start="2">
+<li><p><strong>-Tmin/max/inc</strong>:</p></li>
+</ol>
+<p>If you supply 3 values, then GMT will create a one-column data set from <em>min</em> to <em>max</em>, incrementing by <em>inc</em>.
+You have to use the MOVIE_COL0 parameter to access the values of the one-column data set.
+The total of number of frames will be:</p>
+<div class="math notranslate nohighlight">
+\[\text{total frames} = \frac{\text{max} - \text{min}}{\text{inc}} + 1\]</div>
+<ol class="arabic simple" start="3">
+<li><p><strong>-Ttimefile</strong>:</p></li>
+</ol>
+<p>If you supply the name of a file, then GMT will access it and use one record (i.e. row) per frame.
+This method allows you to have more than one-column and can be used to make more complex animations.
+For example, you can have a second column with numbers that you can access using MOVIE_COL1.
+The file can even have trailing text that will be accessed with MOVIE_TEXT.</p>
+</section>
+<section id="second-attempt-use-parameters">
+<h4>2.4.4. Second attempt. Use parameters<a class="headerlink" href="#second-attempt-use-parameters" title="Link to this heading"></a></h4>
+<p>Now I update the script with movie parameters.
+First, I use the <code class="docutils literal notranslate"><span class="pre">MOVIE_FRAME</span></code> variable parameter to set the central longitude of the map.
+I also use the <code class="docutils literal notranslate"><span class="pre">MOVIE_WIDTH</span></code> constant parameter (in <code class="docutils literal notranslate"><span class="pre">main.sh</span></code>) to set the width of the map (instead of 13c).</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39; &gt; main.sh</span>
+<span class="s">gmt begin</span>
+<span class="s"> gmt grdimage @earth_relief_06m -I -JG-${MOVIE_FRAME}/0/${MOVIE_WIDTH} -Y0 -X0</span>
+<span class="s">gmt end</span>
+<span class="s">EOF</span>
+gmt<span class="w"> </span>movie<span class="w"> </span>main.sh<span class="w"> </span>-NEarth<span class="w"> </span>-C13cx13cx30<span class="w"> </span>-T10<span class="w"> </span>-M0,png<span class="w"> </span>-V<span class="w"> </span>-Gblack<span class="w"> </span>-L+f14p,Helvetica-Bold,white<span class="w"> </span>-Fmp4<span class="w"> </span>-Zs
+</pre></div>
+</div>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>I add a minus sign so the earth spins in the correct sense.</p>
+</div>
+<div class="video_wrapper align-center" style="text-align: center">
+<iframe allowfullscreen="true" src="https://www.youtube.com/embed/sagKzhI88tU" style="border: 0; height: 430px; width: 400px">
+</iframe></div></section>
+</section>
+<section id="make-full-animation">
+<h3>2.5. Make full animation<a class="headerlink" href="#make-full-animation" title="Link to this heading"></a></h3>
+<p>Once the draft animation is working it is possible to increment the number of frames (-T) and movie quality (-C).</p>
+<p>In the step, I increase:</p>
+<ul>
+<li><p>the number of frames to 360 (<code class="docutils literal notranslate"><span class="pre">-T360</span></code>) to get the whole spin.</p></li>
+<li><p>the resolution to 80 DPC (<code class="docutils literal notranslate"><span class="pre">-C13cx13cx80</span></code>) to get a high-quality video.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39; &gt; main.sh</span>
+<span class="s">gmt begin</span>
+<span class="s"> gmt grdimage @earth_relief_06m -I -JG-${MOVIE_FRAME}/0/13c -X0 -Y0</span>
+<span class="s">gmt end</span>
+<span class="s">EOF</span>
+gmt<span class="w"> </span>movie<span class="w"> </span>main.sh<span class="w"> </span>-NEarth<span class="w"> </span>-C13cx13cx80<span class="w"> </span>-T360<span class="w"> </span>-M0,png<span class="w"> </span>-V<span class="w"> </span>-Gblack<span class="w"> </span>-L+f14p,Helvetica-Bold,white<span class="w"> </span>-Fmp4<span class="w"> </span>-Zs
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<div class="video_wrapper align-center" style="text-align: center">
+<iframe allowfullscreen="true" src="https://www.youtube.com/embed/uZtyTv6DLnM" style="border: 0; height: 430px; width: 400px">
+</iframe></div><div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Be careful. This step can be quite time (and resource) consuming.
+By default, <a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/movie">movie</a> uses all the cores available to speed up the frame creation process.
+So probably you can’t do anything else while GMT is creating all the frames (maybe you can take a break, or have lunch).
+Also you could use <a class="reference external" href="https://docs.generic-mapping-tools.org/6.5/gmt.html#core-full">-x</a> to specify the number of active cores to be used.</p>
+</div>
+</section>
+</section>
+<section id="tutorial-2-earthquakes">
+<h2>3. Tutorial 2. Earthquakes<a class="headerlink" href="#tutorial-2-earthquakes" title="Link to this heading"></a></h2>
+<p>Here I explain how to make an animation with appearing objects.
+This is more complex and requires the use <a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/events">events</a> and <a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/movie">movie</a> modules.
+In this example, I create an animation showing the occurrences of earthquakes during the year 2018 (with one frame per day).
+Note that the earthquakes are drawn as they occur and remain visible until the end of the animation.</p>
+<div class="video_wrapper align-center" style="text-align: center">
+<iframe allowfullscreen="true" src="https://www.youtube.com/embed/dbOjYqWzGi0" style="border: 0; height: 430px; width: 800px">
+</iframe></div><p>For this tutorial I follow these steps:</p>
+<ol class="arabic simple">
+<li><p>Make image</p></li>
+<li><p>Make master frame</p></li>
+<li><p>Make draft animation</p></li>
+<li><p>Make animation without enhancement</p></li>
+<li><p>Make animation with enhancement</p></li>
+</ol>
+<section id="id2">
+<h3>3.1. Goals of the Tutorial<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>What is gmt <a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/events">events</a>.</p></li>
+<li><p>How to use a background script for a movie.</p></li>
+<li><p>How to enhance symbols with <a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/events">events</a>.</p></li>
+</ul>
+</section>
+<section id="make-image">
+<h3>3.2 Make image<a class="headerlink" href="#make-image" title="Link to this heading"></a></h3>
+<p>In this step I plot a map of the earth with all the quakes from 2018.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmt<span class="w"> </span>begin<span class="w"> </span>Earth<span class="w"> </span>png
+<span class="w">    </span><span class="c1"># Set parameters and position</span>
+<span class="w">    </span>gmt<span class="w"> </span>basemap<span class="w"> </span>-Rg<span class="w"> </span>-JN14c<span class="w"> </span>-B+n
+<span class="w">    </span><span class="c1"># Plot relief grid</span>
+<span class="w">    </span>gmt<span class="w"> </span>grdimage<span class="w"> </span>@earth_relief_06m<span class="w"> </span>-I
+<span class="w">    </span><span class="c1"># Create cpt for the earthquakes</span>
+<span class="w">    </span>gmt<span class="w"> </span>makecpt<span class="w"> </span>-Cred,green,blue<span class="w"> </span>-T0,70,300,10000
+<span class="w">    </span><span class="c1"># Plot quakes</span>
+<span class="w">    </span>gmt<span class="w"> </span>plot<span class="w"> </span>@quakes_2018.txt<span class="w"> </span>-SE-<span class="w"> </span>-C
+gmt<span class="w"> </span>end
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-ac1f4bddcb2d1e7c7e8c61b7461f3ddb">
+<a class="reference internal image-reference" href="../../_images/ac1f4bddcb2d1e7c7e8c61b7461f3ddb.png"><img alt="../../_images/ac1f4bddcb2d1e7c7e8c61b7461f3ddb.png" src="../../_images/ac1f4bddcb2d1e7c7e8c61b7461f3ddb.png" style="height: 400px;" />
+</a>
+</figure>
+</div></blockquote>
+<div class="admonition-technical-information admonition">
+<p class="admonition-title">Technical Information</p>
+<ul class="simple">
+<li><p>I use <a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/makecpt">makecpt</a> to create a <a class="reference external" href="https://docs.generic-mapping-tools.org/6.5/reference/cpts.html#of-colors-and-color-legends">CPT</a> to color the earthquakes.</p></li>
+<li><p>I used the earthquakes from the file <a class="reference external" href="https://github.com/GenericMappingTools/gmtserver-admin/blob/master/cache/quakes_2018.txt">quakes_2018.txt</a> which has 5 columns.</p></li>
+</ul>
+<blockquote>
+<div><table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Longitude</p></th>
+<th class="head"><p>Latitude</p></th>
+<th class="head"><p>Depth</p></th>
+<th class="head"><p>Magnitude (x50)</p></th>
+<th class="head"><p>Date</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>46.4223</p></td>
+<td><p>-38.9126</p></td>
+<td><p>10</p></td>
+<td><p>260</p></td>
+<td><p>2018-01-02T02:16:18.11</p></td>
+</tr>
+<tr class="row-odd"><td><p>169.3488</p></td>
+<td><p>-18.8355</p></td>
+<td><p>242.77</p></td>
+<td><p>260</p></td>
+<td><p>2018-01-02T08:10:00.06</p></td>
+</tr>
+<tr class="row-even"><td><p>…</p></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<ul class="simple">
+<li><p>Note that the input file has the columns sorted as will be required by the <a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/plot">plot</a> and <a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/events">events</a> modules. It was also used for <a class="reference external" href="https://docs.generic-mapping-tools.org/6.5//animations/anim08.html">animation 08</a>.</p></li>
+</ul>
+<p>Check it to see how it was downloaded and processed.</p>
+</div>
+</section>
+<section id="make-master-frame">
+<h3>3.3. Make master frame<a class="headerlink" href="#make-master-frame" title="Link to this heading"></a></h3>
+<p>In this step I create the master frame of the animation similar to the previous image.</p>
+<section id="first-attempt-first-frame">
+<h4>3.3.1. First attempt (first frame)<a class="headerlink" href="#first-attempt-first-frame" title="Link to this heading"></a></h4>
+<p>In this first attempt I create the first frame (<code class="docutils literal notranslate"><span class="pre">-Mf,png</span></code>) of the animation.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39; &gt; main.sh</span>
+<span class="s">gmt begin</span>
+<span class="s">  # Set parameters and position</span>
+<span class="s">  gmt basemap -Rg -JN${MOVIE_WIDTH} -B+n -X0 -Y0</span>
+<span class="s">  # Create background map</span>
+<span class="s">  gmt grdimage @earth_relief_06m -I</span>
+<span class="s">  # Create cpt for the earthquakes</span>
+<span class="s">  gmt makecpt -Cred,green,blue -T0,70,300,10000</span>
+<span class="s">  gmt plot @quakes_2018.txt -SE- -C</span>
+<span class="s">gmt end</span>
+<span class="s">EOF</span>
+
+gmt<span class="w"> </span>movie<span class="w"> </span>main.sh<span class="w"> </span>-NQuakes<span class="w"> </span>-Mf,png<span class="w"> </span>-Zs<span class="w"> </span>-V<span class="w"> </span>-C24cx12cx80<span class="w"> </span>-T2018-01-01T/2018-12-31T/1d<span class="w"> </span>-Gblack<span class="w"> </span><span class="se">\</span>
+-Lc0<span class="w"> </span>--FONT_TAG<span class="o">=</span>18p,Helvetica,white<span class="w"> </span>--FORMAT_CLOCK_MAP<span class="o">=</span>-
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-4efd84b8bb06debc91d27f36c38f433f">
+<a class="reference internal image-reference" href="../../_images/4efd84b8bb06debc91d27f36c38f433f.png"><img alt="../../_images/4efd84b8bb06debc91d27f36c38f433f.png" src="../../_images/4efd84b8bb06debc91d27f36c38f433f.png" style="height: 400px;" />
+</a>
+</figure>
+</div></blockquote>
+<div class="admonition-technical-information admonition">
+<p class="admonition-title">Technical Information</p>
+<ul class="simple">
+<li><p>I use <code class="docutils literal notranslate"><span class="pre">-T2018-01-01T/2018-12-31T/1d</span></code> to create a one-column data set with all days in 2018.</p></li>
+<li><p>I use <code class="docutils literal notranslate"><span class="pre">-Lc0</span></code> to add a label with the first column (i.e. the dates).</p></li>
+<li><p><strong>–FONT_TAG=18p,Helvetica,white</strong>: This sets the font for the label.</p></li>
+<li><p><strong>–FORMAT_CLOCK_MAP=-</strong>: to NOT include the hours in the date and only plot year, month and day in the label.</p></li>
+<li><p>I use a custom canvas of 24 x 12 cm with a resolution of 80 DPC (<code class="docutils literal notranslate"><span class="pre">-C24cx12cx80</span></code>).</p></li>
+</ul>
+</div>
+<div class="admonition error">
+<p class="admonition-title">Error</p>
+<ul class="simple">
+<li><p>The first frame contains all the quakes when none of them should be plotted. I must use <a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/events">events</a> instead.</p></li>
+</ul>
+</div>
+</section>
+<section id="the-events-module">
+<h4>3.3.2. The events module<a class="headerlink" href="#the-events-module" title="Link to this heading"></a></h4>
+<p>In the previous figure, I use the <a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/plot">plot</a> module to draw the symbols. This results that the symbols appear on all frames.
+However if I want to plot quakes as they unfold, I have to use the <a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/events">events</a> instead.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ul class="simple">
+<li><p><a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/events">events</a> requires a time column in the input data and will use it and the animation time to determine when symbols should be plotted.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">-T</span></code> is a required argument and is used to set the current plot time.</p></li>
+</ul>
+</div>
+</section>
+<section id="second-attempt-first-frame-with-events">
+<h4>3.3.3. Second attempt (first frame with events)<a class="headerlink" href="#second-attempt-first-frame-with-events" title="Link to this heading"></a></h4>
+<p>Now, in this attempt I use <a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/events">events</a> with <code class="docutils literal notranslate"><span class="pre">-T${MOVIE_COL0}</span></code> to plot the quakes as dates progresses</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39; &gt; main.sh</span>
+<span class="s">gmt begin</span>
+<span class="s">  # Set parameters and position</span>
+<span class="s">  gmt basemap -Rg -JN${MOVIE_WIDTH} -B+n -X0 -Y0</span>
+<span class="s">  # Create background map</span>
+<span class="s">  gmt grdimage @earth_relief_06m -I</span>
+<span class="s">  # Create cpt for the earthquakes</span>
+<span class="s">  gmt makecpt -Cred,green,blue -T0,70,300,10000</span>
+<span class="s">  gmt events @quakes_2018.txt -SE- -C -T${MOVIE_COL0}</span>
+<span class="s">gmt end</span>
+<span class="s">EOF</span>
+
+gmt<span class="w"> </span>movie<span class="w"> </span>main.sh<span class="w"> </span>-NQuakes<span class="w"> </span>-Mf,png<span class="w"> </span>-Zs<span class="w"> </span>-V<span class="w"> </span>-C24cx12cx80<span class="w"> </span>-T2018-01-01T/2018-12-31T/1d<span class="w"> </span>-Gblack<span class="w"> </span><span class="se">\</span>
+-Lc0<span class="w"> </span>--FONT_TAG<span class="o">=</span>18p,Helvetica,white<span class="w"> </span>--FORMAT_CLOCK_MAP<span class="o">=</span>-
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-766009993fb8ac5fe771d2e99174efa0">
+<a class="reference internal image-reference" href="../../_images/766009993fb8ac5fe771d2e99174efa0.png"><img alt="../../_images/766009993fb8ac5fe771d2e99174efa0.png" src="../../_images/766009993fb8ac5fe771d2e99174efa0.png" style="height: 400px;" />
+</a>
+</figure>
+</div></blockquote>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The map shows NO earthquakes. This is expected because there are no quakes (in the data file) before January first.
+However, this could also be due to an error in the command.
+I must plot the frame from another date to see if the quakes appear.</p>
+</div>
+</section>
+<section id="third-attempt-last-frame-with-events">
+<h4>3.3.4. Third attempt (last frame with events)<a class="headerlink" href="#third-attempt-last-frame-with-events" title="Link to this heading"></a></h4>
+<p>Now, I also plot the last frame (<code class="docutils literal notranslate"><span class="pre">-Ml</span></code>).</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39; &gt; main.sh</span>
+<span class="s">gmt begin</span>
+<span class="s">  # Set parameters and position</span>
+<span class="s">  gmt basemap -Rg -JN${MOVIE_WIDTH} -B+n -X0 -Y0</span>
+<span class="s">  # Create background map</span>
+<span class="s">  gmt grdimage @earth_relief_06m -I</span>
+<span class="s">  # Create cpt for the earthquakes</span>
+<span class="s">  gmt makecpt -Cred,green,blue -T0,70,300,10000</span>
+<span class="s">  gmt events @quakes_2018.txt -SE- -C -T${MOVIE_COL0}</span>
+<span class="s">gmt end</span>
+<span class="s">EOF</span>
+
+gmt<span class="w"> </span>movie<span class="w"> </span>main.sh<span class="w"> </span>-NQuakes<span class="w"> </span>-Ml,png<span class="w"> </span>-Zs<span class="w"> </span>-V<span class="w"> </span>-C24cx12cx80<span class="w"> </span>-T2018-01-01T/2018-12-31T/1d<span class="w"> </span>-Gblack<span class="w"> </span><span class="se">\</span>
+-Lc0<span class="w"> </span>--FONT_TAG<span class="o">=</span>18p,Helvetica,white<span class="w"> </span>--FORMAT_CLOCK_MAP<span class="o">=</span>-
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-98e45dd03e4db1e5750a500ea0a81455">
+<a class="reference internal image-reference" href="../../_images/98e45dd03e4db1e5750a500ea0a81455.png"><img alt="../../_images/98e45dd03e4db1e5750a500ea0a81455.png" src="../../_images/98e45dd03e4db1e5750a500ea0a81455.png" style="height: 400px;" />
+</a>
+</figure>
+</div></blockquote>
+</section>
+</section>
+<section id="id3">
+<h3>3.4. Make draft animation<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<p>In this step, we can make a draft animation. For this example, I recommend making a low quality (with 30 DPC) video to see if the quakes appear correctly.</p>
+<section id="id4">
+<h4>3.4.1. First attempt<a class="headerlink" href="#id4" title="Link to this heading"></a></h4>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39; &gt; main.sh</span>
+<span class="s">gmt begin</span>
+<span class="s">  # Set parameters and position</span>
+<span class="s">  gmt basemap -Rg -JN${MOVIE_WIDTH} -B+n -X0 -Y0</span>
+<span class="s">  # Create background map</span>
+<span class="s">  gmt grdimage @earth_relief_06m -I</span>
+<span class="s">  # Create cpt for the earthquakes</span>
+<span class="s">  gmt makecpt -Cred,green,blue -T0,70,300,10000</span>
+<span class="s">  gmt events @quakes_2018.txt -SE- -C -T${MOVIE_COL0}</span>
+<span class="s">gmt end</span>
+<span class="s">EOF</span>
+
+gmt<span class="w"> </span>movie<span class="w"> </span>main.sh<span class="w"> </span>-NQuakes<span class="w"> </span>-Ml,png<span class="w"> </span>-Zs<span class="w"> </span>-V<span class="w"> </span>-C24cx12cx30<span class="w"> </span>-T2018-01-01T/2018-12-31T/1d<span class="w"> </span>-Gblack<span class="w"> </span><span class="se">\</span>
+-Lc0<span class="w"> </span>--FONT_TAG<span class="o">=</span>18p,Helvetica,white<span class="w"> </span>--FORMAT_CLOCK_MAP<span class="o">=</span>-<span class="w"> </span>-Fmp4
+</pre></div>
+</div>
+</div></blockquote>
+<div class="video_wrapper align-center" style="text-align: center">
+<iframe allowfullscreen="true" src="https://www.youtube.com/embed/TH4moYCHRT8" style="border: 0; height: 430px; width: 800px">
+</iframe></div><div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<ul class="simple">
+<li><p>The above script works well but it can be more efficient if a background script is used as well.</p></li>
+</ul>
+</div>
+</section>
+<section id="the-background-script">
+<h4>3.4.2. The background script<a class="headerlink" href="#the-background-script" title="Link to this heading"></a></h4>
+<p>Within <a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/movie">movie</a> module, there is an optional background (<a class="reference external" href="https://docs.generic-mapping-tools.org/6.5/movie.html#sb">-Sb</a>) script that it is used for two purposes:</p>
+<ol class="arabic simple">
+<li><p>Create files that will be needed by the main script to make the movie.</p></li>
+<li><p>Make a static background plot that should form the background for all frames.</p></li>
+</ol>
+<div class="admonition-technical-information admonition">
+<p class="admonition-title">Technical Information</p>
+<p>The background script is run only once.</p>
+</div>
+</section>
+<section id="second-attempt-with-background-script">
+<h4>3.4.3. Second attempt (with background script)<a class="headerlink" href="#second-attempt-with-background-script" title="Link to this heading"></a></h4>
+<p>In this step, instead of creating just the main script as before, I now create both a background script and a main script.
+The background script (<code class="docutils literal notranslate"><span class="pre">pre.sh</span></code>) is used to:</p>
+<ol class="arabic simple">
+<li><p>create a CPT file that will be used to color the quakes.</p></li>
+<li><p>make a <strong>static</strong> worldwide background map.</p></li>
+</ol>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ul class="simple">
+<li><p>The animation created is identical to the previous one.</p></li>
+<li><p>The use of a background script allows the creation of the animation much faster because the CPT and the <strong>static</strong> background map will be created only once (instead of 365 times).</p></li>
+</ul>
+</div>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39; &gt; pre.sh</span>
+<span class="s">gmt begin</span>
+<span class="s">  # Set parameters and position</span>
+<span class="s">  gmt basemap -Rg -JN${MOVIE_WIDTH} -X0 -Y0 -B+n</span>
+<span class="s">  # Create background map</span>
+<span class="s">  gmt grdimage @earth_relief_06m -I</span>
+<span class="s">  # Create cpt for the earthquakes</span>
+<span class="s">  gmt makecpt -Cred,green,blue -T0,70,300,10000 -H &gt; quakes.cpt</span>
+<span class="s">gmt end</span>
+<span class="s">EOF</span>
+
+cat<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39; &gt; main.sh</span>
+<span class="s">gmt begin</span>
+<span class="s">  gmt basemap -Rg -JN${MOVIE_WIDTH} -X0 -Y0 -B+n</span>
+<span class="s">  gmt events @quakes_2018.txt -SE- -Cquakes.cpt -T${MOVIE_COL0}</span>
+<span class="s">gmt end</span>
+<span class="s">EOF</span>
+
+gmt<span class="w"> </span>movie<span class="w"> </span>main.sh<span class="w"> </span>-Sbpre.sh<span class="w"> </span>-NQuakes<span class="w"> </span>-Ml,png<span class="w"> </span>-Zs<span class="w"> </span>-V<span class="w"> </span>-C24cx12x80<span class="w"> </span>-T2018-01-01T/2018-12-31T/1d<span class="w"> </span>-Gblack<span class="w"> </span><span class="se">\</span>
+-Lc0<span class="w"> </span>--FONT_TAG<span class="o">=</span>18p,Helvetica,white<span class="w"> </span>--FORMAT_CLOCK_MAP<span class="o">=</span>-
+</pre></div>
+</div>
+</div></blockquote>
+<div class="admonition-technical-information admonition">
+<p class="admonition-title">Technical Information</p>
+<ul class="simple">
+<li><p>For the CPT, I must use <a class="reference external" href="https://docs.generic-mapping-tools.org/latest/makecpt.html#h">-H</a> and give it a name, and then use that name in <code class="docutils literal notranslate"><span class="pre">main.sh</span></code>.</p></li>
+<li><p>I add <code class="docutils literal notranslate"><span class="pre">-Sbpre.sh</span></code> within the <a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/movie">movie</a> module to use the background script.</p></li>
+<li><p>I repeat the <code class="docutils literal notranslate"><span class="pre">basemap</span></code> command in the main and background scripts so both have the same positioning (i.e., <code class="docutils literal notranslate"><span class="pre">-X</span></code> and <code class="docutils literal notranslate"><span class="pre">-Y</span></code>) and parameters (i.e. <code class="docutils literal notranslate"><span class="pre">-R</span></code> and <code class="docutils literal notranslate"><span class="pre">-J</span></code>).</p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="id5">
+<h3>3.5. Make full animation<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<p>Now I make the final high-quality animation (i.e. 80 DPC).</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39; &gt; pre.sh</span>
+<span class="s">gmt begin</span>
+<span class="s">  # Create background map</span>
+<span class="s">  gmt grdimage @earth_relief_06m -I -JN${MOVIE_WIDTH} -Rg -X0 -Y0</span>
+<span class="s">  # Create cpt for the earthquakes</span>
+<span class="s">  gmt makecpt -Cred,green,blue -T0,70,300,10000 -H &gt; quakes.cpt</span>
+<span class="s">gmt end</span>
+<span class="s">EOF</span>
+
+cat<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39; &gt; main.sh</span>
+<span class="s">gmt begin</span>
+<span class="s">  gmt basemap -Rg -JN${MOVIE_WIDTH} -X0 -Y0 -B+n</span>
+<span class="s">  gmt events @quakes_2018.txt -SE- -Cquakes.cpt -T${MOVIE_COL0}</span>
+<span class="s">gmt end</span>
+<span class="s">EOF</span>
+
+gmt<span class="w"> </span>movie<span class="w"> </span>main.sh<span class="w"> </span>-Sbpre.sh<span class="w"> </span>-NQuakes<span class="w"> </span>-Ml,png<span class="w"> </span>-Zs<span class="w"> </span>-V<span class="w"> </span>-C24cx12cx80<span class="w"> </span>-T2018-01-01T/2018-12-31T/1d<span class="w"> </span>-Gblack<span class="w"> </span>-Fmp4<span class="w"> </span><span class="se">\</span>
+-Lc0<span class="w"> </span>--FONT_TAG<span class="o">=</span>18p,Helvetica,white<span class="w"> </span>--FORMAT_CLOCK_MAP<span class="o">=</span>-
+</pre></div>
+</div>
+</div></blockquote>
+<div class="video_wrapper align-center" style="text-align: center">
+<iframe allowfullscreen="true" src="https://www.youtube.com/embed/dbOjYqWzGi0" style="border: 0; height: 430px; width: 800px">
+</iframe></div><div class="line-block">
+<div class="line"><br /></div>
+</div>
+</section>
+<section id="make-full-animation-with-enhancement">
+<h3>3.6. Make full animation with enhancement<a class="headerlink" href="#make-full-animation-with-enhancement" title="Link to this heading"></a></h3>
+<p>In the previous animation, the earthquakes appear but it is hard to see when they do it.
+With <a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/events">events</a> it is possible to draw attention to the arrival of a new event.</p>
+<section id="how-to-enhance-symbols-with-events">
+<h4>3.6.1. How to enhance symbols with events<a class="headerlink" href="#how-to-enhance-symbols-with-events" title="Link to this heading"></a></h4>
+<p>The idea is to change the default behavior of the symbols to enhance their appearance as shown in the following video:</p>
+<div class="video_wrapper align-center" style="text-align: center">
+<iframe allowfullscreen="true" src="https://www.youtube.com/embed/77a2XrfWsHM" style="border: 0; height: 430px; width: 711px">
+</iframe></div><div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>This can be done by using <a class="reference external" href="https://docs.generic-mapping-tools.org/6.5/events.html#m">-M</a> and <a class="reference external" href="https://docs.generic-mapping-tools.org/6.5/events.html#e">-E</a> arguments.
+The -M arguments allows to temporarily change attributes of the symbol like:</p>
+<ul class="simple">
+<li><p>-Ms: Provide a factor to modify the size.</p></li>
+<li><p>-Mi: Provide a value to brighten (up to 1) or darken (up to -1) the <a class="reference external" href="https://docs.generic-mapping-tools.org/6.5/reference/colorspace.html#artificial-illumination">color intensity</a>.</p></li>
+<li><p>-Mt: Transparency. Set a value between 100 (invisible) to 0 (opaque).</p></li>
+</ul>
+<p>The duration of the temporary changes is controlled via the <a class="reference external" href="https://docs.generic-mapping-tools.org/6.5/events.html#e">-E</a> argument.</p>
+<ul class="simple">
+<li><p>-Er: rise phase. It takes place before the start of the event.</p></li>
+<li><p>-Ep: plateau phase. It takes place after the start of the event.</p></li>
+<li><p>-Ed: decay phase. It develops after the plateau phase. If the plateau phase does not occur, then it takes place after the start of the event.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>For finite symbols there are also <em>normal</em> and <em>fade</em> phases.</p></li>
+<li><p>It is also possible to change the data value with <code class="docutils literal notranslate"><span class="pre">-Mv</span></code>.</p></li>
+</ul>
+</div>
+</section>
+<section id="id7">
+<h4>3.6.2. Make full animation<a class="headerlink" href="#id7" title="Link to this heading"></a></h4>
+<p>In this step I announce each quake by magnifying size and whitening the color for a little bit (during the rise phase).
+Later the symbols return to their original properties during the decay phase.
+The plateau phase is not used.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39; &gt; pre.sh</span>
+<span class="s">gmt begin</span>
+<span class="s">  # Create background map</span>
+<span class="s">  gmt grdimage @earth_relief_06m -I -JN${MOVIE_WIDTH} -Rg -X0 -Y0</span>
+<span class="s">  # Create cpt for the earthquakes</span>
+<span class="s">  gmt makecpt -Cred,green,blue -T0,70,300,10000 -H &gt; quakes.cpt</span>
+<span class="s">gmt end</span>
+<span class="s">EOF</span>
+
+cat<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39; &gt; main.sh</span>
+<span class="s">gmt begin</span>
+<span class="s">  gmt basemap -Rg -JN${MOVIE_WIDTH} -X0 -Y0 -B+n</span>
+<span class="s">  gmt events @quakes_2018.txt -SE- -Cquakes.cpt -T${MOVIE_COL0} -Es+r2+d6 -Ms5+c1 -Mi1+c0 -Mt+c0 --TIME_UNIT=d</span>
+<span class="s">gmt end</span>
+<span class="s">EOF</span>
+
+gmt<span class="w"> </span>movie<span class="w"> </span>main.sh<span class="w"> </span>-Sbpre.sh<span class="w"> </span>-NQuakes<span class="w"> </span>-Ml,png<span class="w"> </span>-Zs<span class="w"> </span>-V<span class="w"> </span>-C24cx12cx80<span class="w"> </span>-T2018-01-01T/2018-12-31T/1d<span class="w"> </span>-Gblack<span class="w"> </span>-Fmp4<span class="w"> </span><span class="se">\</span>
+-Lc0<span class="w"> </span>--FONT_TAG<span class="o">=</span>18p,Helvetica,white<span class="w"> </span>--FORMAT_CLOCK_MAP<span class="o">=</span>-
+</pre></div>
+</div>
+</div></blockquote>
+<div class="video_wrapper align-center" style="text-align: center">
+<iframe allowfullscreen="true" src="https://www.youtube.com/embed/rmPhIVzhIgY" style="border: 0; height: 430px; width: 800px">
+</iframe></div><div class="admonition-technical-information admonition">
+<p class="admonition-title">Technical Information</p>
+<ul class="simple">
+<li><p>--TIME_UNIT=d: This sets that the values of -E are in days (d).</p></li>
+<li><p>-Es+r2+d6: This sets the duration of the rise phase and the decay phase.</p></li>
+<li><p>-Ms5+c1: modify the size. The size will increase 5 times during the rise phase and then reduce to the original size in the coda phase.</p></li>
+<li><p>-Mt+c0: modify the transparency. The transparency will remain to 0 at the coda phase. This allows it to be seen after its occurrence.</p></li>
+<li><p>-Mi1+c0: modify the intensity of the color. It gets lighter during the rise phase and then returns to its original color in the coda phase.</p></li>
+</ul>
+</div>
+</section>
+</section>
+</section>
+<section id="see-also">
+<h2>4. See also<a class="headerlink" href="#see-also" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>The paper about animations which include explanation and examples (<a class="reference external" href="https://doi.org/10.1029/2024GC011545">Wessel et al. 2024</a>).</p></li>
+<li><p>Check the <a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/movie">movie</a> and <a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/events">events</a> modules documentation for full technical information.</p></li>
+<li><p>See the <a class="reference external" href="https://docs.generic-mapping-tools.org/6.5/animations.html">GMT animation gallery</a> for more examples.</p></li>
+</ul>
+</section>
+<section id="references">
+<h2>5. References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Wessel, P., Luis, J. F., Uieda, L., Scharroo, R., Wobbe, F., Smith, W. H. F., &amp; Tian, D. (2019). The Generic Mapping Tools Version 6. Geochemistry, Geophysics, Geosystems, 20(11), 5556–5564. <a class="reference external" href="https://doi.org/10.1029/2019GC008515">https://doi.org/10.1029/2019GC008515</a></p></li>
+<li><p>Wessel, P., Esteban, F., &amp; Delaviel-Anger, G. (2024). The Generic Mapping Tools and animations for the masses. Geochemistry, Geophysics, Geosystems, 25, e2024GC011545. <a class="reference external" href="https://doi.org/10.1029/2024GC011545">https://doi.org/10.1029/2024GC011545</a>.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../gallery/maps/gadm.html" class="btn btn-neutral float-left" title="How to use political borders from GADM" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../basics/coastlines.html" class="btn btn-neutral float-right" title="Coastlines and boarders" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022-2025, The GMT Examples Authors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>

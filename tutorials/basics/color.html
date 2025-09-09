@@ -1,0 +1,231 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to use colors &mdash; GMT Examples  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/style.css?v=0a3a2672" />
+
+  
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+    <link rel="canonical" href="https://www.generic-mapping-tools.org/gmt-examples/tutorials/basics/color.html" />
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Frames, ticks, titles, and labels" href="frames.html" />
+    <link rel="prev" title="Coastlines and boarders" href="coastlines.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            GMT Examples
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Gallery</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../gallery/3d_plots/grdview_surface.html">Plotting a surface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gallery/images/slope.html">How to make a slope map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gallery/maps/gadm.html">How to use political borders from GADM</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../advance/animation.html">Making animations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coastlines.html">Coastlines and boarders</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">How to use colors</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#color-names">Color names</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#color-models">Color models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#r-g-b">R/G/B</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rrggbb">#RRGGBB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#graylevel">Graylevel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#h-s-v">H-S-V</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#c-m-y-k">C/M/Y/K</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-with-color-model">Example with color model</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="frames.html">Frames, ticks, titles, and labels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="line.html">Setting attributes of lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="region.html">Setting the Region</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributors Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">GMT Examples</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">How to use colors</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/tutorials/basics/color.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="how-to-use-colors">
+<h1>How to use colors<a class="headerlink" href="#how-to-use-colors" title="Link to this heading"></a></h1>
+<p>In GMT you will want to define the color of different features (line, symbols, polygones, text, etc.).
+There are six methods to define a color:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#color-names">Color names</a></p></li>
+<li><p><a class="reference internal" href="#r-g-b">R/G/B</a></p></li>
+<li><p><a class="reference internal" href="#rrggbb">#RRGGBB</a></p></li>
+<li><p><a class="reference internal" href="#graylevel">Graylevel</a></p></li>
+<li><p><a class="reference internal" href="#h-s-v">H-S-V</a></p></li>
+<li><p><a class="reference internal" href="#c-m-y-k">C/M/Y/K</a></p></li>
+</ul>
+<section id="color-names">
+<h2>Color names<a class="headerlink" href="#color-names" title="Link to this heading"></a></h2>
+<p>This is more friendly way to define a color. There are 663 unique color names that can be selected.
+All names are case-insensitive. You can see the names (and their RGB values) in this
+<a class="reference external" href="https://docs.generic-mapping-tools.org/latest/_images/GMT_RGBchart.png">link</a>
+or use this interactive <a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/color-picker">color-picker</a>.</p>
+<p>In the following example, we use <code class="docutils literal notranslate"><span class="pre">lightgray</span></code> for the dry areas and <code class="docutils literal notranslate"><span class="pre">royalblue4</span></code> for the wet areas.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmt<span class="w"> </span>begin<span class="w"> </span>color<span class="w"> </span>png
+<span class="w">        </span>gmt<span class="w"> </span>coast<span class="w"> </span>-Rd<span class="w"> </span>-JW12c<span class="w"> </span>-Glightgray<span class="w"> </span>-Sroyalblue4
+gmt<span class="w"> </span>end<span class="w"> </span>show
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-42eb572e679e97489f2a5029a5d74352">
+<img alt="../../_images/42eb572e679e97489f2a5029a5d74352.png" src="../../_images/42eb572e679e97489f2a5029a5d74352.png" />
+</figure>
+</div></blockquote>
+</section>
+<section id="color-models">
+<h2>Color models<a class="headerlink" href="#color-models" title="Link to this heading"></a></h2>
+<p>Alternatively, you can also use color models to define a color.
+These are useful especially when you know the values that define the color you want to use.
+GMT identifies the color model according to the syntax used.</p>
+<section id="r-g-b">
+<h3>R/G/B<a class="headerlink" href="#r-g-b" title="Link to this heading"></a></h3>
+<p>Provide 3 values each from 0 to 255 separated by a /.
+Specify <strong>R</strong>ed, <strong>G</strong>reen, and <strong>B</strong>lue levels.
+Each value is separated by a slash and is in the range from 0 (dark) to 255 (light).
+This representation is used to color monitors.</p>
+</section>
+<section id="rrggbb">
+<h3>#RRGGBB<a class="headerlink" href="#rrggbb" title="Link to this heading"></a></h3>
+<p>Specify Red, Green, and Blue levels in the way that it is done in HTML.
+Use two characters for each color channel, ranging from 00 (dark) to FF (light).
+Upper and lower case are allowed.</p>
+</section>
+<section id="graylevel">
+<h3>Graylevel<a class="headerlink" href="#graylevel" title="Link to this heading"></a></h3>
+<p>Specify a single number from 0 (black) to 255 (white). It only uses shades of gray (R = G = B).
+This representation is popular with black and white printers.</p>
+</section>
+<section id="h-s-v">
+<h3>H-S-V<a class="headerlink" href="#h-s-v" title="Link to this heading"></a></h3>
+<p>Specify <strong>H</strong>ue in the range 0 to 360 (degrees), <strong>S</strong>aturation between 0 (not saturated) and 1 (fully saturated), and <strong>V</strong>alue between 0 (dark) and 1 (light). Number are separated by hyphens. This representation can be helpful when hue varies a lot.</p>
+</section>
+<section id="c-m-y-k">
+<h3>C/M/Y/K<a class="headerlink" href="#c-m-y-k" title="Link to this heading"></a></h3>
+<p>Specify <strong>C</strong>yan, <strong>M</strong>agenta, <strong>Y</strong>ellow, and blac**K**. Each number is in the range from 0 (no paint) to 100 (maximum paint). This representation is used by most color printers.</p>
+</section>
+<section id="example-with-color-model">
+<h3>Example with color model<a class="headerlink" href="#example-with-color-model" title="Link to this heading"></a></h3>
+<p>It is possible to make the previous map with color models.</p>
+<p>Color models for <code class="docutils literal notranslate"><span class="pre">royalblue4</span></code>:</p>
+<ul class="simple">
+<li><p>R/G/B: 39/64/139</p></li>
+<li><p>#RRGGBB: #27408B</p></li>
+<li><p>H-S-V: 225-0.719-0.545</p></li>
+<li><p>C/M/Y/K: 72/54/0/45</p></li>
+</ul>
+<p>Color models for <code class="docutils literal notranslate"><span class="pre">lightgray</span></code>:</p>
+<ul>
+<li><p>R/G/B: 211/211/211</p></li>
+<li><p>#RRGGBB: #D3D3D3</p></li>
+<li><p>Graylevel: 211</p></li>
+<li><p>H-S-V: 0-0-0.827</p></li>
+<li><p>C/M/Y/K: 0/0/0/17</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmt<span class="w"> </span>begin<span class="w"> </span>color<span class="w"> </span>png
+<span class="w">        </span>gmt<span class="w"> </span>coast<span class="w"> </span>-Rd<span class="w"> </span>-JW12c<span class="w"> </span>-G211<span class="w"> </span>-S39/64/139
+gmt<span class="w"> </span>end<span class="w"> </span>show
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-c7916f048b10c1d961d39584295b8be1">
+<img alt="../../_images/c7916f048b10c1d961d39584295b8be1.png" src="../../_images/c7916f048b10c1d961d39584295b8be1.png" />
+</figure>
+</div></blockquote>
+</li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="coastlines.html" class="btn btn-neutral float-left" title="Coastlines and boarders" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="frames.html" class="btn btn-neutral float-right" title="Frames, ticks, titles, and labels" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022-2025, The GMT Examples Authors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>

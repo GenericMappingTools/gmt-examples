@@ -1,0 +1,266 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contributors Guide &mdash; GMT Examples  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="_static/style.css?v=0a3a2672" />
+
+  
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+    <link rel="canonical" href="https://www.generic-mapping-tools.org/gmt-examples/contributing.html" />
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Setting the Region" href="tutorials/basics/region.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            GMT Examples
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Gallery</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="gallery/3d_plots/grdview_surface.html">Plotting a surface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gallery/images/slope.html">How to make a slope map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gallery/maps/gadm.html">How to use political borders from GADM</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/advance/animation.html">Making animations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/basics/coastlines.html">Coastlines and boarders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/basics/color.html">How to use colors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/basics/frames.html">Frames, ticks, titles, and labels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/basics/line.html">Setting attributes of lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorials/basics/region.html">Setting the Region</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Contributors Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#gmt-examples-overview">GMT Examples Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-your-environment">Setting up your environment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pip-setup">Pip Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#conda-setup">Conda Setup</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#building-the-documentation">Building the documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#contributing-new-examples">Contributing New Examples</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">GMT Examples</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Contributors Guide</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/contributing.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="contributors-guide">
+<h1>Contributors Guide<a class="headerlink" href="#contributors-guide" title="Link to this heading"></a></h1>
+<p>This is a community driven project and everyone is welcome to contribute. The
+project is hosted at the <a class="reference external" href="https://github.com/GenericMappingTools/gmt-examples">gmt-examples GitHub repository</a>.</p>
+<p>The goal is to maintain a diverse community that’s pleasant for everyone.
+<strong>Please be considerate and respectful of others</strong>. Everyone must abide by our
+<a class="reference external" href="https://github.com/GenericMappingTools/gmt-examples/blob/main/CODE_OF_CONDUCT.md">Code of Conduct</a>
+and we encourage all to read it carefully.</p>
+<section id="gmt-examples-overview">
+<h2>GMT Examples Overview<a class="headerlink" href="#gmt-examples-overview" title="Link to this heading"></a></h2>
+<p>There are two main components to GMT examples project:</p>
+<ul class="simple">
+<li><p>Gallery examples, with source material in the <code class="docutils literal notranslate"><span class="pre">docs/gallery/</span></code> folder.</p></li>
+<li><p>Tutorial examples, with source material in the <code class="docutils literal notranslate"><span class="pre">docs/tutorials/</span></code> folder.</p></li>
+</ul>
+<p>The gallery examples are designed to instruct users on how to complete a specific
+problem. For general recommendations on how to design effective gallery examples,
+see the <a class="reference external" href="https://diataxis.fr/how-to-guides/">diataxis framework’s section on how-to guides</a>.</p>
+<p>The tutorials are learning orientated with the goal of teaching users GMT. For
+general recommendations on how to design effective tutorials, see the
+<a class="reference external" href="https://diataxis.fr/tutorials/">diataxis framework’s section on tutorials</a>.</p>
+<p>The documentation are written primarily in
+<a class="reference external" href="https://docutils.sourceforge.io/rst.html">reStructuredText</a> and built by
+<a class="reference external" href="http://www.sphinx-doc.org/">Sphinx</a>. Please refer to
+<a class="extlink-gmt-module reference external" href="https://docs.generic-mapping-tools.org/latest/devdocs/rst-cheatsheet.html">reStructuredText cheatsheet</a> if you are new to reStructuredText.</p>
+</section>
+<section id="setting-up-your-environment">
+<h2>Setting up your environment<a class="headerlink" href="#setting-up-your-environment" title="Link to this heading"></a></h2>
+<p>The following dependencies are required for building the GMT examples pages:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.generic-mapping-tools.org/latest/">gmt</a> (GMT is required for executing example scripts)</p></li>
+<li><p><a class="reference external" href="http://www.sphinx-doc.org/">sphinx</a> (a Python documentation generator for creating the docs from source files)</p></li>
+<li><p><a class="reference external" href="https://sphinx-design.readthedocs.io/">sphinx_design</a> (A sphinx extension for designing beautiful, screen-size responsive web-components)</p></li>
+<li><p><a class="reference external" href="https://www.generic-mapping-tools.org/sphinx_gmt/latest/">sphinx_gmt</a> (a Sphinx extension for creating GMT figures to accompany example scripts)</p></li>
+<li><p><a class="reference external" href="https://sphinx-rtd-theme.readthedocs.io/en/stable/">sphinx_rtd_theme</a> (a Sphinx theme used for consistent documentation appearance between GMT projects)</p></li>
+</ul>
+<p>Two options for installing the dependencies are <a class="reference internal" href="#pip-setup"><span class="std std-ref">pip</span></a> and <a class="reference internal" href="#conda-setup"><span class="std std-ref">conda</span></a>.
+Since Sphinx is a Python documentation generator, you will need a working Python
+environment. For those who do not already have a working Python environment,
+one option is to use the minimal installer for Conda <a class="reference external" href="https://github.com/conda-forge/miniforge">Miniforge</a>
+along with the <a class="reference internal" href="#conda-setup"><span class="std std-ref">conda</span></a> instructions.</p>
+<section id="pip-setup">
+<h3>Pip Setup<a class="headerlink" href="#pip-setup" title="Link to this heading"></a></h3>
+<p>These instructions rely on the <a class="reference external" href="https://pip.pypa.io/en/stable/">pip</a> package
+installer, which can be used to install all dependencies except GMT.
+Follow the <a class="reference external" href="https://github.com/GenericMappingTools/gmt/blob/master/INSTALL.md">GMT Install Guide</a>
+to install GMT. The Python dependencies can be installed using the
+<code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> from the base of the repository (you may wish to setup a
+<a class="reference external" href="https://packaging.python.org/en/latest/guides/installing-using-pip-and-virtual-environments/#creating-a-virtual-environment">virtual environment</a> first):</p>
+<p>Unix/macOS:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</pre></div>
+</div>
+<p>Windows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>py<span class="w"> </span>-m<span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</pre></div>
+</div>
+</section>
+<section id="conda-setup">
+<h3>Conda Setup<a class="headerlink" href="#conda-setup" title="Link to this heading"></a></h3>
+<p>These instructions rely on the <a class="reference external" href="https://docs.conda.io/en/latest/">conda</a> package
+manager. Run the following from the base of the repository to create a new conda
+environment from the <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>env<span class="w"> </span>create
+</pre></div>
+</div>
+<p>Before building the documentation, you have to activate the environment
+(you’ll need to do this every time you start a new terminal):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>gmt-examples
+</pre></div>
+</div>
+</section>
+</section>
+<section id="building-the-documentation">
+<h2>Building the documentation<a class="headerlink" href="#building-the-documentation" title="Link to this heading"></a></h2>
+<p>Once you have <a class="reference internal" href="#setting-up-your-environment"><span class="std std-ref">setup your environment</span></a>, you can
+build the documentation using:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>docs
+make<span class="w"> </span>html
+</pre></div>
+</div>
+</section>
+<section id="contributing-new-examples">
+<h2>Contributing New Examples<a class="headerlink" href="#contributing-new-examples" title="Link to this heading"></a></h2>
+<p>The source files for the gallery examples and tutorials are <code class="docutils literal notranslate"><span class="pre">.rst</span></code> files in
+<code class="docutils literal notranslate"><span class="pre">docs/</span></code> that generate one or more figures using the
+<a class="reference external" href="https://www.generic-mapping-tools.org/sphinx_gmt/latest/">sphinx_gmt</a>
+extension. To add a new gallery example or tutorial:</p>
+<ul>
+<li><p>If necessary, create a new sub-directory under <code class="docutils literal notranslate"><span class="pre">docs/gallery/</span></code> for a
+gallery example section (e.g., <code class="docutils literal notranslate"><span class="pre">basemaps/</span></code> or <code class="docutils literal notranslate"><span class="pre">plot_embellishments/</span></code>).</p></li>
+<li><p>Create a new <code class="docutils literal notranslate"><span class="pre">.rst</span></code> file inside the appropriate sub-directory in
+<code class="docutils literal notranslate"><span class="pre">docs/gallery/</span></code> or <code class="docutils literal notranslate"><span class="pre">docs/tutorials/</span></code>.</p></li>
+<li><p>Add a descriptive title and as much explanation as necessary.</p></li>
+<li><p>Add hyperlinks to GMT modules using the <code class="docutils literal notranslate"><span class="pre">gmt-module</span></code> reStructuredText directive:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>:gmt-module:<span class="sb">`</span>grdview<span class="sb">`</span>
+</pre></div>
+</div>
+</li>
+<li><p>Add hyperlinks to GMT module options by appending lower-case <code class="docutils literal notranslate"><span class="pre">#&lt;option&gt;</span></code> to
+the <code class="docutils literal notranslate"><span class="pre">gmt-module</span></code> argument:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>:gmt-module:<span class="sb">`</span>grdview#q<span class="sb">`</span>
+</pre></div>
+</div>
+</li>
+<li><p>Add as many figures as needed using the <code class="docutils literal notranslate"><span class="pre">gmtplot</span></code> directive:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>..<span class="w"> </span>gmtplot::
+
+<span class="w">   </span>gmt<span class="w"> </span>begin<span class="w"> </span>basemap<span class="w"> </span>png
+<span class="w">     </span>gmt<span class="w"> </span>basemap<span class="w"> </span>-B<span class="w"> </span>-Rg<span class="w"> </span>-JH5c
+<span class="w">   </span>gmt<span class="w"> </span>end<span class="w"> </span>show
+</pre></div>
+</div>
+<p>The figures will be placed after the source code in the built documentation
+by the <code class="docutils literal notranslate"><span class="pre">sphinx_gmt</span></code> extension.</p>
+</li>
+<li><p>Add the file to the appropriate section in <code class="docutils literal notranslate"><span class="pre">docs/index.rst</span></code> using the following
+template:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>..<span class="w"> </span>grid-item-card::<span class="w"> </span>:doc:<span class="sb">`</span>gallery/&lt;section&gt;/&lt;file-name&gt;<span class="sb">`</span>
+<span class="w">   </span>:padding:<span class="w"> </span><span class="m">1</span>
+<span class="w">   </span>:link-type:<span class="w"> </span>doc
+<span class="w">   </span>:link:<span class="w"> </span>gallery/&lt;section&gt;/&lt;file-name&gt;
+
+<span class="w">   </span>..<span class="w"> </span>image::<span class="w"> </span>_images/&lt;image-hash&gt;.png
+</pre></div>
+</div>
+<p>Edit the hash in the <code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">image::</span> <span class="pre">...</span></code> line to show a different figure on the
+index page.</p>
+</li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="tutorials/basics/region.html" class="btn btn-neutral float-left" title="Setting the Region" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022-2025, The GMT Examples Authors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>

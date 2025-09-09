@@ -1,0 +1,367 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Setting attributes of lines &mdash; GMT Examples  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/style.css?v=0a3a2672" />
+
+  
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+    <link rel="canonical" href="https://www.generic-mapping-tools.org/gmt-examples/tutorials/basics/line.html" />
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Setting the Region" href="region.html" />
+    <link rel="prev" title="Frames, ticks, titles, and labels" href="frames.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            GMT Examples
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Gallery</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../gallery/3d_plots/grdview_surface.html">Plotting a surface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gallery/images/slope.html">How to make a slope map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gallery/maps/gadm.html">How to use political borders from GADM</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../advance/animation.html">Making animations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coastlines.html">Coastlines and boarders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="color.html">How to use colors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frames.html">Frames, ticks, titles, and labels</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Setting attributes of lines</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#use-of-lines">Use of lines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#basic-attributes">Basic Attributes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#width">Width</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#custom">Custom</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pen-names">Pen names</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#minimum-thickness-pen">Minimum-thickness pen</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#color">Color</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#style">Style</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#names-or-symbols">Names (or symbols)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#string">String</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#examples-of-lines">Examples of lines</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="region.html">Setting the Region</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributors Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">GMT Examples</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Setting attributes of lines</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/tutorials/basics/line.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="setting-attributes-of-lines">
+<h1>Setting attributes of lines<a class="headerlink" href="#setting-attributes-of-lines" title="Link to this heading"></a></h1>
+<p>In this tutorial we will show:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#use-of-lines">Use of lines</a></p></li>
+<li><p><a class="reference internal" href="#basic-attributes">Basic Attributes</a></p></li>
+<li><p><a class="reference internal" href="#examples-of-lines">Examples of lines</a></p></li>
+</ul>
+<section id="use-of-lines">
+<h2>Use of lines<a class="headerlink" href="#use-of-lines" title="Link to this heading"></a></h2>
+<p>In GMT, lines (also called <em>pen</em>) are used for many features, such as:</p>
+<ul class="simple">
+<li><p>Lines</p></li>
+<li><p>Outlines of symbols</p></li>
+<li><p>Borders of polygons</p></li>
+<li><p>Outlines of text</p></li>
+<li><p>Vectors (the line and the outline of the head)</p></li>
+<li><p>Map frames</p></li>
+<li><p>Scale bars</p></li>
+</ul>
+<p>In the following example, all the colored elements are specified with the pen.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmt<span class="w"> </span>begin<span class="w"> </span>Pen_examples<span class="w"> </span>png
+<span class="w">    </span><span class="c1"># Basic frame map</span>
+<span class="w">    </span>gmt<span class="w"> </span>basemap<span class="w"> </span>-R0/10/0/4<span class="w"> </span>-Jx1c<span class="w"> </span>-B0<span class="w">  </span>--MAP_FRAME_PEN<span class="o">=</span>thin,mediumpurple
+<span class="w">    </span><span class="c1"># Scale bar</span>
+<span class="w">    </span>gmt<span class="w"> </span>basemap<span class="w"> </span>-LjBR+w1c+jBR+l<span class="s2">&quot; cm&quot;</span>+o0.4c<span class="w"> </span>--MAP_TICK_PEN_PRIMARY<span class="o">=</span>salmon
+<span class="w">    </span><span class="c1"># Create Line</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">1</span><span class="w"> </span>&gt;<span class="w"> </span>tmp
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="m">5</span><span class="w"> </span><span class="m">3</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>tmp
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="m">9</span><span class="w"> </span><span class="m">2</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>tmp
+<span class="w">    </span><span class="c1"># Plot line</span>
+<span class="w">    </span>gmt<span class="w"> </span>plot<span class="w"> </span>tmp<span class="w"> </span>-Wthicker,red,...-
+<span class="w">    </span><span class="c1"># Plot symbol</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmt<span class="w"> </span>plot<span class="w"> </span>-SA1c<span class="w"> </span>-W1p,orange
+<span class="w">    </span><span class="c1"># Plot text</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="m">2</span>.2<span class="w"> </span><span class="m">3</span>.5<span class="w"> </span><span class="s2">&quot;Hello GMT&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>gmt<span class="w"> </span>text<span class="w"> </span>-Wthinner,darkblue,dotted<span class="w"> </span>-F+f24<span class="o">=</span>thin,khaki1,solid<span class="w"> </span>-G211
+<span class="w">    </span><span class="c1"># Plot vector</span>
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="m">6</span><span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="m">25</span><span class="w"> </span>2c<span class="w"> </span><span class="p">|</span><span class="w"> </span>gmt<span class="w"> </span>plot<span class="w"> </span>-Sv0.3c+ea+p0.5p,deepskyblue<span class="w"> </span>-Wthin,darkgreen,--.
+gmt<span class="w"> </span>end
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-ec0d8d5349173bd8da9d665f6f93ea70">
+<img alt="../../_images/ec0d8d5349173bd8da9d665f6f93ea70.png" src="../../_images/ec0d8d5349173bd8da9d665f6f93ea70.png" />
+</figure>
+</div></blockquote>
+</section>
+<section id="basic-attributes">
+<h2>Basic Attributes<a class="headerlink" href="#basic-attributes" title="Link to this heading"></a></h2>
+<p>The basic properties of a line are defined by a <em>pen</em>.
+It has three basic attributes:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#width">Width</a></p></li>
+<li><p><a class="reference internal" href="#color">Color</a></p></li>
+<li><p><a class="reference internal" href="#style">Style</a></p></li>
+</ul>
+<p>Most programs will accept pen attributes in the form of an option argument, with commas separating the given attributes, e.g.,
+<code class="docutils literal notranslate"><span class="pre">width,color,style</span></code>.</p>
+<p><strong>Default pen attributes</strong>: By default they are 0.25-point wide, black and solid line.</p>
+<section id="width">
+<h3>Width<a class="headerlink" href="#width" title="Link to this heading"></a></h3>
+<p>There are two ways to define the width:</p>
+<p><strong>Note:</strong> The width of a line will look bigger if the figure is enlarged (and vice versa).
+In this tutorial we add a graphic scale on the figures.</p>
+<section id="custom">
+<h4>Custom<a class="headerlink" href="#custom" title="Link to this heading"></a></h4>
+<p>Use a number to set the width. Append c, i, or p to specify pen width in cm, inch, or points, respectively.
+If not unit is append, them points is used as the unit. In GMT these units are related in this way:</p>
+<p>1 inch = 2.54 cm = 72 points</p>
+</section>
+<section id="pen-names">
+<h4>Pen names<a class="headerlink" href="#pen-names" title="Link to this heading"></a></h4>
+<p>You can use one of the following preset names to define its width:</p>
+<blockquote id="tbl-pennames">
+<div><table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>faint</p></td>
+<td><p>0</p></td>
+<td><p>thin</p></td>
+<td><p>0.75p</p></td>
+<td><p>fat</p></td>
+<td><p>3p</p></td>
+</tr>
+<tr class="row-even"><td><p>default</p></td>
+<td><p>0.25p</p></td>
+<td><p>thick</p></td>
+<td><p>1p</p></td>
+<td><p>fatter</p></td>
+<td><p>6p</p></td>
+</tr>
+<tr class="row-odd"><td><p>thinnest</p></td>
+<td><p>0.25p</p></td>
+<td><p>thicker</p></td>
+<td><p>1.5p</p></td>
+<td><p>fattest</p></td>
+<td><p>10p</p></td>
+</tr>
+<tr class="row-even"><td><p>thinner</p></td>
+<td><p>0.5p</p></td>
+<td><p>thickest</p></td>
+<td><p>2p</p></td>
+<td><p>wide</p></td>
+<td><p>18p</p></td>
+</tr>
+</tbody>
+</table>
+</div></blockquote>
+<p>In the following example we show all the preset names (with differents colors).</p>
+<p><strong>Note</strong>: In the following examples the <code class="docutils literal notranslate"><span class="pre">-Y</span></code> parameter is only used to move the lines vertically. Otherwise the lines would be overlapped. It does not affect the line attributes.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmt<span class="w"> </span>begin<span class="w"> </span>lines_width<span class="w"> </span>png
+<span class="w">    </span>gmt<span class="w"> </span>basemap<span class="w"> </span>-R0/10/0/4<span class="w"> </span>-Jx1c<span class="w"> </span>-B0<span class="w"> </span>-LjBR+w1c+jBR+l<span class="s2">&quot; cm&quot;</span>+o0.4c
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="m">0</span>.5<span class="w"> </span><span class="m">3</span>.8<span class="w"> </span>&gt;<span class="w"> </span>tmp
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="m">3</span>.8<span class="w"> </span>&gt;&gt;<span class="w"> </span>tmp
+<span class="w">    </span>gmt<span class="w"> </span>plot<span class="w"> </span>tmp<span class="w">       </span>-Wfaint
+<span class="w">    </span>gmt<span class="w"> </span>plot<span class="w"> </span>tmp<span class="w"> </span>-Y-2p<span class="w"> </span>-Wthinnest,purple
+<span class="w">    </span>gmt<span class="w"> </span>plot<span class="w"> </span>tmp<span class="w"> </span>-Y-3p<span class="w"> </span>-Wthinner,blue
+<span class="w">    </span>gmt<span class="w"> </span>plot<span class="w"> </span>tmp<span class="w"> </span>-Y-4p<span class="w"> </span>-Wthin,green
+<span class="w">    </span>gmt<span class="w"> </span>plot<span class="w"> </span>tmp<span class="w"> </span>-Y-5p<span class="w"> </span>-Wthick,orange
+<span class="w">    </span>gmt<span class="w"> </span>plot<span class="w"> </span>tmp<span class="w"> </span>-Y-6p<span class="w"> </span>-Wthicker,red
+<span class="w">    </span>gmt<span class="w"> </span>plot<span class="w"> </span>tmp<span class="w"> </span>-Y-7p<span class="w"> </span>-Wthickest
+<span class="w">    </span>gmt<span class="w"> </span>plot<span class="w"> </span>tmp<span class="w"> </span>-Y-9p<span class="w"> </span>-Wfat,purple
+<span class="w">    </span>gmt<span class="w"> </span>plot<span class="w"> </span>tmp<span class="w"> </span>-Y-12p<span class="w"> </span>-Wfatter,blue
+<span class="w">    </span>gmt<span class="w"> </span>plot<span class="w"> </span>tmp<span class="w"> </span>-Y-15p<span class="w"> </span>-Wfattest,green
+<span class="w">    </span>gmt<span class="w"> </span>plot<span class="w"> </span>tmp<span class="w"> </span>-Y-20p<span class="w"> </span>-Wwide,orange
+gmt<span class="w"> </span>end
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-b2465740603d3c3cbbf3ff6117b54f32">
+<img alt="../../_images/b2465740603d3c3cbbf3ff6117b54f32.png" src="../../_images/b2465740603d3c3cbbf3ff6117b54f32.png" />
+</figure>
+</div></blockquote>
+</section>
+<section id="minimum-thickness-pen">
+<h4>Minimum-thickness pen<a class="headerlink" href="#minimum-thickness-pen" title="Link to this heading"></a></h4>
+<p>This can be achieved by giving zero width (or faint).
+The result is device-dependent but typically means that as you zoom in on the feature in a display, the line thickness stays at the minimum.</p>
+</section>
+</section>
+<section id="color">
+<h3>Color<a class="headerlink" href="#color" title="Link to this heading"></a></h3>
+<p>For the color, you can use all the methods explained in
+<a class="reference external" href="https://www.generic-mapping-tools.org/gmt-examples/tutorials/basics/color.html">How to use colors</a>.</p>
+</section>
+<section id="style">
+<h3>Style<a class="headerlink" href="#style" title="Link to this heading"></a></h3>
+<p>The style attribute controls the appearance of the line.
+By default all lines are drawn are solid.
+You can change this by using the following methods:</p>
+<section id="names-or-symbols">
+<h4>Names (or symbols)<a class="headerlink" href="#names-or-symbols" title="Link to this heading"></a></h4>
+<p>You can use some names to get following styles:</p>
+<ul class="simple">
+<li><p>dotted (or “.”)</p></li>
+<li><p>dashed (or “-“)</p></li>
+</ul>
+<p>Also combinations of dots and dashes, like <code class="docutils literal notranslate"><span class="pre">.-</span></code> for a dot-dashed line, are allowed.</p>
+<p><strong>Note</strong>: The lengths of dots and dashes are scaled relative to the pen width
+(dots has a length that equals the pen width while dashes are 8 times as long; gaps between segments are 4 times the pen width).</p>
+</section>
+<section id="string">
+<h4>String<a class="headerlink" href="#string" title="Link to this heading"></a></h4>
+<p>For more detailed attributes (including exact dimensions) you may specify <code class="docutils literal notranslate"><span class="pre">string[:offset]</span></code>. This is a series of numbers separated by underscores (_).
+These numbers represent a pattern by indicating the length of line segments and the gap between segments.
+The optional offset phase-shifts the pattern from the beginning the line.
+For example, if you want a thin line that alternates between long dashes (9 points), an 4 point gap, then a 3 point dash,
+then another 4 point gap, with pattern offset by 13 points from the origin, specify
+<code class="docutils literal notranslate"><span class="pre">-Wthin,9_4_3_4:13p</span></code>.
+Just as with pen width, the default style units are points, but can also be explicitly specified in cm, inch, or points (see width discussion above).</p>
+<p>Here we show some examples of different style lines:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmt<span class="w"> </span>begin<span class="w"> </span>lines_style<span class="w"> </span>png
+<span class="w">    </span>gmt<span class="w"> </span>basemap<span class="w"> </span>-R0/10/0/2<span class="w"> </span>-Jx1c<span class="w"> </span>-B0<span class="w"> </span>-LjBR+w1c+jBR+l<span class="s2">&quot; cm&quot;</span>+o0.4c
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="m">0</span>.5<span class="w"> </span><span class="m">1</span>.8<span class="w"> </span>&gt;<span class="w"> </span>tmp
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="m">8</span><span class="w"> </span><span class="m">1</span>.8<span class="w"> </span>&gt;&gt;<span class="w"> </span>tmp
+<span class="w">    </span>gmt<span class="w"> </span>plot<span class="w"> </span>tmp<span class="w">       </span>-Wthin
+<span class="w">    </span>gmt<span class="w"> </span>plot<span class="w"> </span>tmp<span class="w"> </span>-Y-7p<span class="w"> </span>-Wthin,dotted
+<span class="w">    </span>gmt<span class="w"> </span>plot<span class="w"> </span>tmp<span class="w"> </span>-Y-7p<span class="w"> </span>-Wthin,dashed
+<span class="w">    </span>gmt<span class="w"> </span>plot<span class="w"> </span>tmp<span class="w"> </span>-Y-7p<span class="w"> </span>-Wthin,.-
+<span class="w">    </span>gmt<span class="w"> </span>plot<span class="w"> </span>tmp<span class="w"> </span>-Y-7p<span class="w"> </span>-Wthin,...-
+<span class="w">    </span>gmt<span class="w"> </span>plot<span class="w"> </span>tmp<span class="w"> </span>-Y-7p<span class="w"> </span>-Wthin,9_4_3_4
+<span class="w">    </span>gmt<span class="w"> </span>plot<span class="w"> </span>tmp<span class="w"> </span>-Y-7p<span class="w"> </span>-Wthin,9_4_3_4:13p
+gmt<span class="w"> </span>end
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-64efd11b854a3d4565989fbd3955149d">
+<img alt="../../_images/64efd11b854a3d4565989fbd3955149d.png" src="../../_images/64efd11b854a3d4565989fbd3955149d.png" />
+</figure>
+</div></blockquote>
+</section>
+</section>
+</section>
+<section id="examples-of-lines">
+<h2>Examples of lines<a class="headerlink" href="#examples-of-lines" title="Link to this heading"></a></h2>
+<p>Here we show some examples of lines combining the three basic attributes.</p>
+<p><strong>Note</strong>: In the last two examples the <code class="docutils literal notranslate"><span class="pre">-Y</span></code> parameter is NOT used so that the lines are intentionally overlapped to achieve more complex lines.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmt<span class="w"> </span>begin<span class="w"> </span>basic_lines<span class="w"> </span>png
+<span class="w">    </span>gmt<span class="w"> </span>basemap<span class="w"> </span>-R0/10/0/2<span class="w"> </span>-Jx1c<span class="w"> </span>-B0<span class="w"> </span>-LjBR+w1c+jBR+l<span class="s2">&quot; cm&quot;</span>+o0.4c
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="m">0</span>.5<span class="w"> </span><span class="m">1</span>.8<span class="w"> </span>&gt;<span class="w"> </span>tmp
+<span class="w">    </span><span class="nb">echo</span><span class="w"> </span><span class="m">8</span>.0<span class="w"> </span><span class="m">1</span>.8<span class="w"> </span>&gt;&gt;<span class="w"> </span>tmp
+<span class="w">    </span>gmt<span class="w"> </span>plot<span class="w"> </span>tmp<span class="w">         </span>-W
+<span class="w">    </span>gmt<span class="w"> </span>plot<span class="w"> </span>tmp<span class="w"> </span>-Y-0.2c<span class="w"> </span>-W1p,red,-
+<span class="w">    </span>gmt<span class="w"> </span>plot<span class="w"> </span>tmp<span class="w"> </span>-Y-0.2c<span class="w"> </span>-W1p,blue,.
+<span class="w">    </span>gmt<span class="w"> </span>plot<span class="w"> </span>tmp<span class="w"> </span>-Y-0.2c<span class="w"> </span>-W1p,lightblue,-.
+<span class="w">    </span>gmt<span class="w"> </span>plot<span class="w"> </span>tmp<span class="w"> </span>-Y-0.2c<span class="w"> </span>-W2p,blue,..-
+<span class="w">    </span>gmt<span class="w"> </span>plot<span class="w"> </span>tmp<span class="w"> </span>-Y-0.2c<span class="w"> </span>-W2p,tomato,4_2:2p
+<span class="w">    </span><span class="c1"># Complex example of a 5p wide black line with a 2p wide red line above it</span>
+<span class="w">    </span>gmt<span class="w"> </span>plot<span class="w"> </span>tmp<span class="w"> </span>-Y-0.3c<span class="w"> </span>-W5p,black
+<span class="w">    </span>gmt<span class="w"> </span>plot<span class="w"> </span>tmp<span class="w">         </span>-W2p,red
+<span class="w">    </span><span class="c1"># Complex example of 5p wide black line and 4p wide white dashed line on top of it</span>
+<span class="w">    </span>gmt<span class="w"> </span>plot<span class="w"> </span>tmp<span class="w"> </span>-Y-0.3c<span class="w"> </span>-W5p,black
+<span class="w">    </span>gmt<span class="w"> </span>plot<span class="w"> </span>tmp<span class="w">         </span>-W4p,white,20p_20p
+gmt<span class="w"> </span>end
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-0a72292723b73d249de434e58e77eb6c">
+<img alt="../../_images/0a72292723b73d249de434e58e77eb6c.png" src="../../_images/0a72292723b73d249de434e58e77eb6c.png" />
+</figure>
+</div></blockquote>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="frames.html" class="btn btn-neutral float-left" title="Frames, ticks, titles, and labels" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="region.html" class="btn btn-neutral float-right" title="Setting the Region" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022-2025, The GMT Examples Authors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>

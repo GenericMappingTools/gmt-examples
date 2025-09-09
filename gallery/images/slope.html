@@ -1,0 +1,152 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How to make a slope map &mdash; GMT Examples  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/style.css?v=0a3a2672" />
+
+  
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+    <link rel="canonical" href="https://www.generic-mapping-tools.org/gmt-examples/gallery/images/slope.html" />
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="How to use political borders from GADM" href="../maps/gadm.html" />
+    <link rel="prev" title="Plotting a surface" href="../3d_plots/grdview_surface.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            GMT Examples
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Gallery</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../3d_plots/grdview_surface.html">Plotting a surface</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">How to make a slope map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../maps/gadm.html">How to use political borders from GADM</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/advance/animation.html">Making animations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/basics/coastlines.html">Coastlines and boarders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/basics/color.html">How to use colors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/basics/frames.html">Frames, ticks, titles, and labels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/basics/line.html">Setting attributes of lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/basics/region.html">Setting the Region</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributors Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">GMT Examples</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">How to make a slope map</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/gallery/images/slope.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="how-to-make-a-slope-map">
+<h1>How to make a slope map<a class="headerlink" href="#how-to-make-a-slope-map" title="Link to this heading"></a></h1>
+<p>This tutorial show how to make a slope map of the moon from a geographic grid.</p>
+<p>We utilize <code class="docutils literal notranslate"><span class="pre">grdgradient</span></code> to calculate the gradient magnitude (i.e., dz/dr).
+Since we are working with geographic coordinates (longitude and latitude),
+it is crucial to set the correct ellipsoid parameter (in this case, for the moon).
+Finally, we convert this gradient to degrees with <code class="docutils literal notranslate"><span class="pre">grdmath</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Make a slope map of the moon.</span>
+<span class="c1"># Calculate gradient magnitude</span>
+gmt<span class="w"> </span>grdgradient<span class="w"> </span>@moon_relief_15m<span class="w"> </span>-D<span class="w"> </span>-Sgradient.nc<span class="w"> </span>-fg<span class="w"> </span>--PROJ_ELLIPSOID<span class="o">=</span>moon
+<span class="c1"># Convert gradient to degrees</span>
+gmt<span class="w"> </span>grdmath<span class="w"> </span>gradient.nc<span class="w"> </span><span class="nv">ATAND</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>moon_slope.nc
+<span class="c1"># Make map with colorbar</span>
+gmt<span class="w"> </span>begin<span class="w"> </span>moon<span class="w"> </span>png
+<span class="w"> </span>gmt<span class="w"> </span>makecpt<span class="w"> </span>-Clajolla<span class="w"> </span>-T0/12<span class="w"> </span>-I
+<span class="w">    </span>gmt<span class="w"> </span>grdimage<span class="w"> </span>moon_slope.nc<span class="w"> </span>-JW15c<span class="w"> </span>-B0
+<span class="w">    </span>gmt<span class="w"> </span>colorbar<span class="w"> </span>-DJRM+o0.5c/0c+w90%/0.5c+ef<span class="w"> </span>-Ba+l<span class="s2">&quot;Slope (@.)&quot;</span>
+gmt<span class="w"> </span>end
+<span class="c1"># Delete temporal files</span>
+rm<span class="w"> </span>gradient.nc
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-7d348a567d46f174deaf393618a19491">
+<img alt="../../_images/7d348a567d46f174deaf393618a19491.png" src="../../_images/7d348a567d46f174deaf393618a19491.png" />
+</figure>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../3d_plots/grdview_surface.html" class="btn btn-neutral float-left" title="Plotting a surface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../maps/gadm.html" class="btn btn-neutral float-right" title="How to use political borders from GADM" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022-2025, The GMT Examples Authors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>

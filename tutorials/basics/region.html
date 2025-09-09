@@ -1,0 +1,360 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Setting the Region &mdash; GMT Examples  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/style.css?v=0a3a2672" />
+
+  
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+    <link rel="canonical" href="https://www.generic-mapping-tools.org/gmt-examples/tutorials/basics/region.html" />
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Contributors Guide" href="../../contributing.html" />
+    <link rel="prev" title="Setting attributes of lines" href="line.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            GMT Examples
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Gallery</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../gallery/3d_plots/grdview_surface.html">Plotting a surface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gallery/images/slope.html">How to make a slope map</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../gallery/maps/gadm.html">How to use political borders from GADM</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../advance/animation.html">Making animations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="coastlines.html">Coastlines and boarders</a></li>
+<li class="toctree-l1"><a class="reference internal" href="color.html">How to use colors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="frames.html">Frames, ticks, titles, and labels</a></li>
+<li class="toctree-l1"><a class="reference internal" href="line.html">Setting attributes of lines</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Setting the Region</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#string-of-coordinates">String of Coordinates</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#global-domain-keys">Global Domain keys</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rd">-Rd</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rg">-Rg</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#codes">Codes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#iso-codes">ISO Codes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dcw-collection">DCW Collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#many-codes">Many codes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modifiers">Modifiers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#modifier-r">Modifier +R</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Modifier +r</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modifier-e">Modifier +e</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#custom-expansion">Custom expansion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#shrink-region">Shrink region</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributors Guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">GMT Examples</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Setting the Region</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/tutorials/basics/region.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="setting-the-region">
+<h1>Setting the Region<a class="headerlink" href="#setting-the-region" title="Link to this heading"></a></h1>
+<p>In this tutorial we are going to explain how to define the geographical region of maps.
+This is done trough the <code class="docutils literal notranslate"><span class="pre">-R</span></code> parameter .
+To do so, we will use the simplest way which is when the boundaries are defined by meridians and parallels.</p>
+<p>This tutorial covers the following methods:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#string-of-coordinates">String of Coordinates</a></p></li>
+<li><p><a class="reference internal" href="#global-domain-keys">Global Domain keys</a></p></li>
+<li><p><a class="reference internal" href="#codes">Codes</a></p></li>
+</ul>
+<section id="string-of-coordinates">
+<h2>String of Coordinates<a class="headerlink" href="#string-of-coordinates" title="Link to this heading"></a></h2>
+<p>A string of coordinates can be passed to <code class="docutils literal notranslate"><span class="pre">-R</span></code>, in the form of xmin/xmax/ymin/ymax.
+This is the standard and most customizable way to specify geographic regions.
+For example, to make a map that x-range from 85W to 74W and the y-range to 19N to 24N we should use <code class="docutils literal notranslate"><span class="pre">-R-85/-74/19/24</span></code></p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmt<span class="w"> </span>begin<span class="w"> </span>region<span class="w"> </span>png
+<span class="w">   </span>gmt<span class="w"> </span>basemap<span class="w"> </span>-JM12c<span class="w"> </span>-Bxafg<span class="w"> </span>-Byafg<span class="w"> </span>-R-85/-74/19/24
+<span class="w">   </span>gmt<span class="w"> </span>coast<span class="w"> </span>-Glightgray<span class="w"> </span>-Swhite<span class="w"> </span>-W1/0.5p<span class="w"> </span>-N1/0.5p<span class="w"> </span>-Clightgray
+gmt<span class="w"> </span>end<span class="w"> </span>show
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-5ab8ab860d0be4c77d481962e422bd37">
+<img alt="../../_images/5ab8ab860d0be4c77d481962e422bd37.png" src="../../_images/5ab8ab860d0be4c77d481962e422bd37.png" />
+</figure>
+</div></blockquote>
+</section>
+<section id="global-domain-keys">
+<h2>Global Domain keys<a class="headerlink" href="#global-domain-keys" title="Link to this heading"></a></h2>
+<p>If you want to make a global map, then you can use one of the following codes
+to quickly specify the global domain:</p>
+<section id="rd">
+<h3>-Rd<a class="headerlink" href="#rd" title="Link to this heading"></a></h3>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">-Rd</span></code>: Centered at the Prime meridian (0º). It sets the region to -180/180/-90/90.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmt<span class="w"> </span>begin<span class="w"> </span>region<span class="w"> </span>png
+<span class="w">   </span>gmt<span class="w"> </span>basemap<span class="w"> </span>-JN12c<span class="w"> </span>-Baf<span class="w"> </span>-Rd
+<span class="w">   </span>gmt<span class="w"> </span>coast<span class="w"> </span>-Glightgray<span class="w"> </span>-Swhite<span class="w"> </span>-W1/0.5p<span class="w"> </span>-N1/0.5p<span class="w"> </span>-Clightgray
+gmt<span class="w"> </span>end<span class="w"> </span>show
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-c3018db8132410e7582610b4ced975f2">
+<img alt="../../_images/c3018db8132410e7582610b4ced975f2.png" src="../../_images/c3018db8132410e7582610b4ced975f2.png" />
+</figure>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="rg">
+<h3>-Rg<a class="headerlink" href="#rg" title="Link to this heading"></a></h3>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">-Rg</span></code>: Centered at the antimeridian (180º). It sets the region to 0/360/-90/90.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmt<span class="w"> </span>begin<span class="w"> </span>region<span class="w"> </span>png
+<span class="w">   </span>gmt<span class="w"> </span>basemap<span class="w"> </span>-JN12c<span class="w"> </span>-Baf<span class="w"> </span>-Rg
+<span class="w">   </span>gmt<span class="w"> </span>coast<span class="w"> </span>-Glightgray<span class="w"> </span>-Swhite<span class="w"> </span>-W1/0.5p<span class="w"> </span>-N1/0.5p<span class="w"> </span>-Clightgray
+gmt<span class="w"> </span>end<span class="w"> </span>show
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-8d5c170e8a066463205f50a5c130cb9f">
+<img alt="../../_images/8d5c170e8a066463205f50a5c130cb9f.png" src="../../_images/8d5c170e8a066463205f50a5c130cb9f.png" />
+</figure>
+</div></blockquote>
+</li>
+</ul>
+</section>
+</section>
+<section id="codes">
+<h2>Codes<a class="headerlink" href="#codes" title="Link to this heading"></a></h2>
+<section id="iso-codes">
+<h3>ISO Codes<a class="headerlink" href="#iso-codes" title="Link to this heading"></a></h3>
+<p>If you want to make a map of a country, then you select its region with the two-character ISO-Code.
+This indirectly supplies the region by consulting the DCW (<a class="reference external" href="https://github.com/GenericMappingTools/dcw-gmt?tab=readme-ov-file#dcw-gmt-the-digital-chart-of-the-world-for-gmt">Digital Chart of the World</a>) database
+and derives the bounding region given by the code.
+For example, to make a map of Cuba we should use <code class="docutils literal notranslate"><span class="pre">-RCU</span></code>.
+Note that in this case, the map will have the exact region of the country.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmt<span class="w"> </span>begin<span class="w"> </span>region<span class="w"> </span>png
+<span class="w">   </span>gmt<span class="w"> </span>basemap<span class="w"> </span>-JM12c<span class="w"> </span>-Bxaf<span class="w"> </span>-Byaf<span class="w"> </span>-RCU
+<span class="w">   </span>gmt<span class="w"> </span>coast<span class="w"> </span>-Glightgray<span class="w"> </span>-Swhite<span class="w"> </span>-W1/0.5p<span class="w"> </span>-N1/0.5p<span class="w"> </span>-Clightgray
+gmt<span class="w"> </span>end<span class="w"> </span>show
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-e3eb556d66e09fdd2c498b1768cbc965">
+<img alt="../../_images/e3eb556d66e09fdd2c498b1768cbc965.png" src="../../_images/e3eb556d66e09fdd2c498b1768cbc965.png" />
+</figure>
+</div></blockquote>
+</section>
+<section id="dcw-collection">
+<h3>DCW Collection<a class="headerlink" href="#dcw-collection" title="Link to this heading"></a></h3>
+<p>Alternative, to make a map of another named region (continents, oceans, seas, islands, etc.) NOT include in the ISO codes you can use the
+the three-to-five-character codes of <a class="reference external" href="https://github.com/GenericMappingTools/dcw-gmt/tree/master?tab=readme-ov-file#dcw-collections">DCW-Collection</a>. For example, to make a map of the Mediterranean Sea we should use <code class="docutils literal notranslate"><span class="pre">-RIHO28</span></code>:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmt<span class="w"> </span>begin<span class="w"> </span>region<span class="w"> </span>png
+<span class="w">   </span>gmt<span class="w"> </span>basemap<span class="w"> </span>-JM12c<span class="w"> </span>-Bxaf<span class="w"> </span>-Byaf<span class="w"> </span>-RIHO28
+<span class="w">   </span>gmt<span class="w"> </span>coast<span class="w"> </span>-Glightgray<span class="w"> </span>-Swhite<span class="w"> </span>-W1/0.5p<span class="w"> </span>-N1/0.5p<span class="w"> </span>-Clightgray
+gmt<span class="w"> </span>end<span class="w"> </span>show
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-32afc593882fe8278213c58b6c838da7">
+<img alt="../../_images/32afc593882fe8278213c58b6c838da7.png" src="../../_images/32afc593882fe8278213c58b6c838da7.png" />
+</figure>
+</div></blockquote>
+</section>
+<section id="many-codes">
+<h3>Many codes<a class="headerlink" href="#many-codes" title="Link to this heading"></a></h3>
+<p>We could use more than one code to get the region that includes all of them.
+For example, if we wish to see all Italy and the Mediterranean Sea, then we should use <code class="docutils literal notranslate"><span class="pre">-RIHO28,IT</span></code></p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmt<span class="w"> </span>begin<span class="w"> </span>region<span class="w"> </span>png
+<span class="w">   </span>gmt<span class="w"> </span>basemap<span class="w"> </span>-JM12c<span class="w"> </span>-Bxaf<span class="w"> </span>-Byaf<span class="w"> </span>-RIHO28,IT
+<span class="w">   </span>gmt<span class="w"> </span>coast<span class="w"> </span>-Glightgray<span class="w"> </span>-Swhite<span class="w"> </span>-W1/0.5p<span class="w"> </span>-N1/0.5p<span class="w"> </span>-Clightgray
+gmt<span class="w"> </span>end<span class="w"> </span>show
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-b8698360bbb10f6f08fc07b3c8fbf1ac">
+<img alt="../../_images/b8698360bbb10f6f08fc07b3c8fbf1ac.png" src="../../_images/b8698360bbb10f6f08fc07b3c8fbf1ac.png" />
+</figure>
+</div></blockquote>
+</section>
+<section id="modifiers">
+<h3>Modifiers<a class="headerlink" href="#modifiers" title="Link to this heading"></a></h3>
+<p>There are 3 modifiers to sligthy change the region encompassed by the codes that can be used.
+In the following examples will be used them to modify the exact region of the Mediterranean Sea (-6.0319/36.2093/30.2662/45.7946).</p>
+<section id="modifier-r">
+<h4>Modifier +R<a class="headerlink" href="#modifier-r" title="Link to this heading"></a></h4>
+<p>If you want to extend 1 degree the region in all directions, then add <code class="docutils literal notranslate"><span class="pre">+R1</span></code> to the code.
+This will extend the region to <code class="docutils literal notranslate"><span class="pre">-7.0319/37.2093/29.2662/46.7946</span></code>.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmt<span class="w"> </span>begin<span class="w"> </span>region<span class="w"> </span>png
+<span class="w">   </span>gmt<span class="w"> </span>basemap<span class="w"> </span>-JM12c<span class="w"> </span>-Bxaf<span class="w"> </span>-Byaf<span class="w"> </span>-RIHO28+R1
+<span class="w">   </span>gmt<span class="w"> </span>coast<span class="w"> </span>-Glightgray<span class="w"> </span>-Swhite<span class="w"> </span>-W1/0.5p<span class="w"> </span>-N1/0.5p<span class="w"> </span>-Clightgray
+gmt<span class="w"> </span>end<span class="w"> </span>show
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-9cd527d7de54dc59dc281715ab1cfadc">
+<img alt="../../_images/9cd527d7de54dc59dc281715ab1cfadc.png" src="../../_images/9cd527d7de54dc59dc281715ab1cfadc.png" />
+</figure>
+</div></blockquote>
+</section>
+<section id="id2">
+<h4>Modifier +r<a class="headerlink" href="#id2" title="Link to this heading"></a></h4>
+<p>You can use the <code class="docutils literal notranslate"><span class="pre">+r</span></code> modifier if you instead want the region will be rounded to nearest integer degree.
+In the following example the region will be extend to <code class="docutils literal notranslate"><span class="pre">-7/37/30/46</span></code>.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmt<span class="w"> </span>begin<span class="w"> </span>region<span class="w"> </span>png
+<span class="w">   </span>gmt<span class="w"> </span>basemap<span class="w"> </span>-JM12c<span class="w"> </span>-Bxaf<span class="w"> </span>-Byaf<span class="w"> </span>-RIHO28+r1
+<span class="w">   </span>gmt<span class="w"> </span>coast<span class="w"> </span>-Glightgray<span class="w"> </span>-Swhite<span class="w"> </span>-W1/0.5p<span class="w"> </span>-N1/0.5p<span class="w"> </span>-Clightgray
+gmt<span class="w"> </span>end<span class="w"> </span>show
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-1db761511fa1371a3fa3f01cc3bdc199">
+<img alt="../../_images/1db761511fa1371a3fa3f01cc3bdc199.png" src="../../_images/1db761511fa1371a3fa3f01cc3bdc199.png" />
+</figure>
+</div></blockquote>
+</section>
+<section id="modifier-e">
+<h4>Modifier +e<a class="headerlink" href="#modifier-e" title="Link to this heading"></a></h4>
+<p>Finally, the <code class="docutils literal notranslate"><span class="pre">+e</span></code> modifier is like <code class="docutils literal notranslate"><span class="pre">+r</span></code> and expands the final region boundaries to be multiples of increment.
+However, it ensures that the bounding box extends by at least 0.25 times the increment.
+In the following example the region will be extend to <code class="docutils literal notranslate"><span class="pre">-7/37/30/47</span></code>.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmt<span class="w"> </span>begin<span class="w"> </span>region<span class="w"> </span>png
+<span class="w">   </span>gmt<span class="w"> </span>basemap<span class="w"> </span>-JM12c<span class="w"> </span>-Bxaf<span class="w"> </span>-Byaf<span class="w"> </span>-RIHO28+e1
+<span class="w">   </span>gmt<span class="w"> </span>coast<span class="w"> </span>-Glightgray<span class="w"> </span>-Swhite<span class="w"> </span>-W1/0.5p<span class="w"> </span>-N1/0.5p<span class="w"> </span>-Clightgray
+gmt<span class="w"> </span>end<span class="w"> </span>show
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-ccb60b0756948bd2a4770d91bd2846d0">
+<img alt="../../_images/ccb60b0756948bd2a4770d91bd2846d0.png" src="../../_images/ccb60b0756948bd2a4770d91bd2846d0.png" />
+</figure>
+</div></blockquote>
+</section>
+<section id="custom-expansion">
+<h4>Custom expansion<a class="headerlink" href="#custom-expansion" title="Link to this heading"></a></h4>
+<p>In the previous examples, the expansion was uniformly in all directions.
+If you want to expand the region differently in each direction, then you could passed four values
+(to expands to the west, east, south and north repectively),
+For example use the modifier <code class="docutils literal notranslate"><span class="pre">+R1/2/3/4</span></code> to expand the Mediterranean Sea map.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmt<span class="w"> </span>begin<span class="w"> </span>region<span class="w"> </span>png
+<span class="w">   </span>gmt<span class="w"> </span>basemap<span class="w"> </span>-JM12c<span class="w"> </span>-Bxaf<span class="w"> </span>-Byaf<span class="w"> </span>-RIHO28+R1/2/3/4
+<span class="w">   </span>gmt<span class="w"> </span>coast<span class="w"> </span>-Glightgray<span class="w"> </span>-Swhite<span class="w"> </span>-W1/0.5p<span class="w"> </span>-N1/0.5p<span class="w"> </span>-Clightgray
+gmt<span class="w"> </span>end<span class="w"> </span>show
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-32471ccabf1ff6170dc5064d911c326e">
+<img alt="../../_images/32471ccabf1ff6170dc5064d911c326e.png" src="../../_images/32471ccabf1ff6170dc5064d911c326e.png" />
+</figure>
+</div></blockquote>
+</section>
+<section id="shrink-region">
+<h4>Shrink region<a class="headerlink" href="#shrink-region" title="Link to this heading"></a></h4>
+<p>All the above modifiers can be also use to shrink the area. Just use a negative number.
+For example use the modifier <code class="docutils literal notranslate"><span class="pre">+R-2</span></code> to shrink the Mediterranean Sea map by two degrees.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>gmt<span class="w"> </span>begin<span class="w"> </span>region<span class="w"> </span>png
+<span class="w">   </span>gmt<span class="w"> </span>basemap<span class="w"> </span>-JM12c<span class="w"> </span>-Bxaf<span class="w"> </span>-Byaf<span class="w"> </span>-RIHO28+R-3
+<span class="w">   </span>gmt<span class="w"> </span>coast<span class="w"> </span>-Glightgray<span class="w"> </span>-Swhite<span class="w"> </span>-W1/0.5p<span class="w"> </span>-N1/0.5p<span class="w"> </span>-Clightgray
+gmt<span class="w"> </span>end<span class="w"> </span>show
+</pre></div>
+</div>
+<figure class="align-center" id="gmtplot-44a989feb7eef11e3362a7bc89d2bac0">
+<img alt="../../_images/44a989feb7eef11e3362a7bc89d2bac0.png" src="../../_images/44a989feb7eef11e3362a7bc89d2bac0.png" />
+</figure>
+</div></blockquote>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="line.html" class="btn btn-neutral float-left" title="Setting attributes of lines" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../contributing.html" class="btn btn-neutral float-right" title="Contributors Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022-2025, The GMT Examples Authors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(false);
+      });
+  </script> 
+
+</body>
+</html>
